@@ -1,0 +1,21 @@
+.queryContainer {
+  position: relative;
+}
+
+.query {
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+}
+
+.typeahead {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+}
+
+.x {
+  position: absolute;
+  z-index: 2;
+}

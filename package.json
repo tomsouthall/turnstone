@@ -1,10 +1,13 @@
 {
   "name": "turnstone",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Made with create-react-library",
-  "author": "tomsouthall",
+  "author": "Tom Southall",
   "license": "MIT",
-  "repository": "tomsouthall/turnstone",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomsouthall/turnstone.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
@@ -23,11 +26,14 @@
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build"
   },
-  "peerDependencies": {
-    "react": "^16.0.0"
+  "dependencies": {
+    "first-of-type": "^1.0.0",
+    "react-use": "^17.3.2",
+    "setify": "^1.0.4",
+    "swr": "^1.1.2",
+    "use-debounce": "^7.0.1"
   },
   "devDependencies": {
-    "microbundle-crl": "^0.13.10",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
@@ -41,13 +47,13 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-standard": "^4.0.1",
     "gh-pages": "^2.2.0",
+    "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ]
 }

@@ -1,6 +1,15 @@
 import React from 'react'
-import styles from './styles.module.css'
+import { AutocompleteContextProvider } from './context/autocomplete'
+import AutocompleteInput from './components/input'
 
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
+export default function Autocomplete(props) {
+  const { splitChar, styles, text } = props
+  return (
+    <AutocompleteContextProvider
+      splitChar={splitChar}
+      styles={styles}
+      text={text}>
+      <AutocompleteInput {...props} />
+    </AutocompleteContextProvider>
+  )
 }
