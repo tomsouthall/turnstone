@@ -1,19 +1,17 @@
 import React, { useContext, useMemo } from 'react'
-import { AutocompleteContext } from '../context/autocomplete'
-import classNameHelper from '../utils/classNameHelper'
-import defaultStyles from './styles/items.module.css'
+import { TurnstoneContext } from '../context/turnstone'
+import defaultStyles from './styles/items.styles.js'
 import ItemFirst from './itemFirst'
 import Item from './item'
 import isUndefined from '../utils/isUndefined'
 
 export default function Items(props) {
   const { isLoading, items, loadingMessage, noItemsMessage } = props
-  const { customStyles } = useContext(AutocompleteContext)
-  const className = classNameHelper(defaultStyles, customStyles)
+  const { customStyles } = useContext(TurnstoneContext)
 
   const itemElements = () => {
     return (
-      <div className={className('dropdown')}>
+      <div className={customStyles.dropdown} style={defaultStyles.dropdown}>
         {items.map((item, index) =>
           index === 0 || item.groupIndex !== items[index - 1].groupIndex ? (
             <ItemFirst
@@ -35,12 +33,17 @@ export default function Items(props) {
   }, [isLoading, loadingMessage])
 
   const noItemsMsg = () => {
-    const msg = showLoadingMessage ? loadingMessage : noItemsMessage
-    const c = showLoadingMessage ? className('loading') : className('noItems')
+    const msg = showLoadingMessage
+      ? loadingMessage
+      : noItemsMessage
+
+    const msgClassName = showLoadingMessage
+      ? customStyles.loading
+      : customStyles.noItems
 
     return (
-      <div className={className('dropdown')}>
-        <div className={c}>{msg}</div>
+      <div className={customStyles.dropdown}>
+        <div className={msgClassName}>{msg}</div>
       </div>
     )
   }

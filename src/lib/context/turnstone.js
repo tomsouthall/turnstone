@@ -1,8 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react'
 
-const AutocompleteContext = createContext()
+const TurnstoneContext = createContext()
 
-const AutocompleteContextProvider = (props) => {
+const TurnstoneContextProvider = (props) => {
   const { children, splitChar, styles = {}, text = '' } = props
   const [queryState, setQueryState] = useState(text)
   const [highlightedState, setHighlightedState] = useState()
@@ -13,7 +13,7 @@ const AutocompleteContextProvider = (props) => {
   useEffect(() => setQueryState(text), [text])
 
   return (
-    <AutocompleteContext.Provider
+    <TurnstoneContext.Provider
       value={{
         queryState,
         setQueryState,
@@ -25,8 +25,8 @@ const AutocompleteContextProvider = (props) => {
         splitCharState
       }}>
       {children}
-    </AutocompleteContext.Provider>
+    </TurnstoneContext.Provider>
   )
 }
 
-export { AutocompleteContext, AutocompleteContextProvider }
+export { TurnstoneContext, TurnstoneContextProvider }

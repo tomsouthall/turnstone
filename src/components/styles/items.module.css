@@ -1,9 +1,0 @@
-.dropdown {
-  position: absolute;
-  z-index: 100;
-}
-
-.item {
-  white-space: nowrap;
-  overflow: hidden;
-}

@@ -1,8 +1,7 @@
 import React, { useContext, useMemo } from 'react'
-import classNameHelper from '../utils/classNameHelper'
-import defaultStyles from './styles/item.module.css'
+import defaultStyles from './styles/item.styles.js'
 import MatchingText from './matchingText'
-import { AutocompleteContext } from '../context/autocomplete'
+import { TurnstoneContext } from '../context/turnstone'
 import isUndefined from '../utils/isUndefined'
 import escapeStringRegExp from 'escape-string-regexp'
 
@@ -15,9 +14,7 @@ export default function Item(props) {
     setHighlightedState,
     setSelectedState,
     splitCharState
-  } = useContext(AutocompleteContext)
-
-  const className = classNameHelper(defaultStyles, customStyles)
+  } = useContext(TurnstoneContext)
 
   const splitText = useMemo(() => {
     if (isUndefined(splitCharState)) return [item.text]
@@ -26,14 +23,16 @@ export default function Item(props) {
   }, [splitCharState, item])
 
   const divClassName = useMemo(() => {
-    let c =
+    let itemStyle = customStyles[
       highlightedState && index === highlightedState.index
-        ? className('highlightedItem')
-        : className('item')
+        ? 'highlightedItem'
+        : 'item'
+    ]
 
-    if (index === 0) c = `${c} ${className('topItem')}`
-    return c
-  }, [className, highlightedState, index])
+    return (index === 0)
+      ? `${itemStyle} ${customStyles.topItem}`
+      : itemStyle
+  }, [customStyles, highlightedState, index])
 
   const handleMouseEnter = () => {
     setHighlightedState({ index, text: item.text })
@@ -56,8 +55,8 @@ export default function Item(props) {
     return (
       <React.Fragment>
         <MatchingText text={splitText[0]} />
-        <span className='splitChar'>{splitCharState}</span>
-        <span className={className('split')}>{splitText[1]}</span>
+        <span className={customStyles.splitChar}>{splitCharState}</span>
+        <span className={customStyles.split}>{splitText[1]}</span>
       </React.Fragment>
     )
   }
@@ -65,6 +64,7 @@ export default function Item(props) {
   return (
     <div
       className={divClassName}
+      style={defaultStyles.item}
       onMouseEnter={handleMouseEnter}
       onMouseDown={handleClick}>
       {itemElement()}

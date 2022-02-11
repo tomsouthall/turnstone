@@ -1,15 +1,5 @@
 import React from 'react'
-import { AutocompleteContextProvider } from './context/autocomplete'
-import AutocompleteInput from './components/input'
+import ReactDOM from 'react-dom'
+import App from './App'
 
-export default function Autocomplete(props) {
-  const { splitChar, styles, text } = props
-  return (
-    <AutocompleteContextProvider
-      splitChar={splitChar}
-      styles={styles}
-      text={text}>
-      <AutocompleteInput {...props} />
-    </AutocompleteContextProvider>
-  )
-}
+ReactDOM.render(<App />, document.getElementById('root'))

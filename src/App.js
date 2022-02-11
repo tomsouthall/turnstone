@@ -1,6 +1,5 @@
 import React from 'react'
-import Turnstone from 'turnstone'
-import 'turnstone/dist/index.css'
+import Turnstone from './lib'
 import fruits from './data'
 
 const App = () => {

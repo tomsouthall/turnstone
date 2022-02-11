@@ -2,14 +2,13 @@ import React, { useState, useEffect, useRef, useContext, useMemo } from 'react'
 import useSWR from 'swr'
 import setify from 'setify' // Sets input value without changing cursor position
 import swrLaggyMiddleware from '../utils/swrLaggyMiddleware'
-import { AutocompleteContext } from '../context/autocomplete'
+import { TurnstoneContext } from '../context/turnstone'
 import Items from './items'
 import { useDebounce } from 'use-debounce'
 import firstOfType from 'first-of-type'
 import undef from '../utils/undef'
 import isUndefined from '../utils/isUndefined'
-import classNameHelper from '../utils/classNameHelper'
-import defaultStyles from './styles/input.module.css'
+import defaultStyles from './styles/input.styles.js'
 // import fetch from 'unfetch' // TODO: may need this if not using Next.js
 
 export default function Container(props) {
@@ -57,7 +56,7 @@ export default function Container(props) {
     setHighlightedState,
     selectedState,
     setSelectedState
-  } = useContext(AutocompleteContext)
+  } = useContext(TurnstoneContext)
 
   // Component state
   const [debouncedQueryState] = useDebounce(queryState, debounceWait)
@@ -67,9 +66,6 @@ export default function Container(props) {
   // DOM references
   const queryInput = useRef(null)
   const typeaheadInput = useRef(null)
-
-  // Styles helper
-  const className = classNameHelper(defaultStyles, customStyles)
 
   const itemText = (item, displayField) => {
     const itemType = typeof item
@@ -366,9 +362,10 @@ export default function Container(props) {
 
   return (
     <React.Fragment>
-      <div className={className('queryContainer')}>
+      <div className={customStyles.queryContainer} style={defaultStyles.queryContainer}>
         <input
-          className={className('query')}
+          className={customStyles.query}
+          style={defaultStyles.query}
           disabled={isDisabled}
           placeholder={placeholder}
           type='text'
@@ -385,7 +382,8 @@ export default function Container(props) {
         />
 
         <input
-          className={className('typeahead')}
+          className={customStyles.typeahead}
+          style={defaultStyles.typeahead}
           disabled={isDisabled}
           type='text'
           autoComplete='off'
@@ -398,7 +396,7 @@ export default function Container(props) {
         />
 
         {isX() && (
-          <div className={className('x')} onMouseDown={(evt) => handleX(evt)} />
+          <div className={customStyles.x} style={defaultStyles.x} onMouseDown={handleX} />
         )}
 
         {isDropdown() && (
