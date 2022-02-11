@@ -33,6 +33,9 @@
     "swr": "^1.1.2",
     "use-debounce": "^7.0.1"
   },
+  "peerDependencies": {
+    "react": "^16.0.0"
+  },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
