@@ -3,7 +3,7 @@
   "description": "In development. React multi-search autocomplete component.",
   "author": "Tom Southall",
   "keywords": [],
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": false,
   "main": "dist/index.js",
   "module": "dist/index.js",
