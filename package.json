@@ -4,7 +4,10 @@
   "description": "In development. React multi-search autocomplete component.",
   "author": "Tom Southall",
   "keywords": [],
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "main": "./dist/turnstone.umd.js",
   "module": "./dist/turnstone.es.js",
   "exports": {
@@ -20,23 +23,31 @@
   },
   "dependencies": {
     "first-of-type": "^1.0.0",
+    "prop-types": "^15.8.1",
     "react-use": "^17.3.2",
     "setify": "^1.0.4",
     "swr": "^1.1.2",
     "use-debounce": "^7.0.1"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^1.0.7",
+    "eslint": "^8.9.0",
+    "eslint-plugin-react": "^7.28.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "@vitejs/plugin-react": "^1.0.7",
     "vite": "^2.8.0"
   },
   "eslintConfig": {
+    "env": {
+      "es6": true
+    },
     "extends": [
       "eslint:recommended",
-      "react-app",
-      "react-app/jest"
-    ]
+      "plugin:react/recommended"
+    ],
+    "parserOptions": {
+      "sourceType": "module"
+    }
   },
   "browserslist": {
     "production": [
