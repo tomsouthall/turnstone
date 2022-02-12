@@ -42,7 +42,7 @@ export default function Items(props) {
       : customStyles.noItems
 
     return (
-      <div className={customStyles.dropdown}>
+      <div className={customStyles.dropdown} style={defaultStyles.dropdown}>
         <div className={msgClassName}>{msg}</div>
       </div>
     )
