@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`MatchingText > snapshot renders 1`] = `
+<span>
+  New York City
+</span>
+`;
