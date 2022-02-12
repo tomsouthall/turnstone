@@ -1,38 +1,35 @@
 {
   "name": "turnstone",
+  "version": "0.3.0",
   "description": "In development. React multi-search autocomplete component.",
   "author": "Tom Southall",
   "keywords": [],
-  "version": "0.2.1",
-  "private": false,
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tomsouthall/turnstone.git"
+  "files": ["dist", "README.md"],
+  "main": "./dist/turnstone.umd.js",
+  "module": "./dist/turnstone.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/turnstone.es.js",
+      "require": "./dist/turnstone.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1",
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
     "first-of-type": "^1.0.0",
     "react-use": "^17.3.2",
     "setify": "^1.0.4",
     "swr": "^1.1.2",
-    "use-debounce": "^7.0.1",
-    "web-vitals": "^2.1.4"
+    "use-debounce": "^7.0.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "appbuild": "react-scripts build"
+  "devDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "@vitejs/plugin-react": "^1.0.7",
+    "vite": "^2.8.0"
   },
   "eslintConfig": {
     "extends": [
@@ -52,13 +49,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.17.0",
-    "@babel/core": "^7.17.2",
-    "@babel/preset-env": "^7.16.11",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0"
   }
 }
