@@ -65,7 +65,8 @@
       "sourceType": "module"
     },
     "rules": {
-      "semi": ["error", "never"]
+      "semi": ["error", "never"],
+      "react/prop-types": 0
     }
   }
 }

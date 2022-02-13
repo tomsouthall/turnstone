@@ -1,3 +1,5 @@
+/* eslint react/prop-types: 1 */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { TurnstoneContextProvider } from './context/turnstone'
@@ -17,7 +19,7 @@ export default function Turnstone(props) {
 }
 
 //////////////////////////////////////////////////////
-// Prop validation //
+// Prop validation                                  //
 //////////////////////////////////////////////////////
 
 const msgBothRequired = `Either a "data" prop or an "itemGroups" prop must be provided. Both are missing.`
