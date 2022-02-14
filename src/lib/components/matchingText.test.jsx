@@ -9,8 +9,8 @@ describe('MatchingText', () => {
   test('snapshot renders', () => {
     const component = renderer.create(
       <TurnstoneContextProvider
-        text={'New York City, New York, United States'}
-        queryState={'New York City, New York, United States'}>
+        styles={{match: 'match-class', nonMatch: 'non-match-class'}}
+        text={'New'}>
         <MatchingText text={'New York City'} />
       </TurnstoneContextProvider>
     )

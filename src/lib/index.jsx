@@ -4,7 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { TurnstoneContextProvider } from './context/turnstone'
 import isUndefined from './utils/isUndefined'
-import AutocompleteInput from './components/input'
+import Container from './components/container'
 
 export default function Turnstone(props) {
   const { splitChar, styles, text } = props
@@ -13,7 +13,7 @@ export default function Turnstone(props) {
       splitChar={splitChar}
       styles={styles}
       text={text}>
-      <AutocompleteInput {...props} />
+      <Container {...props} />
     </TurnstoneContextProvider>
   )
 }

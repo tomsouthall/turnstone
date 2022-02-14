@@ -1,0 +1,12 @@
+// Vitest Snapshot v1
+
+exports[`ItemFirst > Component renders correctly 1`] = `
+[
+  <div
+    className="group-name-class"
+  >
+    Cities
+  </div>,
+  "Item",
+]
+`;

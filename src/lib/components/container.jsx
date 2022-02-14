@@ -125,9 +125,7 @@ export default function Container(props) {
     return groups.map((group, index) => group.slice(0, groupCounts[index]))
   }
 
-  const fetcher = async (q) => {
-    console.log({ q })
-
+  const fetcher = (q) => {
     if (defaultItemGroups && q.length > 0 && q.length < minQueryLength)
       return []
     else if (!defaultItemGroups && q.length < minQueryLength) return []
@@ -193,7 +191,7 @@ export default function Container(props) {
   ).data
 
   const items = useMemo(() => {
-    console.log('swrData', swrData)
+    // console.log('swrData', swrData)
     return swrData || []
   }, [swrData])
 
@@ -205,7 +203,7 @@ export default function Container(props) {
   // As soon as the query changes (ignoring debounce) update the
   // typeahead value to prevent conflict between the two.
   useEffect(() => {
-    console.log('queryState changed', { queryState })
+    // console.log('queryState changed', { queryState })
     const value = (() => {
       const currentValue = typeaheadInput.current.value
       if (!queryState) return ''

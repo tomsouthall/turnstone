@@ -24,12 +24,12 @@ export default function Item(props) {
 
   const divClassName = useMemo(() => {
     let itemStyle = customStyles[
-      highlightedState && index === highlightedState.index
+      (highlightedState && index === highlightedState.index)
         ? 'highlightedItem'
         : 'item'
     ]
 
-    return (index === 0)
+    return (index === 0 && customStyles.topItem)
       ? `${itemStyle} ${customStyles.topItem}`
       : itemStyle
   }, [customStyles, highlightedState, index])

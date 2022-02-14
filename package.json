@@ -20,7 +20,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest",
+    "test": "vitest run",
+    "test-watch": "vitest",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",
+    "c8": "^7.11.0",
     "eslint": "^8.9.0",
     "eslint-plugin-react": "^7.28.0",
     "react": "^17.0.2",
@@ -55,7 +57,9 @@
   },
   "eslintConfig": {
     "env": {
-      "es6": true
+      "browser": true,
+      "node": true,
+      "es2020": true
     },
     "extends": [
       "eslint:recommended",
@@ -65,7 +69,10 @@
       "sourceType": "module"
     },
     "rules": {
-      "semi": ["error", "never"],
+      "semi": [
+        "error",
+        "never"
+      ],
       "react/prop-types": 0
     }
   }
