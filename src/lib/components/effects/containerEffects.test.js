@@ -1,6 +1,9 @@
 import { vi, describe, test, expect, beforeEach } from 'vitest'
 import { renderHook } from '@testing-library/react-hooks'
-import { useAutoFocus, useQueryChange } from './containerEffects'
+import {
+  useAutoFocus,
+  useQueryChange
+} from './containerEffects'
 
 let inputRef = (value = '') => ( //TODO: Put in a beforeEach when blogging
   {

@@ -9,6 +9,7 @@ import { useAutoFocus, useQueryChange } from './effects/containerEffects'
 import firstOfType from 'first-of-type'
 import undef from '../utils/undef'
 import isUndefined from '../utils/isUndefined'
+import startsWithCaseInsensitive from '../utils/startsWithCaseInsensitive'
 import defaultStyles from './styles/input.styles.js'
 // import fetch from 'unfetch' // TODO: may need this if not using Next.js
 
@@ -224,7 +225,7 @@ export default function Container(props) {
       highlightedState &&
       hasFocus &&
       queryInput.current.value.length > 0 &&
-      queryMatchesTypeahead(queryInput.current.value, highlightedState.text)
+      startsWithCaseInsensitive(highlightedState.text, queryInput.current.value)
         ? highlightedState.text
         : ''
     const queryValue = formatQuery(queryInput.current.value, typeAheadValue)
@@ -243,13 +244,6 @@ export default function Container(props) {
       if (typeof onSelect === 'function') onSelect(selectedState.value)
     }
   }, [selectedState, setQueryState, onSelect])
-
-  const queryMatchesTypeahead = (query, typeahead, caseSensitive = false) => {
-    return caseSensitive
-      ? typeahead.substring(0, query.length) === query
-      : typeahead.substring(0, query.length).toLowerCase() ===
-          query.toLowerCase()
-  }
 
   const formatQuery = (query, typeahead) => {
     const formattedQuery = typeahead.substring(0, query.length)
