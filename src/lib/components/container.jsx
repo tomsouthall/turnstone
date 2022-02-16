@@ -5,6 +5,7 @@ import swrLaggyMiddleware from '../utils/swrLaggyMiddleware'
 import { TurnstoneContext } from '../context/turnstone'
 import Items from './items'
 import { useDebounce } from 'use-debounce'
+import { useAutoFocus, useQueryChange } from './effects/containerEffects'
 import firstOfType from 'first-of-type'
 import undef from '../utils/undef'
 import isUndefined from '../utils/isUndefined'
@@ -195,27 +196,12 @@ export default function Container(props) {
     return swrData || []
   }, [swrData])
 
-  // Side effects on first render
-  useEffect(() => {
-    if (autoFocus) queryInput.current.focus()
-  }, [autoFocus])
+  // Autofocus on render if prop is true
+  useAutoFocus(queryInput, autoFocus)
 
-  // As soon as the query changes (ignoring debounce) update the
-  // typeahead value to prevent conflict between the two.
-  useEffect(() => {
-    // console.log('queryState changed', { queryState })
-    const value = (() => {
-      const currentValue = typeaheadInput.current.value
-      if (!queryState) return ''
-      if (!queryMatchesTypeahead(queryState, currentValue, true)) return ''
-      return currentValue
-    })()
-
-    typeaheadInput.current.value = value
-
-    setify(queryInput.current, queryState)
-    if (typeof onChange === 'function') onChange(queryState)
-  }, [queryState, onChange])
+  // As soon as the queryState changes (ignoring debounce) update the
+  // typeahead value and the query value
+  useQueryChange(queryInput, typeaheadInput, queryState, onChange)
 
   // Whenever the dropdown items change, set the highlighted item
   // to either the first or nothing if there are no items
@@ -225,7 +211,7 @@ export default function Container(props) {
     )
   }, [items, setHighlightedState])
 
-  // Figure out whether we are able to display a loading state
+  // Figure out whether we are able to display a loading state //TODO: useReducer instead of useeffect?
   useEffect(() => {
     if (items && items.length) setIsLoaded(true)
     else if (queryState.length <= minQueryLength) setIsLoaded(false)
@@ -252,7 +238,7 @@ export default function Container(props) {
   useEffect(() => {
     if (!isUndefined(selectedState)) {
       typeaheadInput.current.value = ''
-      setQueryState(selectedState.text)
+      setQueryState(selectedState.text) //TODO: Put in a reducer?
       queryInput.current.blur()
       if (typeof onSelect === 'function') onSelect(selectedState.value)
     }

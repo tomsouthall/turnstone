@@ -33,6 +33,7 @@
     "use-debounce": "^7.0.1"
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^7.0.2",
     "@vitejs/plugin-react": "^1.0.7",
     "c8": "^7.11.0",
     "eslint": "^8.9.0",
