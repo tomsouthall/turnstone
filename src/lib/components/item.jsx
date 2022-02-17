@@ -4,7 +4,7 @@ import MatchingText from './matchingText'
 import { StateContext } from '../context/state'
 import isUndefined from '../utils/isUndefined'
 import escapeStringRegExp from 'escape-string-regexp'
-import { setHighlighted } from '../actions/actions'
+import { setHighlighted, setSelected } from '../actions/actions'
 
 export default function Item(props) {
   const { index, item } = props
@@ -13,7 +13,6 @@ export default function Item(props) {
     state,
     dispatch,
     customStyles,
-    setSelectedState,
     splitCharState
   } = useContext(StateContext)
 
@@ -40,7 +39,7 @@ export default function Item(props) {
   }
 
   const handleClick = () => {
-    setSelectedState(item)
+    dispatch(setSelected(index))
   }
 
   const itemElement = () => {

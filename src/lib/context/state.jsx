@@ -15,7 +15,6 @@ const StateContextProvider = (props) => {
     customStyles: styles,
     splitChar
   })
-  const [selectedState, setSelectedState] = useState()
   const [customStyles] = useState(styles)
   const [splitCharState] = useState(splitChar)
 
@@ -26,8 +25,6 @@ const StateContextProvider = (props) => {
       value={{
         state,
         dispatch,
-        selectedState,
-        setSelectedState,
         customStyles,
         splitCharState
       }}>

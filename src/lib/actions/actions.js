@@ -53,3 +53,16 @@ export const highlightNext = () => {
     type: types.NEXT_HIGHLIGHTED
   }
 }
+
+export const setSelected = (index) => {
+  return {
+    type: types.SET_SELECTED,
+    index
+  }
+}
+
+export const clearSelected = () => {
+  return {
+    type: types.CLEAR_SELECTED
+  }
+}

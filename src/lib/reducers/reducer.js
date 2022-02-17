@@ -13,7 +13,6 @@ const reducer = (state, action) => {
       case types.SET_ITEMS:
         return action.payload
       case types.SET_HIGHLIGHTED:
-        console.log('setting', action.index)
         return { highlighted: highlightedItem(action.index, state) }
       case types.CLEAR_HIGHLIGHTED:
         return { highlighted: undef }
@@ -26,7 +25,7 @@ const reducer = (state, action) => {
           ? { highlighted: highlightedItem(state.highlighted.index + 1, state) }
           : {}
       case types.SET_SELECTED:
-        return action.payload
+        return { selected: state.items[action.index] }
       default:
         throw new Error('Invalid action type passed to reducer')
     }

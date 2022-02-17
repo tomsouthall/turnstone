@@ -15,7 +15,8 @@ import {
   setHighlighted,
   clearHighlighted,
   highlightPrev,
-  highlightNext
+  highlightNext,
+  setSelected
 } from '../actions/actions'
 
 export default function Container(props) {
@@ -58,9 +59,7 @@ export default function Container(props) {
   const {
     state,
     dispatch,
-    customStyles,
-    selectedState,
-    setSelectedState
+    customStyles
   } = useContext(StateContext)
 
   // Component state
@@ -136,13 +135,13 @@ export default function Container(props) {
 
   // When an item is selected alter the query to match and fire applicable events
   useEffect(() => {
-    if (!isUndefined(selectedState)) {
+    if (!isUndefined(state.selected)) {
       typeaheadInput.current.value = ''
-      dispatch(setQuery(selectedState.text))
+      dispatch(setQuery(state.selected.text))
       queryInput.current.blur()
-      if (typeof onSelect === 'function') onSelect(selectedState.value)
+      if (typeof onSelect === 'function') onSelect(state.selected.value)
     }
-  }, [selectedState, onSelect])
+  }, [state.selected, onSelect])
 
   const formatQuery = (query, typeahead) => {
     const formattedQuery = typeahead.substring(0, query.length)
@@ -160,7 +159,7 @@ export default function Container(props) {
       ? state.items[highlightedIndex]
       : undef
     const f = keyPressed.toLowerCase() === 'enter' ? onEnter : onTab
-    setSelectedState(state.items[highlightedIndex])
+    dispatch(setSelected(highlightedIndex))
     if (typeof f === 'function') f(queryInput.current.value, highlightedItem)
   }
 
