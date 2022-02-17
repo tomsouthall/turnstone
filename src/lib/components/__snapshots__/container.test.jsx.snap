@@ -1,0 +1,52 @@
+// Vitest Snapshot v1
+
+exports[`Container > Component renders correctly 1`] = `
+<div
+  className="query-container-class"
+  style={
+    {
+      "position": "relative",
+    }
+  }
+>
+  <input
+    autoCapitalize="off"
+    autoComplete="off"
+    autoCorrect="off"
+    className="query-class"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onInput={[Function]}
+    onKeyDown={[Function]}
+    placeholder="Type something fruity"
+    spellCheck="false"
+    style={
+      {
+        "backgroundColor": "transparent",
+        "position": "relative",
+        "zIndex": 1,
+      }
+    }
+    tabIndex="1"
+    type="text"
+  />
+  <input
+    autoCapitalize="off"
+    autoComplete="off"
+    autoCorrect="off"
+    className="typeahead-class"
+    readOnly="readonly"
+    spellCheck="false"
+    style={
+      {
+        "left": 0,
+        "position": "absolute",
+        "top": 0,
+        "zIndex": 0,
+      }
+    }
+    tabIndex="-1"
+    type="text"
+  />
+</div>
+`;
