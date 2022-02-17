@@ -72,7 +72,6 @@ Turnstone.propTypes = {
     )
   },
   itemGroupsAreImmutable: PropTypes.bool,
-  loadingMessage: PropTypes.string,
   minQueryLength: (props) => {
     PropTypes.checkPropTypes(
       {minQueryLength: PropTypes.number},
@@ -80,7 +79,9 @@ Turnstone.propTypes = {
       'prop', 'Turnstone'
     )
     if(props.minQueryLength < propDefaults.minQueryLength)
-      return new Error(`Prop "minQueryLength" must be a number greater than ${propDefaults.minQueryLength - 1}`)
+      return new Error(
+        `Prop "minQueryLength" must be a number greater than ${propDefaults.minQueryLength - 1}`
+      )
   },
   noItemsMessage: PropTypes.string,
   onChange: PropTypes.func,

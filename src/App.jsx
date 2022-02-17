@@ -18,6 +18,7 @@ const App = () => {
       noItemsMessage={'No matching fruit found'}
       placeholder={'Type something fruity'}
       styles={styles}
+      minQueryLength={1}
     />
   )
 }

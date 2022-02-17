@@ -3,12 +3,16 @@ import setify from 'setify' // Sets input value without changing cursor position
 import { StateContext } from '../context/state'
 import Items from './items'
 import { useDebounce } from 'use-debounce'
-import { useItemsState, useAutoFocus, useQueryChange } from './hooks/containerEffects'
 import useData from './hooks/useData'
 import undef from '../utils/undef'
 import isUndefined from '../utils/isUndefined'
 import startsWithCaseInsensitive from '../utils/startsWithCaseInsensitive'
 import defaultStyles from './styles/input.styles.js'
+import {
+  useItemsState,
+  useAutoFocus,
+  useQueryChange,
+} from './hooks/containerEffects'
 import {
   setQuery,
   setHighlighted,
@@ -32,7 +36,6 @@ export default function Container(props) {
     itemGroupsAreImmutable,
     maxItems,
     minQueryLength,
-    loadingMessage,
     noItemsMessage,
     onChange,
     onSelect,
@@ -61,7 +64,6 @@ export default function Container(props) {
   // Component state
   const [debouncedQuery] = useDebounce(state.query, debounceWait)
   const [hasFocus, setHasFocus] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
 
   // DOM references
   const queryInput = useRef(null)
@@ -95,12 +97,6 @@ export default function Container(props) {
   // As soon as the query state changes (ignoring debounce) update the
   // typeahead value and the query value and fire onChnage
   useQueryChange(state.query, queryInput, typeaheadInput, onChange)
-
-  // Figure out whether we are able to display a loading state
-  useEffect(() => {
-    if (state.items && state.items.length) setIsLoading(false)
-    else if (state.query.length <= minQueryLength) setIsLoading(true)
-  }, [state.items, state.query, minQueryLength, setIsLoading])
 
   // When the highlighted item changes, make sure the typeahead matches and format
   // the query text to match the case of the typeahead text
@@ -256,9 +252,7 @@ export default function Container(props) {
 
         {isDropdown() && (
           <Items
-            isLoading={isLoading}
             items={state.items}
-            loadingMessage={loadingMessage}
             noItemsMessage={noItemsMessage}
           />
         )}

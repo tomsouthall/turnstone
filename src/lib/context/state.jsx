@@ -13,7 +13,6 @@ const StateContextProvider = (props) => {
     items,
     highlighted: undef,
     selected: undef,
-    isLoading: false,
     customStyles: styles,
     splitChar,
     props: propsMinusChildren
