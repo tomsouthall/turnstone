@@ -6,10 +6,10 @@ import undef from '../utils/undef'
 const TurnstoneContext = createContext() //TODO: Rename GlobalStateContext
 
 const TurnstoneContextProvider = (props) => {
-  const { children, splitChar, styles = {}, text = '' } = props
+  const { children, splitChar, styles = {}, text = '', items = [] } = props
   const [state, dispatch] = useReducer(reducer, {
     query: text,
-    items: [],
+    items,
     highlighted: undef,
     selected: undef,
     customStyles: styles,

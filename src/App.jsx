@@ -13,6 +13,7 @@ const App = () => {
       data={fruits}
       dataSearchType={'startswith'}
       debounceWait={0}
+      itemGroupsAreImmutable={true}
       maxItems={10}
       noItemsMessage={'No matching fruit found'}
       placeholder={'Type something fruity'}

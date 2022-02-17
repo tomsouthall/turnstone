@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext, useMemo } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import setify from 'setify' // Sets input value without changing cursor position
 import { TurnstoneContext } from '../context/turnstone'
 import Items from './items'

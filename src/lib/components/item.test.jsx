@@ -5,6 +5,7 @@ import { describe, expect, test } from 'vitest'
 import { TurnstoneContextProvider } from '../context/turnstone.jsx'
 import Item from './item.jsx'
 
+// TODO: Create test helper files?
 const customStyles = {
   item: 'item-class',
   highlightedItem: 'highlighted-item-class',
@@ -21,7 +22,7 @@ const item = {
 }
 
 const component = renderer.create(
-  <TurnstoneContextProvider styles={customStyles} text={'Chi'}>
+  <TurnstoneContextProvider styles={customStyles} text={'Chi'} items={[item]}>
    <Item
       index={0}
       key={'item0'}
@@ -40,14 +41,6 @@ describe('Item', () => {
   test('Link changes the class when hovered', () => {
     // Manually trigger onMouseEnter callback and rerender
     tree.props.onMouseEnter()
-    tree = component.toJSON()
-
-    expect(tree).toMatchSnapshot()
-  })
-
-  test('Link changes the class when hovered', () => {
-    // Manually trigger onMouseEnter callback and rerender
-    tree.props.onMouseDown()
     tree = component.toJSON()
 
     expect(tree).toMatchSnapshot()

@@ -41,24 +41,3 @@ exports[`Item > Link changes the class when hovered 1`] = `
   </span>
 </div>
 `;
-
-exports[`Item > Link changes the class when hovered 2`] = `
-<div
-  className="highlighted-item-class top-item-class"
-  onMouseDown={[Function]}
-  onMouseEnter={[Function]}
-  style={
-    {
-      "overflow": "hidden",
-      "whiteSpace": "nowrap",
-    }
-  }
->
-  <span>
-    Chi
-  </span>
-  <span>
-    cago, Illinois, United States
-  </span>
-</div>
-`;
