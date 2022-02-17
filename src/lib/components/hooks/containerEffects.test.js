@@ -5,6 +5,7 @@ import {
   useAutoFocus,
   useQueryChange,
   useHighlight,
+  useSelected,
   formatQuery
 } from './containerEffects'
 
@@ -12,6 +13,7 @@ let inputRef = (value = '') => ( //TODO: Put in a beforeEach when blogging
   {
     current: {
       focus: vi.fn(),
+      blur: vi.fn(),
       value
     }
   }
@@ -80,7 +82,7 @@ describe('useQueryChange', () => {
 
 describe('useHighlight', () => {
   const queryValue = 'chi'
-  const highlighted = {index: 0, text: 'Chicago, Illinois, United States'}
+  const highlighted = { index: 0, text: 'Chicago, Illinois, United States' }
 
   test('Typeahead is set to highlighted text and query text changes to match case', () => {
     const queryRef = inputRef(queryValue)
@@ -120,6 +122,38 @@ describe('useHighlight', () => {
     renderHook(() => useHighlight(highlighted, true, queryRef, typeaheadRef))
     expect(queryRef.current.value).toBe('Foo')
     expect(typeaheadRef.current.value).toBe('')
+  })
+})
+
+describe('useSelected', () => {
+  const queryValue = 'Chicago, Illinois, United States'
+  const selected = {
+    text: queryValue,
+    value: {
+      name: queryValue,
+      coords: '41.882304590139135, -87.62327214400634'
+    }
+  }
+
+  test('Side effects of item selection occur correctly', () => {
+    const queryRef = inputRef(queryValue)
+    const typeaheadRef = inputRef(queryValue)
+    const onSelect = vi.fn()
+    renderHook(() => useSelected(selected, queryRef, typeaheadRef, onSelect))
+    expect(queryRef.current.value).toBe(queryValue)
+    expect(queryRef.current.blur).toHaveBeenCalledTimes(1)
+    expect(typeaheadRef.current.value).toBe('')
+    expect(onSelect).toHaveBeenCalledWith(selected.value)
+  })
+
+  test('Side effects do not occur if selected item is undefined', () => {
+    const queryRef = inputRef(queryValue)
+    const typeaheadRef = inputRef(queryValue)
+    const onSelect = vi.fn()
+    renderHook(() => useSelected(undef, queryRef, typeaheadRef, onSelect))
+    expect(queryRef.current.blur).toHaveBeenCalledTimes(0)
+    expect(typeaheadRef.current.value).toBe(queryValue)
+    expect(onSelect).toHaveBeenCalledTimes(0)
   })
 })
 

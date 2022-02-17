@@ -2,6 +2,7 @@ import { useEffect, useContext } from 'react'
 import setify from 'setify' // Sets input value without changing cursor position
 import { StateContext } from '../../context/state'
 import { setItems } from '../../actions/actions'
+import isUndefined from '../../utils/isUndefined'
 import startsWithCaseInsensitive from '../../utils/startsWithCaseInsensitive'
 
 export const useItemsState = (swrData) => {
@@ -50,6 +51,16 @@ export const useHighlight = (highlighted, hasFocus, queryInput, typeaheadInput) 
 
     setify(queryInput.current, queryValue)
   }, [highlighted, hasFocus])
+}
+
+export const useSelected = (selected, queryInput, typeaheadInput, onSelect) => {
+  useEffect(() => {
+    if (!isUndefined(selected)) {
+      typeaheadInput.current.value = ''
+      queryInput.current.blur()
+      if (typeof onSelect === 'function') onSelect(selected.value)
+    }
+  }, [selected, onSelect])
 }
 
 //////////////////////////////

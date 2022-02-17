@@ -6,7 +6,7 @@ const highlightedItem = (i, state) => {
 }
 
 const reducer = (state, action) => {
-  const newState = () => {
+  const newState = (() => {
     switch (action.type) {
       case types.SET_QUERY:
         return action.payload
@@ -25,13 +25,16 @@ const reducer = (state, action) => {
           ? { highlighted: highlightedItem(state.highlighted.index + 1, state) }
           : {}
       case types.SET_SELECTED:
-        return { selected: state.items[action.index] }
+        return {
+          selected: state.items[action.index],
+          query: state.items[action.index].text,
+        }
       default:
         throw new Error('Invalid action type passed to reducer')
     }
-  }
+  })()
 
-  return {...state, ...newState()}
+  return {...state, ...newState}
 }
 
 export default reducer

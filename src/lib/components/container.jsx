@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { StateContext } from '../context/state'
 import Items from './items'
 import { useDebounce } from 'use-debounce'
@@ -10,12 +10,12 @@ import {
   useItemsState,
   useAutoFocus,
   useQueryChange,
-  useHighlight
+  useHighlight,
+  useSelected
 } from './hooks/containerEffects'
 import {
   setQuery,
   setHighlighted,
-  clearHighlighted,
   highlightPrev,
   highlightNext,
   setSelected
@@ -68,18 +68,20 @@ export default function Container(props) {
   const queryInput = useRef(null)
   const typeaheadInput = useRef(null)
 
-  const isImmutable = () => {
+  // Checks whether or not SWR data is to be treated as immutable
+  const isImmutable = (() => {
     return itemGroupsAreImmutable &&
       !(
         defaultItemGroups &&
         !defaultItemGroupsAreImmutable &&
         debouncedQuery.length === 0
       )
-  }
+  })()
 
+  // Hook to retrieve data using SWR
   const swrData = useData(
     debouncedQuery.toLowerCase(),
-    isImmutable(),
+    isImmutable,
     itemGroups,
     defaultItemGroups,
     minQueryLength,
@@ -102,14 +104,7 @@ export default function Container(props) {
   useHighlight(state.highlighted, hasFocus, queryInput, typeaheadInput)
 
   // When an item is selected alter the query to match and fire applicable events
-  useEffect(() => {
-    if (!isUndefined(state.selected)) {
-      typeaheadInput.current.value = ''
-      dispatch(setQuery(state.selected.text))
-      queryInput.current.blur()
-      if (typeof onSelect === 'function') onSelect(state.selected.value)
-    }
-  }, [state.selected, onSelect])
+  useSelected(state.selected, queryInput, typeaheadInput, onSelect)
 
   const onTabOrEnter = (keyPressed) => {
     // keyPressed must be 'enter' or 'tab'
@@ -176,16 +171,12 @@ export default function Container(props) {
     setHasFocus(true) //TODO: make hasFocus part of global state?
 
     if (state.items && state.items.length > 0) {
-      dispatch(setHighlighted({ index: 0, text: state.items[0].text }))
-    }
-    else {
-      dispatch(clearHighlighted())
+      dispatch(setHighlighted(0))
     }
   }
 
   const handleBlur = () => {
     setHasFocus(false)
-    dispatch(clearHighlighted())
   }
 
   return (
