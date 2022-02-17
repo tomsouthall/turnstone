@@ -1,17 +1,22 @@
 import React, { useState, useEffect, useRef, useContext, useMemo } from 'react'
-import useSWR from 'swr'
 import setify from 'setify' // Sets input value without changing cursor position
-import swrLaggyMiddleware from '../utils/swrLaggyMiddleware'
 import { TurnstoneContext } from '../context/turnstone'
 import Items from './items'
 import { useDebounce } from 'use-debounce'
-import { useAutoFocus, useQueryChange } from './effects/containerEffects'
-import firstOfType from 'first-of-type'
+import { useAutoFocus, useQueryChange } from './hooks/containerEffects'
+import useData from './hooks/useData'
 import undef from '../utils/undef'
 import isUndefined from '../utils/isUndefined'
 import startsWithCaseInsensitive from '../utils/startsWithCaseInsensitive'
 import defaultStyles from './styles/input.styles.js'
-// import fetch from 'unfetch' // TODO: may need this if not using Next.js
+import {
+  setQuery,
+  setItems,
+  setHighlighted,
+  clearHighlighted,
+  highlightPrev,
+  highlightNext
+} from '../actions/actions'
 
 export default function Container(props) {
   // Destructure props
@@ -51,17 +56,15 @@ export default function Container(props) {
 
   // Global state from context
   const {
+    state,
+    dispatch,
     customStyles,
-    queryState,
-    setQueryState,
-    highlightedState,
-    setHighlightedState,
     selectedState,
     setSelectedState
   } = useContext(TurnstoneContext)
 
   // Component state
-  const [debouncedQueryState] = useDebounce(queryState, debounceWait)
+  const [debouncedQuery] = useDebounce(state.query, debounceWait)
   const [hasFocus, setHasFocus] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -69,181 +72,77 @@ export default function Container(props) {
   const queryInput = useRef(null)
   const typeaheadInput = useRef(null)
 
-  const itemText = (item, displayField) => {
-    const itemType = typeof item
-    const text =
-      itemType === 'string' && isUndefined(displayField)
-        ? item
-        : item[displayField]
-    return isUndefined(text) ? firstOfType(item, 'string') || '' : text
+  const isImmutable = () => {
+    return itemGroupsAreImmutable &&
+      !(
+        defaultItemGroups &&
+        !defaultItemGroupsAreImmutable &&
+        debouncedQuery.length === 0
+      )
   }
 
-  const filterSuppliedData = (group, query) => {
-    const { data, displayField, dataSearchType } = group
-    const searchType = dataSearchType
-      ? dataSearchType.toLowerCase()
-      : dataSearchType
-
-    switch (searchType) {
-      case 'startswith':
-        return data.filter((item) =>
-          itemText(item, displayField)
-            .toLowerCase()
-            .startsWith(query.toLowerCase())
-        )
-      case 'contains':
-        return data.filter((item) =>
-          itemText(item, displayField)
-            .toLowerCase()
-            .includes(query.toLowerCase())
-        )
-      default:
-        return data
-    }
-  }
-
-  const limitResults = (groups, groupsProp) => {
-    // TODO: Place into a util/callback function
-    const ratios = groupsProp.map((group) => group.ratio || 1)
-    const ratioTotal = ratios.reduce((total, ratio) => total + ratio, 0)
-    const ratioMultiplier = maxItems / ratioTotal
-    const resultTotal = groups.flat().length
-    const groupCounts = []
-    let unassignedSlots = resultTotal < maxItems ? resultTotal : maxItems
-
-    while (unassignedSlots > 0) {
-      groups = groups.map((group, i) => {
-        if (!groupCounts[i]) {
-          groupCounts[i] = Math.round(ratios[i] * ratioMultiplier)
-          if (groupCounts[i] > group.length) groupCounts[i] = group.length
-          unassignedSlots = unassignedSlots - groupCounts[i]
-        } else if (groupCounts[i] < group.length) {
-          unassignedSlots -= ++groupCounts[i]
-        }
-        return group
-      })
-    }
-
-    return groups.map((group, index) => group.slice(0, groupCounts[index]))
-  }
-
-  const fetcher = (q) => {
-    if (defaultItemGroups && q.length > 0 && q.length < minQueryLength)
-      return []
-    else if (!defaultItemGroups && q.length < minQueryLength) return []
-
-    const groupsProp =
-      defaultItemGroups && !q.length ? defaultItemGroups : itemGroups
-
-    const promises = groupsProp.map((g) => {
-      if (typeof g.data === 'function') {
-        return g.data(q)
-      } else {
-        return Promise.resolve({ data: filterSuppliedData(g, q) })
-      }
-    })
-
-    return Promise.all(promises).then((groups) => {
-      groups = groups.reduce((prevGroups, group, groupIndex) => {
-        return [
-          ...prevGroups,
-          group.data.map((item) => ({
-            value: item,
-            text: itemText(item, groupsProp[groupIndex].displayField),
-            groupIndex,
-            groupName: groupsProp[groupIndex].name
-          }))
-        ]
-      }, [])
-
-      if (groups.length) groups = limitResults(groups, groupsProp)
-
-      return groups.flat()
-    })
-  }
-
-  const swrBaseOptions = {
-    use: [swrLaggyMiddleware]
-  }
-  const swrOptions =
-    itemGroupsAreImmutable &&
-    !(
-      defaultItemGroups &&
-      !defaultItemGroupsAreImmutable &&
-      debouncedQueryState.length === 0
-    )
-      ? {
-          ...swrBaseOptions,
-          revalidateIfStale: false,
-          revalidateOnFocus: false,
-          revalidateOnReconnect: false
-        }
-      : swrBaseOptions
-
-  // See: https://github.com/vercel/swr/discussions/1810
-  const dummyArgToEnsureCachingOfZeroLengthStrings = 'X'
-
-  const swrData = useSWR(
-    [
-      debouncedQueryState.toLowerCase(),
-      dummyArgToEnsureCachingOfZeroLengthStrings
-    ],
-    fetcher,
-    swrOptions
+  const swrData = useData(
+    debouncedQuery.toLowerCase(),
+    isImmutable(),
+    itemGroups,
+    defaultItemGroups,
+    minQueryLength,
+    maxItems,
+    dispatch
   ).data
 
-  const items = useMemo(() => {
-    // console.log('swrData', swrData)
-    return swrData || []
+  // Store retrieved data in global state
+  useEffect(() => {
+    dispatch(setItems(swrData || []))
   }, [swrData])
 
   // Autofocus on render if prop is true
   useAutoFocus(queryInput, autoFocus)
 
-  // As soon as the queryState changes (ignoring debounce) update the
-  // typeahead value and the query value
-  useQueryChange(queryInput, typeaheadInput, queryState, onChange)
+  // As soon as the query state changes (ignoring debounce) update the
+  // typeahead value and the query value and fire onChnage
+  useQueryChange(state.query, queryInput, typeaheadInput, onChange)
 
-  // Whenever the dropdown items change, set the highlighted item
-  // to either the first or nothing if there are no items
-  useEffect(() => {
-    setHighlightedState(
-      items && items.length ? { index: 0, text: items[0].text } : undef
-    )
-  }, [items, setHighlightedState])
+  // // Whenever the dropdown items change, set the highlighted item
+  // // to either the first or nothing if there are no items
+  // useEffect(() => {
+  //   setHighlightedState(
+  //     state.items && state.items.length ? { index: 0, text: state.items[0].text } : undef
+  //   )
+  // }, [state.items, setHighlightedState])
 
   // Figure out whether we are able to display a loading state //TODO: useReducer instead of useeffect?
   useEffect(() => {
-    if (items && items.length) setIsLoaded(true)
-    else if (queryState.length <= minQueryLength) setIsLoaded(false)
-  }, [items, queryState, isLoaded, minQueryLength, setIsLoaded])
+    if (state.items && state.items.length) setIsLoaded(true)
+    else if (state.query.length <= minQueryLength) setIsLoaded(false)
+  }, [state.items, state.query, isLoaded, minQueryLength, setIsLoaded])
 
   // When the highlighted item changes, make sure the typeahead matches and format
   // the query text to match the case of the typeahead text
   useEffect(() => {
     const typeAheadValue =
-      highlightedState &&
+      state.highlighted &&
       hasFocus &&
       queryInput.current.value.length > 0 &&
-      startsWithCaseInsensitive(highlightedState.text, queryInput.current.value)
-        ? highlightedState.text
+      startsWithCaseInsensitive(state.highlighted.text, queryInput.current.value)
+        ? state.highlighted.text
         : ''
     const queryValue = formatQuery(queryInput.current.value, typeAheadValue)
 
     typeaheadInput.current.value = typeAheadValue
 
     setify(queryInput.current, queryValue)
-  }, [highlightedState, hasFocus, setQueryState])
+  }, [state.highlighted, hasFocus])
 
   // When an item is selected alter the query to match and fire applicable events
   useEffect(() => {
     if (!isUndefined(selectedState)) {
       typeaheadInput.current.value = ''
-      setQueryState(selectedState.text) //TODO: Put in a reducer?
+      dispatch(setQuery(selectedState.text))
       queryInput.current.blur()
       if (typeof onSelect === 'function') onSelect(selectedState.value)
     }
-  }, [selectedState, setQueryState, onSelect])
+  }, [selectedState, onSelect])
 
   const formatQuery = (query, typeahead) => {
     const formattedQuery = typeahead.substring(0, query.length)
@@ -254,29 +153,25 @@ export default function Container(props) {
       : query
   }
 
-  const setHighlightedIndex = (i) => {
-    setHighlightedState({ index: i, text: items[i].text })
-  }
-
   const onTabOrEnter = (keyPressed) => {
     // keyPressed must be 'enter' or 'tab'
-    const highlightedIndex = highlightedState && highlightedState.index
+    const highlightedIndex = state.highlighted && state.highlighted.index
     const highlightedItem = !isUndefined(highlightedIndex)
-      ? items[highlightedIndex]
+      ? state.items[highlightedIndex]
       : undef
     const f = keyPressed.toLowerCase() === 'enter' ? onEnter : onTab
-    setSelectedState(items[highlightedIndex])
+    setSelectedState(state.items[highlightedIndex])
     if (typeof f === 'function') f(queryInput.current.value, highlightedItem)
   }
 
   const isX = () => {
-    return !!queryState
+    return !!state.query
   }
 
   const isDropdown = () => {
-    if (hasFocus && !queryState && defaultItemGroups) return true
-    if (queryState.length < minQueryLength) return false
-    return hasFocus && queryState
+    if (hasFocus && !state.query && defaultItemGroups) return true
+    if (state.query.length < minQueryLength) return false
+    return hasFocus && state.query
   }
 
   // Handle different keypresses and call the appropriate action creators
@@ -284,13 +179,11 @@ export default function Container(props) {
     switch (evt.keyCode) {
       case 40: // Down arrow
         evt.preventDefault()
-        if (highlightedState.index < items.length - 1)
-          setHighlightedIndex(highlightedState.index + 1)
+        dispatch(highlightNext())
         break
       case 38: // Up arrow
         evt.preventDefault()
-        if (highlightedState.index > 0)
-          setHighlightedIndex(highlightedState.index - 1)
+        dispatch(highlightPrev())
         break
       case 13: // Enter
         evt.preventDefault()
@@ -308,8 +201,7 @@ export default function Container(props) {
   }
 
   const handleInput = () => {
-    setSelectedState()
-    setQueryState(queryInput.current.value)
+    dispatch(setQuery(queryInput.current.value))
   }
 
   const handleX = (evt) => {
@@ -318,24 +210,24 @@ export default function Container(props) {
   }
 
   const clearState = () => {
-    setSelectedState()
-    setQueryState('')
-    setTimeout(() => queryInput.current.focus(), debounceWait)
+    dispatch(setQuery(queryInput.current.value))
+    setTimeout(() => queryInput.current.focus(), debounceWait) // TODO: Put in useEffect
   }
 
   const handleFocus = () => {
-    setHasFocus(true)
+    setHasFocus(true) //TODO: make hasFocus part of global state?
 
-    if (items && items.length > 0) {
-      setHighlightedIndex(0)
-    } else {
-      setHighlightedState()
+    if (state.items && state.items.length > 0) {
+      dispatch(setHighlighted({ index: 0, text: state.items[0].text }))
+    }
+    else {
+      dispatch(clearHighlighted())
     }
   }
 
   const handleBlur = () => {
     setHasFocus(false)
-    setHighlightedState()
+    dispatch(clearHighlighted())
   }
 
   return (
@@ -380,7 +272,7 @@ export default function Container(props) {
         {isDropdown() && (
           <Items
             isLoading={!isLoaded}
-            items={items}
+            items={state.items}
             loadingMessage={loadingMessage}
             noItemsMessage={noItemsMessage}
           />

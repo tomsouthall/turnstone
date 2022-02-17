@@ -4,14 +4,15 @@ import MatchingText from './matchingText'
 import { TurnstoneContext } from '../context/turnstone'
 import isUndefined from '../utils/isUndefined'
 import escapeStringRegExp from 'escape-string-regexp'
+import { setHighlighted } from '../actions/actions'
 
 export default function Item(props) {
   const { index, item } = props
 
   const {
+    state,
+    dispatch,
     customStyles,
-    highlightedState,
-    setHighlightedState,
     setSelectedState,
     splitCharState
   } = useContext(TurnstoneContext)
@@ -24,7 +25,7 @@ export default function Item(props) {
 
   const divClassName = useMemo(() => {
     let itemStyle = customStyles[
-      (highlightedState && index === highlightedState.index)
+      (state.highlighted && index === state.highlighted.index)
         ? 'highlightedItem'
         : 'item'
     ]
@@ -32,10 +33,10 @@ export default function Item(props) {
     return (index === 0 && customStyles.topItem)
       ? `${itemStyle} ${customStyles.topItem}`
       : itemStyle
-  }, [customStyles, highlightedState, index])
+  }, [customStyles, state.highlighted, index])
 
   const handleMouseEnter = () => {
-    setHighlightedState({ index, text: item.text })
+    dispatch(setHighlighted(index))
   }
 
   const handleClick = () => {

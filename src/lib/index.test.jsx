@@ -13,6 +13,7 @@ const component = renderer.create(
   <Turnstone
     data={data}
     dataSearchType={dataSearchType}
+    itemGroupsAreImmutable={true}
   />
 )
 

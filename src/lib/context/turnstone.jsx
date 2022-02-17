@@ -1,24 +1,31 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useReducer, useState, useEffect } from 'react'
+import reducer from '../reducers/reducer'
+import {setQuery} from '../actions/actions'
+import undef from '../utils/undef'
 
-const TurnstoneContext = createContext()
+const TurnstoneContext = createContext() //TODO: Rename GlobalStateContext
 
 const TurnstoneContextProvider = (props) => {
   const { children, splitChar, styles = {}, text = '' } = props
-  const [queryState, setQueryState] = useState(text)
-  const [highlightedState, setHighlightedState] = useState()
+  const [state, dispatch] = useReducer(reducer, {
+    query: text,
+    items: [],
+    highlighted: undef,
+    selected: undef,
+    customStyles: styles,
+    splitChar
+  })
   const [selectedState, setSelectedState] = useState()
   const [customStyles] = useState(styles)
   const [splitCharState] = useState(splitChar)
 
-  useEffect(() => setQueryState(text), [text])
+  useEffect(() => dispatch(setQuery(text)), [text]) // TODO: Is this needed?
 
   return (
     <TurnstoneContext.Provider
       value={{
-        queryState,
-        setQueryState,
-        highlightedState,
-        setHighlightedState,
+        state,
+        dispatch,
         selectedState,
         setSelectedState,
         customStyles,

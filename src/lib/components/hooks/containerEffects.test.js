@@ -34,43 +34,43 @@ describe('useQueryChange', () => {
   const typeaheadValue = 'Chicago, Illinois, United States'
   const queryValue = 'Chi'
 
-  test('Empty queryState causes both query and typeahead inputs to be emptied', () => {
+  test('Empty query causes both query and typeahead inputs to be emptied', () => {
     const queryRef = inputRef(queryValue)
     const typeaheadRef = inputRef(typeaheadValue)
-    renderHook(() => useQueryChange(queryRef, typeaheadRef, ''))
+    renderHook(() => useQueryChange('', queryRef, typeaheadRef))
     expect(queryRef.current.value).toBe('')
     expect(typeaheadRef.current.value).toBe('')
   })
 
-  test('Empty query input value is set to queryState', () => {
+  test('Empty query input value is set to query', () => {
     const queryRef = inputRef()
     const typeaheadRef = inputRef()
-    renderHook(() => useQueryChange(queryRef, typeaheadRef, queryValue))
+    renderHook(() => useQueryChange(queryValue, queryRef, typeaheadRef))
     expect(queryRef.current.value).toBe(queryValue)
   })
 
-  test('If queryState matches typeahead, both values remain unchanged', () => {
+  test('If query matches typeahead, both values remain unchanged', () => {
     const queryRef = inputRef()
     const typeaheadRef = inputRef(typeaheadValue)
-    renderHook(() => useQueryChange(queryRef, typeaheadRef, queryValue))
+    renderHook(() => useQueryChange(queryValue, queryRef, typeaheadRef))
     expect(queryRef.current.value).toBe(queryValue)
     expect(typeaheadRef.current.value).toBe(typeaheadValue)
   })
 
-  test('If queryState does not match typeahead, typeahead is emptied', () => {
-    const queryState = 'Chil'
-    const queryRef = inputRef(queryState)
+  test('If query does not match typeahead, typeahead is emptied', () => {
+    const query = 'Chil'
+    const queryRef = inputRef(query)
     const typeaheadRef = inputRef(typeaheadValue)
-    renderHook(() => useQueryChange(queryRef, typeaheadRef, queryState))
-    expect(queryRef.current.value).toBe(queryState)
+    renderHook(() => useQueryChange(query, queryRef, typeaheadRef))
+    expect(queryRef.current.value).toBe(query)
     expect(typeaheadRef.current.value).toBe('')
   })
 
-  test('If onChange is present, it is called and passed the queryState', () => {
+  test('If onChange is present, it is called and passed the query', () => {
     const queryRef = inputRef()
     const typeaheadRef = inputRef()
     const onChange = vi.fn()
-    renderHook(() => useQueryChange(queryRef, typeaheadRef, queryValue, onChange))
+    renderHook(() => useQueryChange(queryValue, queryRef, typeaheadRef, onChange))
     expect(onChange).toHaveBeenCalledWith(queryValue)
   })
 })

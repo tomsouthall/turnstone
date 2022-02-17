@@ -2,6 +2,10 @@ import React from 'react'
 import Turnstone from './lib'
 import fruits from './data'
 
+const styles = {
+  highlightedItem: 'highlightedItem'
+}
+
 const App = () => {
   return (
     <Turnstone
@@ -12,6 +16,7 @@ const App = () => {
       maxItems={10}
       noItemsMessage={'No matching fruit found'}
       placeholder={'Type something fruity'}
+      styles={styles}
     />
   )
 }
