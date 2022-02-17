@@ -2,7 +2,7 @@
 // import renderer from 'react-test-renderer'
 
 // import { vi, describe, expect, test } from 'vitest'
-// import { TurnstoneContextProvider } from '../context/turnstone'
+// import { StateContextProvider } from '../context/turnstone'
 // import Container from './container'
 // import fruits from '../../data'
 
@@ -18,7 +18,7 @@
 //     }
 
 //     const component = renderer.create(
-//       <TurnstoneContextProvider styles={customStyles}>
+//       <StateContextProvider styles={customStyles}>
 //        <Container
 //          autoFocus={true}
 //          data={fruits}
@@ -28,7 +28,7 @@
 //          noItemsMessage={'No matching fruit found'}
 //          placeholder={'Type something fruity'}
 //         />
-//       </TurnstoneContextProvider>
+//       </StateContextProvider>
 //     )
 
 //     const tree = component.toJSON()

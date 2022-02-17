@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import { TurnstoneContext } from '../context/turnstone'
+import { StateContext } from '../context/state'
 import Item from './item'
 
 export default function ItemFirst(props) {
   const { groupName, index, item } = props
-  const { customStyles } = useContext(TurnstoneContext)
+  const { customStyles } = useContext(StateContext)
 
   return (
     <React.Fragment>

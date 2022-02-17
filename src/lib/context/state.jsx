@@ -3,9 +3,9 @@ import reducer from '../reducers/reducer'
 import {setQuery} from '../actions/actions'
 import undef from '../utils/undef'
 
-const TurnstoneContext = createContext() //TODO: Rename GlobalStateContext
+const StateContext = createContext() //TODO: Rename GlobalStateContext
 
-const TurnstoneContextProvider = (props) => {
+const StateContextProvider = (props) => {
   const { children, splitChar, styles = {}, text = '', items = [] } = props
   const [state, dispatch] = useReducer(reducer, {
     query: text,
@@ -22,7 +22,7 @@ const TurnstoneContextProvider = (props) => {
   useEffect(() => dispatch(setQuery(text)), [text]) // TODO: Is this needed?
 
   return (
-    <TurnstoneContext.Provider
+    <StateContext.Provider
       value={{
         state,
         dispatch,
@@ -32,8 +32,8 @@ const TurnstoneContextProvider = (props) => {
         splitCharState
       }}>
       {children}
-    </TurnstoneContext.Provider>
+    </StateContext.Provider>
   )
 }
 
-export { TurnstoneContext, TurnstoneContextProvider }
+export { StateContext, StateContextProvider }

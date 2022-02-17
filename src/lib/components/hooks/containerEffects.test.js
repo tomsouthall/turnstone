@@ -1,4 +1,4 @@
-import { vi, describe, test, expect, beforeEach } from 'vitest'
+import { vi, describe, test, expect } from 'vitest'
 import { renderHook } from '@testing-library/react-hooks'
 import {
   useAutoFocus,

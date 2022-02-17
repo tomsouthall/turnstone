@@ -2,7 +2,7 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 
 import { vi, describe, expect, test } from 'vitest'
-import { TurnstoneContextProvider } from '../context/turnstone'
+import { StateContextProvider } from '../context/state'
 import ItemFirst from './itemFirst'
 
 vi.mock('./item', () => ({ default: () => 'Item' }))
@@ -14,13 +14,13 @@ describe('ItemFirst', () => {
     }
 
     const component = renderer.create(
-      <TurnstoneContextProvider styles={customStyles}>
+      <StateContextProvider styles={customStyles}>
        <ItemFirst
           groupName={'Cities'}
           index={0}
           key={'item0'}
         />
-      </TurnstoneContextProvider>
+      </StateContextProvider>
     )
 
     const tree = component.toJSON()

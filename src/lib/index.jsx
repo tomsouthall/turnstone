@@ -2,19 +2,19 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TurnstoneContextProvider } from './context/turnstone'
+import { StateContextProvider } from './context/state'
 import isUndefined from './utils/isUndefined'
 import Container from './components/container'
 
 export default function Turnstone(props) {
   const { splitChar, styles, text } = props
   return (
-    <TurnstoneContextProvider
+    <StateContextProvider
       splitChar={splitChar}
       styles={styles}
       text={text}>
       <Container {...props} />
-    </TurnstoneContextProvider>
+    </StateContextProvider>
   )
 }
 

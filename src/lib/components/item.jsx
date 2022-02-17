@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react'
 import defaultStyles from './styles/item.styles.js'
 import MatchingText from './matchingText'
-import { TurnstoneContext } from '../context/turnstone'
+import { StateContext } from '../context/state'
 import isUndefined from '../utils/isUndefined'
 import escapeStringRegExp from 'escape-string-regexp'
 import { setHighlighted } from '../actions/actions'
@@ -15,7 +15,7 @@ export default function Item(props) {
     customStyles,
     setSelectedState,
     splitCharState
-  } = useContext(TurnstoneContext)
+  } = useContext(StateContext)
 
   const splitText = useMemo(() => {
     if (isUndefined(splitCharState)) return [item.text]

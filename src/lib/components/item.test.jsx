@@ -2,7 +2,7 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 
 import { describe, expect, test } from 'vitest'
-import { TurnstoneContextProvider } from '../context/turnstone.jsx'
+import { StateContextProvider } from '../context/state.jsx'
 import Item from './item.jsx'
 
 // TODO: Create test helper files?
@@ -22,13 +22,13 @@ const item = {
 }
 
 const component = renderer.create(
-  <TurnstoneContextProvider styles={customStyles} text={'Chi'} items={[item]}>
+  <StateContextProvider styles={customStyles} text={'Chi'} items={[item]}>
    <Item
       index={0}
       key={'item0'}
       item={item}
     />
-  </TurnstoneContextProvider>
+  </StateContextProvider>
 )
 let tree = component.toJSON()
 

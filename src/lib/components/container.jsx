@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import setify from 'setify' // Sets input value without changing cursor position
-import { TurnstoneContext } from '../context/turnstone'
+import { StateContext } from '../context/state'
 import Items from './items'
 import { useDebounce } from 'use-debounce'
 import { useAutoFocus, useQueryChange } from './hooks/containerEffects'
@@ -61,7 +61,7 @@ export default function Container(props) {
     customStyles,
     selectedState,
     setSelectedState
-  } = useContext(TurnstoneContext)
+  } = useContext(StateContext)
 
   // Component state
   const [debouncedQuery] = useDebounce(state.query, debounceWait)

@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react'
-import { TurnstoneContext } from '../context/turnstone'
+import { StateContext } from '../context/state'
 import defaultStyles from './styles/items.styles.js'
 import ItemFirst from './itemFirst'
 import Item from './item'
@@ -7,7 +7,7 @@ import isUndefined from '../utils/isUndefined'
 
 export default function Items(props) {
   const { isLoading, items, loadingMessage, noItemsMessage } = props
-  const { customStyles } = useContext(TurnstoneContext)
+  const { customStyles } = useContext(StateContext)
 
   const itemElements = () => {
     return (
