@@ -21,17 +21,18 @@ const item = {
   }
 }
 
+const index = 0
+
 const component = renderer.create(
   <StateContextProvider styles={customStyles} text={'Chi'} items={[item]}>
    <Item
-      index={0}
-      key={'item0'}
+      index={index}
+      key={`item${index}`}
       item={item}
     />
   </StateContextProvider>
 )
 let tree = component.toJSON()
-
 
 describe('Item', () => {
   test('Component renders correctly', () => {
@@ -39,7 +40,7 @@ describe('Item', () => {
   })
 
   test('Link changes the class when hovered', () => {
-    // Manually trigger onMouseEnter callback and rerender
+    // Manually trigger onMouseEnter and rerender
     tree.props.onMouseEnter()
     tree = component.toJSON()
 
