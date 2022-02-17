@@ -1,8 +1,11 @@
 import { vi, describe, test, expect } from 'vitest'
 import { renderHook } from '@testing-library/react-hooks'
+import undef from '../../utils/undef'
 import {
   useAutoFocus,
-  useQueryChange
+  useQueryChange,
+  useHighlight,
+  formatQuery
 } from './containerEffects'
 
 let inputRef = (value = '') => ( //TODO: Put in a beforeEach when blogging
@@ -72,5 +75,81 @@ describe('useQueryChange', () => {
     const onChange = vi.fn()
     renderHook(() => useQueryChange(queryValue, queryRef, typeaheadRef, onChange))
     expect(onChange).toHaveBeenCalledWith(queryValue)
+  })
+})
+
+describe('useHighlight', () => {
+  const queryValue = 'chi'
+  const highlighted = {index: 0, text: 'Chicago, Illinois, United States'}
+
+  test('Typeahead is set to highlighted text and query text changes to match case', () => {
+    const queryRef = inputRef(queryValue)
+    const typeaheadRef = inputRef()
+    renderHook(() => useHighlight(highlighted, true, queryRef, typeaheadRef))
+    expect(queryRef.current.value).toBe('Chi')
+    expect(typeaheadRef.current.value).toBe(highlighted.text)
+  })
+
+  test('If there is no highlighted item, no change occurs', () => {
+    const queryRef = inputRef(queryValue)
+    const typeaheadRef = inputRef()
+    renderHook(() => useHighlight(undef, true, queryRef, typeaheadRef))
+    expect(queryRef.current.value).toBe(queryValue)
+    expect(typeaheadRef.current.value).toBe('')
+  })
+
+  test('If focus is not set, no change occurs', () => {
+    const queryRef = inputRef(queryValue)
+    const typeaheadRef = inputRef()
+    renderHook(() => useHighlight(highlighted, false, queryRef, typeaheadRef))
+    expect(queryRef.current.value).toBe(queryValue)
+    expect(typeaheadRef.current.value).toBe('')
+  })
+
+  test('If there is no query, no change occurs', () => {
+    const queryRef = inputRef()
+    const typeaheadRef = inputRef()
+    renderHook(() => useHighlight(highlighted, true, queryRef, typeaheadRef))
+    expect(queryRef.current.value).toBe('')
+    expect(typeaheadRef.current.value).toBe('')
+  })
+
+  test('If selected text does not match typed text, no change occurs', () => {
+    const queryRef = inputRef('Foo')
+    const typeaheadRef = inputRef()
+    renderHook(() => useHighlight(highlighted, true, queryRef, typeaheadRef))
+    expect(queryRef.current.value).toBe('Foo')
+    expect(typeaheadRef.current.value).toBe('')
+  })
+})
+
+//////////////////////////////
+// Helper functions         //
+//////////////////////////////
+
+describe('formatQuery', () => {
+  test('If query does not match typeahead, change the case', () => {
+    const formattedQuery = formatQuery('chi', 'Chicago')
+    expect(formattedQuery).toBe('Chi')
+  })
+
+  test('If there is no typeahead, return original query', () => {
+    const formattedQuery = formatQuery('chi', '')
+    expect(formattedQuery).toBe('chi')
+  })
+
+  test('If query and typeahead do not match, return original query', () => {
+    const formattedQuery = formatQuery('chi', 'New York')
+    expect(formattedQuery).toBe('chi')
+  })
+
+  test('If query is blank, return original query', () => {
+    const formattedQuery = formatQuery('', 'Chicago')
+    expect(formattedQuery).toBe('')
+  })
+
+  test('If query matches typeahead, make no change', () => {
+    const formattedQuery = formatQuery('Chi', 'Chicago')
+    expect(formattedQuery).toBe('Chi')
   })
 })

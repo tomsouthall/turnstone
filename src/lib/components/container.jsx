@@ -12,6 +12,7 @@ import {
   useItemsState,
   useAutoFocus,
   useQueryChange,
+  useHighlight
 } from './hooks/containerEffects'
 import {
   setQuery,
@@ -95,25 +96,12 @@ export default function Container(props) {
   useAutoFocus(queryInput, autoFocus)
 
   // As soon as the query state changes (ignoring debounce) update the
-  // typeahead value and the query value and fire onChnage
+  // typeahead value and the query value and fire onChange
   useQueryChange(state.query, queryInput, typeaheadInput, onChange)
 
   // When the highlighted item changes, make sure the typeahead matches and format
   // the query text to match the case of the typeahead text
-  useEffect(() => {
-    const typeAheadValue =
-      state.highlighted &&
-      hasFocus &&
-      queryInput.current.value.length > 0 &&
-      startsWithCaseInsensitive(state.highlighted.text, queryInput.current.value)
-        ? state.highlighted.text
-        : ''
-    const queryValue = formatQuery(queryInput.current.value, typeAheadValue)
-
-    typeaheadInput.current.value = typeAheadValue
-
-    setify(queryInput.current, queryValue)
-  }, [state.highlighted, hasFocus])
+  useHighlight(state.highlighted, hasFocus, queryInput, typeaheadInput)
 
   // When an item is selected alter the query to match and fire applicable events
   useEffect(() => {
@@ -124,15 +112,6 @@ export default function Container(props) {
       if (typeof onSelect === 'function') onSelect(state.selected.value)
     }
   }, [state.selected, onSelect])
-
-  const formatQuery = (query, typeahead) => {
-    const formattedQuery = typeahead.substring(0, query.length)
-    return formattedQuery.length > 0 &&
-      query.toLowerCase() === formattedQuery.toLowerCase() &&
-      query !== formattedQuery
-      ? formattedQuery
-      : query
-  }
 
   const onTabOrEnter = (keyPressed) => {
     // keyPressed must be 'enter' or 'tab'
