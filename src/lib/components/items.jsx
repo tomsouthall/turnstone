@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useContext } from 'react'
 import { StateContext } from '../context/state'
 import defaultStyles from './styles/items.styles.js'
 import ItemFirst from './itemFirst'

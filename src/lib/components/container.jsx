@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
-import setify from 'setify' // Sets input value without changing cursor position
 import { StateContext } from '../context/state'
 import Items from './items'
 import { useDebounce } from 'use-debounce'
 import useData from './hooks/useData'
 import undef from '../utils/undef'
 import isUndefined from '../utils/isUndefined'
-import startsWithCaseInsensitive from '../utils/startsWithCaseInsensitive'
 import defaultStyles from './styles/input.styles.js'
 import {
   useItemsState,
