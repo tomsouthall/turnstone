@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useState, useEffect } from 'react'
+import React, { createContext, useReducer, useEffect } from 'react'
 import reducer from '../reducers/reducer'
 import {setQuery} from '../actions/actions'
 import undef from '../utils/undef'
@@ -15,19 +15,12 @@ const StateContextProvider = (props) => {
     customStyles: styles,
     splitChar
   })
-  const [customStyles] = useState(styles)
-  const [splitCharState] = useState(splitChar)
 
   useEffect(() => dispatch(setQuery(text)), [text]) // TODO: Is this needed?
 
   return (
     <StateContext.Provider
-      value={{
-        state,
-        dispatch,
-        customStyles,
-        splitCharState
-      }}>
+      value={{state, dispatch}}>
       {children}
     </StateContext.Provider>
   )

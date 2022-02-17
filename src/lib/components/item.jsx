@@ -11,20 +11,20 @@ export default function Item(props) {
 
   const {
     state,
-    dispatch,
-    customStyles,
-    splitCharState
+    dispatch
   } = useContext(StateContext)
 
+  const { customStyles, highlighted, splitChar } = state
+
   const splitText = useMemo(() => {
-    if (isUndefined(splitCharState)) return [item.text]
-    const regex = new RegExp(escapeStringRegExp(splitCharState) + '(.+)')
+    if (isUndefined(splitChar)) return [item.text]
+    const regex = new RegExp(escapeStringRegExp(splitChar) + '(.+)')
     return item.text.split(regex)
-  }, [splitCharState, item])
+  }, [splitChar, item])
 
   const divClassName = useMemo(() => {
     let itemStyle = customStyles[
-      (state.highlighted && index === state.highlighted.index)
+      (highlighted && index === highlighted.index)
         ? 'highlightedItem'
         : 'item'
     ]
@@ -32,7 +32,7 @@ export default function Item(props) {
     return (index === 0 && customStyles.topItem)
       ? `${itemStyle} ${customStyles.topItem}`
       : itemStyle
-  }, [customStyles, state.highlighted, index])
+  }, [customStyles, highlighted, index])
 
   const handleMouseEnter = () => {
     dispatch(setHighlighted(index))
@@ -43,8 +43,8 @@ export default function Item(props) {
   }
 
   const itemElement = () => {
-    return isUndefined(splitCharState) ||
-      !item.text.includes(splitCharState) ? (
+    return isUndefined(splitChar) ||
+      !item.text.includes(splitChar) ? (
       <MatchingText text={splitText[0]} />
     ) : (
       splitItemElement()
@@ -55,7 +55,7 @@ export default function Item(props) {
     return (
       <React.Fragment>
         <MatchingText text={splitText[0]} />
-        <span className={customStyles.splitChar}>{splitCharState}</span>
+        <span className={customStyles.splitChar}>{splitChar}</span>
         <span className={customStyles.split}>{splitText[1]}</span>
       </React.Fragment>
     )

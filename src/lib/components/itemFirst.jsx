@@ -4,7 +4,8 @@ import Item from './item'
 
 export default function ItemFirst(props) {
   const { groupName, index, item } = props
-  const { customStyles } = useContext(StateContext)
+  const { state } = useContext(StateContext)
+  const { customStyles } = state
 
   return (
     <React.Fragment>

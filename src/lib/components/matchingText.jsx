@@ -4,7 +4,8 @@ import escapeStringRegExp from 'escape-string-regexp'
 
 export default function MatchingText(props) {
   const { text } = props
-  const { customStyles, state } = useContext(StateContext)
+  const { state } = useContext(StateContext)
+  const { customStyles } = state
   const regex = new RegExp('(' + escapeStringRegExp(state.query) + ')', 'i')
   const parts = (state.query) ? text.split(regex) : [text]
   const matchingText = parts.map((part, index) => {

@@ -7,7 +7,8 @@ import isUndefined from '../utils/isUndefined'
 
 export default function Items(props) {
   const { isLoading, items, loadingMessage, noItemsMessage } = props
-  const { customStyles } = useContext(StateContext)
+  const { state } = useContext(StateContext)
+  const { customStyles } = state
 
   const itemElements = () => {
     return (

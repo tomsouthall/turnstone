@@ -56,11 +56,8 @@ export default function Container(props) {
   } = props
 
   // Global state from context
-  const {
-    state,
-    dispatch,
-    customStyles
-  } = useContext(StateContext)
+  const { state, dispatch } = useContext(StateContext)
+  const { customStyles } = state
 
   // Component state
   const [debouncedQuery] = useDebounce(state.query, debounceWait)
