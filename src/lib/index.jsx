@@ -6,14 +6,24 @@ import { StateContextProvider } from './context/state'
 import isUndefined from './utils/isUndefined'
 import Container from './components/container'
 
+// Set prop defaults before passing them on to components
+const propDefaults = {
+  autoFocus: false,
+  debounceWait: 250,
+  defaultItemGroupsAreImmutable: true,
+  isDisabled: false,
+  itemGroupsAreImmutable: true,
+  maxItems: 10,
+  minQueryLength: 1,
+  placeholder: ''
+}
+
 export default function Turnstone(props) {
-  const { splitChar, styles, text } = props
+  const newProps = {...propDefaults, ...props}
+
   return (
-    <StateContextProvider
-      splitChar={splitChar}
-      styles={styles}
-      text={text}>
-      <Container {...props} />
+    <StateContextProvider {...newProps}>
+      <Container {...newProps} />
     </StateContextProvider>
   )
 }
@@ -63,7 +73,15 @@ Turnstone.propTypes = {
   },
   itemGroupsAreImmutable: PropTypes.bool,
   loadingMessage: PropTypes.string,
-  minQueryLength: PropTypes.number,
+  minQueryLength: (props) => {
+    PropTypes.checkPropTypes(
+      {minQueryLength: PropTypes.number},
+      {minQueryLength: props.minQueryLength},
+      'prop', 'Turnstone'
+    )
+    if(props.minQueryLength < propDefaults.minQueryLength)
+      return new Error(`Prop "minQueryLength" must be a number greater than ${propDefaults.minQueryLength - 1}`)
+  },
   noItemsMessage: PropTypes.string,
   onChange: PropTypes.func,
   onSelect: PropTypes.func,

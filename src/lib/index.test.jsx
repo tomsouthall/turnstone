@@ -23,8 +23,16 @@ describe('Turnstone', () => {
     expect(tree).toMatchSnapshot()
   })
 
-  test('Turnstone component passes all props to Container component', () => {
+  test('Turnstone component passes all props to Container component along with default props', () => {
     expect(component.root.children[0].children[0].props).toEqual({
+      autoFocus: false,
+      debounceWait: 250,
+      defaultItemGroupsAreImmutable: true,
+      isDisabled: false,
+      itemGroupsAreImmutable: true,
+      maxItems: 10,
+      minQueryLength: 1,
+      placeholder: '',
       data,
       dataSearchType
     })

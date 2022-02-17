@@ -3,7 +3,7 @@ import setify from 'setify' // Sets input value without changing cursor position
 import { StateContext } from '../context/state'
 import Items from './items'
 import { useDebounce } from 'use-debounce'
-import { useAutoFocus, useQueryChange } from './hooks/containerEffects'
+import { useItemsState, useAutoFocus, useQueryChange } from './hooks/containerEffects'
 import useData from './hooks/useData'
 import undef from '../utils/undef'
 import isUndefined from '../utils/isUndefined'
@@ -11,7 +11,6 @@ import startsWithCaseInsensitive from '../utils/startsWithCaseInsensitive'
 import defaultStyles from './styles/input.styles.js'
 import {
   setQuery,
-  setItems,
   setHighlighted,
   clearHighlighted,
   highlightPrev,
@@ -22,24 +21,24 @@ import {
 export default function Container(props) {
   // Destructure props
   const {
-    autoFocus = false,
-    debounceWait = 250,
+    autoFocus,
+    debounceWait,
     defaultItemGroups,
-    defaultItemGroupsAreImmutable = true,
+    defaultItemGroupsAreImmutable,
     displayField,
     data,
     dataSearchType,
-    isDisabled = false,
-    itemGroupsAreImmutable = true,
-    maxItems = 10,
-    minQueryLength = 0,
+    isDisabled,
+    itemGroupsAreImmutable,
+    maxItems,
+    minQueryLength,
     loadingMessage,
     noItemsMessage,
     onChange,
     onSelect,
     onEnter,
     onTab,
-    placeholder = ''
+    placeholder
   } = props
 
   // Destructure itemGroups prop
@@ -62,7 +61,7 @@ export default function Container(props) {
   // Component state
   const [debouncedQuery] = useDebounce(state.query, debounceWait)
   const [hasFocus, setHasFocus] = useState(false)
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   // DOM references
   const queryInput = useRef(null)
@@ -87,10 +86,8 @@ export default function Container(props) {
     dispatch
   ).data
 
-  // Store retrieved data in global state
-  useEffect(() => {
-    dispatch(setItems(swrData || []))
-  }, [swrData])
+  // Store retrieved data in global state as state.items
+  useItemsState(swrData)
 
   // Autofocus on render if prop is true
   useAutoFocus(queryInput, autoFocus)
@@ -99,19 +96,11 @@ export default function Container(props) {
   // typeahead value and the query value and fire onChnage
   useQueryChange(state.query, queryInput, typeaheadInput, onChange)
 
-  // // Whenever the dropdown items change, set the highlighted item
-  // // to either the first or nothing if there are no items
-  // useEffect(() => {
-  //   setHighlightedState(
-  //     state.items && state.items.length ? { index: 0, text: state.items[0].text } : undef
-  //   )
-  // }, [state.items, setHighlightedState])
-
-  // Figure out whether we are able to display a loading state //TODO: useReducer instead of useeffect?
+  // Figure out whether we are able to display a loading state
   useEffect(() => {
-    if (state.items && state.items.length) setIsLoaded(true)
-    else if (state.query.length <= minQueryLength) setIsLoaded(false)
-  }, [state.items, state.query, isLoaded, minQueryLength, setIsLoaded])
+    if (state.items && state.items.length) setIsLoading(false)
+    else if (state.query.length <= minQueryLength) setIsLoading(true)
+  }, [state.items, state.query, minQueryLength, setIsLoading])
 
   // When the highlighted item changes, make sure the typeahead matches and format
   // the query text to match the case of the typeahead text
@@ -267,7 +256,7 @@ export default function Container(props) {
 
         {isDropdown() && (
           <Items
-            isLoading={!isLoaded}
+            isLoading={isLoading}
             items={state.items}
             loadingMessage={loadingMessage}
             noItemsMessage={noItemsMessage}

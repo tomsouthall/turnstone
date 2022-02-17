@@ -6,14 +6,17 @@ import undef from '../utils/undef'
 const StateContext = createContext() //TODO: Rename GlobalStateContext
 
 const StateContextProvider = (props) => {
-  const { children, splitChar, styles = {}, text = '', items = [] } = props
+  const { splitChar, styles = {}, text = '', items = [] } = props
+  const { children, ...propsMinusChildren} = props
   const [state, dispatch] = useReducer(reducer, {
     query: text,
     items,
     highlighted: undef,
     selected: undef,
+    isLoading: false,
     customStyles: styles,
-    splitChar
+    splitChar,
+    props: propsMinusChildren
   })
 
   useEffect(() => dispatch(setQuery(text)), [text]) // TODO: Is this needed?

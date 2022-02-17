@@ -78,8 +78,6 @@ const swrOptions = (isImmutable) => {
 }
 
 const useData = (query, isImmutable, itemGroups, defaultItemGroups, minQueryLength, maxItems) => {
-  console.log({query})
-
   // See: https://github.com/vercel/swr/discussions/1810
   const dummyArgToEnsureCachingOfZeroLengthStrings = 'X'
 
