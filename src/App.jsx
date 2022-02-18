@@ -1,6 +1,6 @@
 import React from 'react'
 import Turnstone from './lib'
-import fruits from './data'
+import { fruits } from './data'
 
 const styles = {
   highlightedItem: 'highlightedItem'

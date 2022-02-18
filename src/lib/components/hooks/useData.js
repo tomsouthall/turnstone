@@ -77,51 +77,52 @@ const swrOptions = (isImmutable) => {
     : swrBaseOptions
 }
 
+export const fetcher = (query, itemGroups, defaultItemGroups, minQueryLength, maxItems) => {
+  if (defaultItemGroups && query.length > 0 && query.length < minQueryLength)
+    return []
+  else if (!defaultItemGroups && query.length < minQueryLength) return []
+
+  const groupsProp =
+    defaultItemGroups && !query.length ? defaultItemGroups : itemGroups
+
+  const promises = groupsProp.map((group) => {
+    if (typeof group.data === 'function') {
+      return group.data(query)
+    } else {
+      return Promise.resolve({ data: filterSuppliedData(group, query) })
+    }
+  })
+
+  return Promise.all(promises).then((groups) => {
+    groups = groups.reduce((prevGroups, group, groupIndex) => {
+      return [
+        ...prevGroups,
+        group.data.map((item) => ({
+          value: item,
+          text: itemText(item, groupsProp[groupIndex].displayField),
+          groupIndex,
+          groupName: groupsProp[groupIndex].name
+        }))
+      ]
+    }, [])
+
+    if (groups.length) groups = limitResults(groups, groupsProp, maxItems)
+
+    return groups.flat()
+  })
+}
+
 const useData = (query, isImmutable, itemGroups, defaultItemGroups, minQueryLength, maxItems) => {
+
   // See: https://github.com/vercel/swr/discussions/1810
   const dummyArgToEnsureCachingOfZeroLengthStrings = 'X'
-
-  const fetcher = (q) => {
-    if (defaultItemGroups && q.length > 0 && q.length < minQueryLength)
-      return []
-    else if (!defaultItemGroups && q.length < minQueryLength) return []
-
-    const groupsProp =
-      defaultItemGroups && !q.length ? defaultItemGroups : itemGroups
-
-    const promises = groupsProp.map((g) => {
-      if (typeof g.data === 'function') {
-        return g.data(q)
-      } else {
-        return Promise.resolve({ data: filterSuppliedData(g, q) })
-      }
-    })
-
-    return Promise.all(promises).then((groups) => {
-      groups = groups.reduce((prevGroups, group, groupIndex) => {
-        return [
-          ...prevGroups,
-          group.data.map((item) => ({
-            value: item,
-            text: itemText(item, groupsProp[groupIndex].displayField),
-            groupIndex,
-            groupName: groupsProp[groupIndex].name
-          }))
-        ]
-      }, [])
-
-      if (groups.length) groups = limitResults(groups, groupsProp, maxItems)
-
-      return groups.flat()
-    })
-  }
 
   const swrObj = useSWR(
     [
       query.toLowerCase(),
       dummyArgToEnsureCachingOfZeroLengthStrings
     ],
-    fetcher,
+    (query) => fetcher(query, itemGroups, defaultItemGroups, minQueryLength, maxItems),
     swrOptions(isImmutable)
   )
 

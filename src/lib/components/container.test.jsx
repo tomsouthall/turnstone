@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer'
 import { vi, describe, expect, test } from 'vitest'
 import { StateContextProvider } from '../context/state'
 import Container from './container'
-import fruits from '../../data'
+import { fruits } from '../../data'
 
 vi.mock('./items', () => ({ default: () => 'Items' }))
 vi.mock('./hooks/containerEffects', () => ({
