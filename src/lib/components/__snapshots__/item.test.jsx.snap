@@ -2,9 +2,12 @@
 
 exports[`Item > Component renders correctly 1`] = `
 <div
+  aria-label="Chicago, Illinois, United States"
+  aria-selected={[Function]}
   className="item-class top-item-class"
   onMouseDown={[Function]}
   onMouseEnter={[Function]}
+  role="option"
   style={
     {
       "overflow": "hidden",
@@ -23,9 +26,12 @@ exports[`Item > Component renders correctly 1`] = `
 
 exports[`Item > Link changes the class when hovered 1`] = `
 <div
+  aria-label="Chicago, Illinois, United States"
+  aria-selected={[Function]}
   className="highlighted-item-class top-item-class"
   onMouseDown={[Function]}
   onMouseEnter={[Function]}
+  role="option"
   style={
     {
       "overflow": "hidden",

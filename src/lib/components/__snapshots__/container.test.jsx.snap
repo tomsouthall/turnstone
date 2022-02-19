@@ -2,14 +2,21 @@
 
 exports[`Container > Component renders correctly 1`] = `
 <div
+  aria-expanded={false}
+  aria-haspopup="listbox"
+  aria-owns="undefined-dropdown"
   className="query-container-class"
+  role="combobox"
   style={
     {
+      "display": "inline-block",
       "position": "relative",
     }
   }
 >
   <input
+    aria-autocomplete="both"
+    aria-controls="undefined-dropdown"
     autoCapitalize="off"
     autoComplete="off"
     autoCorrect="off"
@@ -31,6 +38,7 @@ exports[`Container > Component renders correctly 1`] = `
     type="text"
   />
   <input
+    aria-hidden="true"
     autoCapitalize="off"
     autoComplete="off"
     autoCorrect="off"

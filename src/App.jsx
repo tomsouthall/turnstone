@@ -8,18 +8,22 @@ const styles = {
 
 const App = () => {
   return (
-    <Turnstone
-      autoFocus={true}
-      data={fruits}
-      dataSearchType={'startswith'}
-      debounceWait={0}
-      itemGroupsAreImmutable={true}
-      maxItems={10}
-      noItemsMessage={'No matching fruit found'}
-      placeholder={'Type something fruity'}
-      styles={styles}
-      minQueryLength={1}
-    />
+    <>
+      <label htmlFor="autocomplete">Search:</label>&nbsp;
+      <Turnstone
+        autoFocus={true}
+        clearButton={true}
+        data={fruits}
+        dataSearchType={'startswith'}
+        debounceWait={0}
+        id={'autocomplete'}
+        itemGroupsAreImmutable={true}
+        maxItems={10}
+        noItemsMessage={'No matching fruit found'}
+        placeholder={'Type something fruity'}
+        styles={styles}
+      />
+    </>
   )
 }
 

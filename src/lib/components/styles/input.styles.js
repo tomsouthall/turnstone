@@ -1,5 +1,6 @@
 const styles = {
   queryContainer: {
+    display: 'inline-block',
     position: 'relative'
   },
   query: {
@@ -13,8 +14,9 @@ const styles = {
     top: 0,
     left: 0
   },
-  x: {
+  clearButton: {
     position: 'absolute',
+    display: 'inline-block',
     zIndex: 2
   }
 }

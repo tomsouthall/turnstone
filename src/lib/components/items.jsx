@@ -5,13 +5,13 @@ import ItemFirst from './itemFirst'
 import Item from './item'
 
 export default function Items(props) {
-  const { items, noItemsMessage } = props
+  const { id, items, noItemsMessage } = props
   const { state } = useContext(StateContext)
   const { customStyles } = state
 
   const itemElements = () => {
     return (
-      <div className={customStyles.dropdown} style={defaultStyles.dropdown}>
+      <div id={id} className={customStyles.dropdown} style={defaultStyles.dropdown}>
         {items.map((item, index) =>
           index === 0 || item.groupIndex !== items[index - 1].groupIndex ? (
             <ItemFirst
@@ -30,7 +30,7 @@ export default function Items(props) {
 
   const noItemsMsg = () => {
     return (
-      <div className={customStyles.dropdown} style={defaultStyles.dropdown}>
+      <div id={id} className={customStyles.dropdown} style={defaultStyles.dropdown}>
         <div className={customStyles.noItems}>{noItemsMessage}</div>
       </div>
     )

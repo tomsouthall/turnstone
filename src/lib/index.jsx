@@ -2,6 +2,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import { nanoid } from 'nanoid'
 import { StateContextProvider } from './context/state'
 import isUndefined from './utils/isUndefined'
 import Container from './components/container'
@@ -9,8 +10,12 @@ import Container from './components/container'
 // Set prop defaults before passing them on to components
 const propDefaults = {
   autoFocus: false,
+  clearButton: false,
+  clearButtonAriaLabel: 'Clear contents',
+  clearButtonText: '×',
   debounceWait: 250,
   defaultItemGroupsAreImmutable: true,
+  id: nanoid(),
   isDisabled: false,
   itemGroupsAreImmutable: true,
   maxItems: 10,
@@ -37,6 +42,9 @@ const msgOneOnly = `Both a "data" prop and an "itemGroups" prop were provided. P
 const requiredPropsAreMissing = (props) => isUndefined(props.data) && isUndefined(props.itemGroups)
 Turnstone.propTypes = {
   autoFocus: PropTypes.bool,
+  clearButton: PropTypes.bool,
+  clearButtonAriaLabel: PropTypes.string,
+  clearButtonText: PropTypes.string,
   data: (props) => {
     if(requiredPropsAreMissing(props)) return new Error(msgBothRequired)
     if(!isUndefined(props.data) && !isUndefined(props.itemGroups)) return new Error(msgOneOnly)
@@ -51,6 +59,7 @@ Turnstone.propTypes = {
   defaultItemGroups: PropTypes.array,
   defaultItemGroupsAreImmutable: PropTypes.bool,
   displayField: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  id: PropTypes.string,
   itemGroups: (props) => {
     if(requiredPropsAreMissing(props)) return new Error(msgBothRequired)
     if(!isUndefined(props.data) && !isUndefined(props.itemGroups)) return new Error(msgOneOnly)

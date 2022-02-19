@@ -22,9 +22,11 @@ export default function Item(props) {
     return item.text.split(regex)
   }, [splitChar, item])
 
-  const divClassName = useMemo(() => {
+  const isHighlighted = () => highlighted && index === highlighted.index
+
+  const divClassName = () => {
     let itemStyle = customStyles[
-      (highlighted && index === highlighted.index)
+      (isHighlighted())
         ? 'highlightedItem'
         : 'item'
     ]
@@ -32,7 +34,7 @@ export default function Item(props) {
     return (index === 0 && customStyles.topItem)
       ? `${itemStyle} ${customStyles.topItem}`
       : itemStyle
-  }, [customStyles, highlighted, index])
+  }
 
   const handleMouseEnter = () => {
     dispatch(setHighlighted(index))
@@ -63,10 +65,13 @@ export default function Item(props) {
 
   return (
     <div
-      className={divClassName}
+      className={divClassName()}
       style={defaultStyles.item}
       onMouseEnter={handleMouseEnter}
-      onMouseDown={handleClick}>
+      onMouseDown={handleClick}
+      role='option'
+      aria-selected={isHighlighted}
+      aria-label={item.text}>
       {itemElement()}
     </div>
   )

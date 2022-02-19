@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useMemo, useRef, useContext } from 'react'
 import { StateContext } from '../context/state'
 import Items from './items'
 import { useDebounce } from 'use-debounce'
@@ -25,12 +25,16 @@ export default function Container(props) {
   // Destructure props
   const {
     autoFocus,
+    clearButton,
+    clearButtonAriaLabel,
+    clearButtonText,
     debounceWait,
     defaultItemGroups,
     defaultItemGroupsAreImmutable,
     displayField,
     data,
     dataSearchType,
+    id,
     isDisabled,
     itemGroupsAreImmutable,
     maxItems,
@@ -55,6 +59,8 @@ export default function Container(props) {
       }
     ]
   } = props
+
+  const dropdownId = `${id}-dropdown`
 
   // Global state from context
   const { state, dispatch } = useContext(StateContext)
@@ -117,15 +123,15 @@ export default function Container(props) {
     if (typeof f === 'function') f(queryInput.current.value, highlightedItem)
   }
 
-  const isX = () => {
-    return !!state.query
+  const hasClearButton = () => {
+    return clearButton && !!state.query
   }
 
-  const isDropdown = () => {
+  const isExpanded = useMemo(() => {
     if (hasFocus && !state.query && defaultItemGroups) return true
     if (state.query.length < minQueryLength) return false
-    return hasFocus && state.query
-  }
+    return hasFocus && !!state.query
+  }, [hasFocus, state.query, defaultItemGroups, minQueryLength])
 
   // Handle different keypresses and call the appropriate action creators
   const checkKey = (evt) => {
@@ -157,7 +163,8 @@ export default function Container(props) {
     dispatch(setQuery(queryInput.current.value))
   }
 
-  const handleX = (evt) => {
+  const handleClearButton = (evt) => {
+    console.log('handleClearButton')
     evt.preventDefault()
     clearState()
   }
@@ -181,8 +188,15 @@ export default function Container(props) {
 
   return (
     <React.Fragment>
-      <div className={customStyles.queryContainer} style={defaultStyles.queryContainer}>
+      <div
+        className={customStyles.queryContainer}
+        style={defaultStyles.queryContainer}
+        role='combobox'
+        aria-expanded={isExpanded}
+        aria-owns={dropdownId}
+        aria-haspopup='listbox'>
         <input
+          id={id}
           className={customStyles.query}
           style={defaultStyles.query}
           disabled={isDisabled}
@@ -198,6 +212,8 @@ export default function Container(props) {
           onInput={handleInput}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          aria-autocomplete='both'
+          aria-controls={dropdownId}
         />
 
         <input
@@ -211,15 +227,23 @@ export default function Container(props) {
           spellCheck='false'
           tabIndex='-1'
           readOnly='readonly'
+          aria-hidden='true'
           ref={typeaheadInput}
         />
 
-        {isX() && (
-          <div className={customStyles.x} style={defaultStyles.x} onMouseDown={handleX} />
+        {hasClearButton() && (
+          <div
+            className={customStyles.clearButton}
+            style={defaultStyles.clearButton}
+            onMouseDown={handleClearButton}
+            tabIndex={-1}
+            role='button'
+            aria-label={clearButtonAriaLabel}>{clearButtonText}</div>
         )}
 
-        {isDropdown() && (
+        {isExpanded && (
           <Items
+            id={dropdownId}
             items={state.items}
             noItemsMessage={noItemsMessage}
           />

@@ -24,8 +24,16 @@ describe('Turnstone', () => {
   })
 
   test('Turnstone component passes all props to Container component along with default props', () => {
-    expect(component.root.children[0].children[0].props).toEqual({
+    const props = {...component.root.children[0].children[0].props}
+
+    // The id prop is randomly generated so must be excluded
+    delete props.id
+
+    expect(props).toEqual({
       autoFocus: false,
+      clearButton: false,
+      clearButtonAriaLabel: 'Clear contents',
+      clearButtonText: '×',
       debounceWait: 250,
       defaultItemGroupsAreImmutable: true,
       isDisabled: false,
