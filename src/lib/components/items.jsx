@@ -11,7 +11,11 @@ export default function Items(props) {
 
   const itemElements = () => {
     return (
-      <div id={id} className={customStyles.dropdown} style={defaultStyles.dropdown}>
+      <div
+        id={id}
+        className={customStyles.dropdown}
+        style={defaultStyles.dropdown}
+        role='listbox'>
         {items.map((item, index) =>
           index === 0 || item.groupIndex !== items[index - 1].groupIndex ? (
             <ItemFirst
