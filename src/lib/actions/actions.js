@@ -2,7 +2,6 @@ import * as types from './actionTypes'
 import undef from '../utils/undef'
 
 export const setQuery = (query) => {
-  console.log('setQuery', {query})
   const payload = {
     query,
     selected: undef

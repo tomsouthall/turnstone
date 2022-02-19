@@ -39,12 +39,14 @@ export default function Container(props) {
     itemGroupsAreImmutable,
     maxItems,
     minQueryLength,
+    name,
     noItemsMessage,
     onChange,
     onSelect,
     onEnter,
     onTab,
-    placeholder
+    placeholder,
+    tabIndex
   } = props
 
   // Destructure itemGroups prop
@@ -196,6 +198,7 @@ export default function Container(props) {
         aria-haspopup='listbox'>
         <input
           id={id}
+          name={name}
           className={customStyles.query}
           style={defaultStyles.query}
           disabled={isDisabled}
@@ -205,7 +208,7 @@ export default function Container(props) {
           autoCorrect='off'
           autoCapitalize='off'
           spellCheck='false'
-          tabIndex='1'
+          tabIndex={tabIndex}
           ref={queryInput}
           onKeyDown={checkKey}
           onInput={handleInput}

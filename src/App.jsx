@@ -19,6 +19,7 @@ const App = () => {
         id={'autocomplete'}
         itemGroupsAreImmutable={true}
         maxItems={10}
+        name={'search'}
         noItemsMessage={'No matching fruit found'}
         placeholder={'Type something fruity'}
         styles={styles}

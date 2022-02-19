@@ -92,6 +92,7 @@ Turnstone.propTypes = {
         `Prop "minQueryLength" must be a number greater than ${propDefaults.minQueryLength - 1}`
       )
   },
+  name: PropTypes.string,
   noItemsMessage: PropTypes.string,
   onChange: PropTypes.func,
   onSelect: PropTypes.func,
@@ -101,6 +102,7 @@ Turnstone.propTypes = {
   maxItems: PropTypes.number,
   splitChar: PropTypes.string,
   styles: PropTypes.object,
+  tabIndex: PropTypes.number,
   text: PropTypes.string
 }
 
