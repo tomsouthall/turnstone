@@ -32,6 +32,7 @@ describe('Container', () => {
       data: fruits,
       dataSearchType: 'startswith',
       debounceWait: 0,
+      id: 'autocomplete',
       maxItems: 10,
       noItemsMessage: 'No matching fruit found',
       placeholder: 'Type something fruity',
