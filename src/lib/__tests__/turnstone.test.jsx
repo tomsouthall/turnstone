@@ -36,7 +36,7 @@ describe('Integration tests', () => {
     expect(screen.getByDisplayValue(text)).toBeDefined()
     expect(screen.queryByRole('button', { name: /clear contents/i })).toBeDefined()
     expect(await screen.findByRole('listbox')).toBeDefined()
-    expect(await screen.getByDisplayValue('Peach')).toBeDefined()
+    expect(screen.getByDisplayValue('Peach')).toBeDefined()
   })
 
   test('Supplying a clearButton prop displays the clear button', () => {
