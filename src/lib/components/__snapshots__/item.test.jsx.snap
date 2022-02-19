@@ -3,7 +3,6 @@
 exports[`Item > Component renders correctly 1`] = `
 <div
   aria-label="Chicago, Illinois, United States"
-  aria-selected={[Function]}
   className="item-class top-item-class"
   onMouseDown={[Function]}
   onMouseEnter={[Function]}
@@ -27,7 +26,7 @@ exports[`Item > Component renders correctly 1`] = `
 exports[`Item > Link changes the class when hovered 1`] = `
 <div
   aria-label="Chicago, Illinois, United States"
-  aria-selected={[Function]}
+  aria-selected={true}
   className="highlighted-item-class top-item-class"
   onMouseDown={[Function]}
   onMouseEnter={[Function]}

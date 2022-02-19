@@ -70,7 +70,7 @@ export default function Item(props) {
       onMouseEnter={handleMouseEnter}
       onMouseDown={handleClick}
       role='option'
-      aria-selected={isHighlighted}
+      aria-selected={isHighlighted()}
       aria-label={item.text}>
       {itemElement()}
     </div>
