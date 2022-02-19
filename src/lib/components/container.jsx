@@ -164,14 +164,13 @@ export default function Container(props) {
   }
 
   const handleClearButton = (evt) => {
-    console.log('handleClearButton')
     evt.preventDefault()
     clearState()
   }
 
   const clearState = () => {
-    dispatch(setQuery(queryInput.current.value))
-    setTimeout(() => queryInput.current.focus(), debounceWait) // TODO: Put in useEffect
+    dispatch(setQuery(''))
+    queryInput.current.focus()
   }
 
   const handleFocus = () => {
