@@ -1,5 +1,5 @@
 const styles = {
-  dropdown: {
+  listbox: {
     position: 'absolute',
     zIndex: 100
   }

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { StateContext } from '../context/state'
-import defaultStyles from './styles/items.styles.js'
+import defaultStyles from './styles/listBox.styles.js'
 import ItemFirst from './itemFirst'
 import Item from './item'
 
-export default function Items(props) {
+export default function Listbox(props) {
   const { id, items, noItemsMessage } = props
   const { state } = useContext(StateContext)
   const { customStyles } = state
@@ -13,8 +13,8 @@ export default function Items(props) {
     return (
       <div
         id={id}
-        className={customStyles.dropdown}
-        style={defaultStyles.dropdown}
+        className={customStyles.listbox}
+        style={defaultStyles.listbox}
         role='listbox'>
         {items.map((item, index) =>
           index === 0 || item.groupIndex !== items[index - 1].groupIndex ? (
@@ -34,13 +34,13 @@ export default function Items(props) {
 
   const noItemsMsg = () => {
     return (
-      <div id={id} className={customStyles.dropdown} style={defaultStyles.dropdown}>
+      <div id={id} className={customStyles.listbox} style={defaultStyles.listbox}>
         <div className={customStyles.noItems}>{noItemsMessage}</div>
       </div>
     )
   }
 
-  const dropdown = () => {
+  const listBox = () => {
     if (items && items.length) {
       return itemElements()
     }
@@ -52,5 +52,5 @@ export default function Items(props) {
     }
   }
 
-  return dropdown()
+  return listBox()
 }

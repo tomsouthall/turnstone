@@ -26,7 +26,7 @@ describe('Integration tests', () => {
     expect(screen.queryByRole('button', { name: /clear contents/i })).toBeNull()
   })
 
-  test('Supplying a text prop populates the query input and opens the dropdown', async () => {
+  test('Supplying a text prop populates the query input and opens the listbox', async () => {
     const text = 'pe'
 
     render(<Turnstone
@@ -70,7 +70,7 @@ describe('Integration tests', () => {
     expect(input.hasAttribute('disabled')).toBe(true)
   })
 
-  test('Changing the typed text produces the expected dropdown results', async () => {
+  test('Changing the typed text produces the expected listbox results', async () => {
     const placeholder = 'test'
 
     render(<Turnstone

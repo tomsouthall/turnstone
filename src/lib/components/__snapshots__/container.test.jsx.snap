@@ -4,7 +4,7 @@ exports[`Container > Component renders correctly 1`] = `
 <div
   aria-expanded={false}
   aria-haspopup="listbox"
-  aria-owns="autocomplete-dropdown"
+  aria-owns="autocomplete-listbox"
   className="query-container-class"
   role="combobox"
   style={
@@ -16,7 +16,7 @@ exports[`Container > Component renders correctly 1`] = `
 >
   <input
     aria-autocomplete="both"
-    aria-controls="autocomplete-dropdown"
+    aria-controls="autocomplete-listbox"
     autoCapitalize="off"
     autoComplete="off"
     autoCorrect="off"
