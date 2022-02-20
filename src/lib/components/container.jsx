@@ -31,11 +31,11 @@ export default function Container(props) {
     debounceWait,
     defaultItemGroups,
     defaultItemGroupsAreImmutable,
+    disabled,
     displayField,
     data,
     dataSearchType,
     id,
-    isDisabled,
     itemGroupsAreImmutable,
     maxItems,
     minQueryLength,
@@ -201,7 +201,7 @@ export default function Container(props) {
           name={name}
           className={customStyles.query}
           style={defaultStyles.query}
-          disabled={isDisabled}
+          disabled={disabled}
           placeholder={placeholder}
           type='text'
           autoComplete='off'
@@ -221,7 +221,7 @@ export default function Container(props) {
         <input
           className={customStyles.typeahead}
           style={defaultStyles.typeahead}
-          disabled={isDisabled}
+          disabled={disabled}
           type='text'
           autoComplete='off'
           autoCorrect='off'

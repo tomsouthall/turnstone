@@ -9,7 +9,7 @@ describe('Integration tests', () => {
   afterEach(cleanup)
 
   test('Minimal render includes expected elements', () => {
-    const placeholder = 'Test placeholder'
+    const placeholder = 'test'
 
     render(<Turnstone
       data={fruits}
@@ -17,8 +17,11 @@ describe('Integration tests', () => {
       placeholder={placeholder}
     />)
 
+    const input = screen.getByPlaceholderText(placeholder)
+
     expect(screen.getByRole('combobox'))
-    expect(screen.getByPlaceholderText(placeholder)).toBeDefined()
+    expect(input).toBeDefined()
+    expect(input.hasAttribute('disabled')).toBe(false)
     expect(screen.queryByText('listbox')).toBeNull().toBeDefined()
     expect(screen.queryByRole('button', { name: /clear contents/i })).toBeNull()
   })
@@ -49,6 +52,22 @@ describe('Integration tests', () => {
     />)
 
     expect(screen.queryByRole('button', { name: /clear contents/i })).toBeDefined()
+  })
+
+  test('Supplying a disabled prop disables the input', () => {
+    const placeholder = 'test'
+
+    render(<Turnstone
+      data={fruits}
+      dataSearchType={'startswith'}
+      disabled={true}
+      placeholder={placeholder}
+    />)
+
+    const input = screen.getByPlaceholderText(placeholder)
+
+    expect(input).toBeDefined()
+    expect(input.hasAttribute('disabled')).toBe(true)
   })
 
   test('Changing the typed text produces the expected dropdown results', async () => {

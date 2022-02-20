@@ -36,7 +36,7 @@ describe('Turnstone', () => {
       clearButtonText: '×',
       debounceWait: 250,
       defaultItemGroupsAreImmutable: true,
-      isDisabled: false,
+      disabled: false,
       itemGroupsAreImmutable: true,
       maxItems: 10,
       minQueryLength: 1,

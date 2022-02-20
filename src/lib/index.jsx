@@ -16,8 +16,8 @@ const propDefaults = {
   clearButtonText: '\u00d7',
   debounceWait: 250,
   defaultItemGroupsAreImmutable: true,
+  disabled: false,
   id: randomId(),
-  isDisabled: false,
   itemGroupsAreImmutable: true,
   maxItems: 10,
   minQueryLength: 1,
@@ -59,6 +59,7 @@ Turnstone.propTypes = {
   debounceWait: PropTypes.number,
   defaultItemGroups: PropTypes.array,
   defaultItemGroupsAreImmutable: PropTypes.bool,
+  disabled: PropTypes.bool,
   displayField: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   id: PropTypes.string,
   itemGroups: (props) => {
