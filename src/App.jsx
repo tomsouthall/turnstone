@@ -16,7 +16,6 @@ const App = () => {
         data={fruits}
         dataSearchType={'startswith'}
         debounceWait={0}
-        id={'autocomplete'}
         itemGroupsAreImmutable={true}
         maxItems={10}
         name={'search'}

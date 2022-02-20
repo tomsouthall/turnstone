@@ -2,20 +2,21 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { nanoid } from 'nanoid'
 import { StateContextProvider } from './context/state'
 import isUndefined from './utils/isUndefined'
 import Container from './components/container'
+
+const randomId = () => `turnstone-${(0|Math.random()*6.04e7).toString(36)}`
 
 // Set prop defaults before passing them on to components
 const propDefaults = {
   autoFocus: false,
   clearButton: false,
   clearButtonAriaLabel: 'Clear contents',
-  clearButtonText: '×',
+  clearButtonText: '\u00d7',
   debounceWait: 250,
   defaultItemGroupsAreImmutable: true,
-  id: nanoid(),
+  id: randomId(),
   isDisabled: false,
   itemGroupsAreImmutable: true,
   maxItems: 10,
