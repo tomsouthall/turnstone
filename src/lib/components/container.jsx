@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useContext } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { StateContext } from '../context/state'
 import ListBox from './listBox'
 import { useDebounce } from 'use-debounce'
@@ -115,7 +115,6 @@ export default function Container(props) {
   useSelected(state.selected, queryInput, typeaheadInput, onSelect)
 
   const onTabOrEnter = (keyPressed) => {
-    // keyPressed must be 'enter' or 'tab'
     const highlightedIndex = state.highlighted && state.highlighted.index
     const highlightedItem = !isUndefined(highlightedIndex)
       ? state.items[highlightedIndex]
@@ -129,11 +128,9 @@ export default function Container(props) {
     return clearButton && !!state.query
   }
 
-  const isExpanded = useMemo(() => {
-    if (hasFocus && !state.query && defaultItemGroups) return true
-    if (state.query.length < minQueryLength) return false
-    return hasFocus && !!state.query
-  }, [hasFocus, state.query, defaultItemGroups, minQueryLength])
+  const isExpanded = () => {
+    return hasFocus && state.itemsLoaded
+  }
 
   // Handle different keypresses and call the appropriate action creators
   const checkKey = (evt) => {
@@ -243,7 +240,7 @@ export default function Container(props) {
             aria-label={clearButtonAriaLabel}>{clearButtonText}</div>
         )}
 
-        {isExpanded && (
+        {isExpanded() && (
           <ListBox
             id={listBoxId}
             items={state.items}

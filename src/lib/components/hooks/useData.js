@@ -9,8 +9,6 @@ const filterSuppliedData = (group, query) => {
     ? dataSearchType.toLowerCase()
     : dataSearchType
 
-  if(!query.length) return []
-
   switch (searchType) {
     case 'startswith':
       return data.filter((item) =>

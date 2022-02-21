@@ -47,25 +47,25 @@ const defaultItemGroups = [
 const App = () => {
   const onChange = useCallback(
     (text) => {
-      console.log('Changed to:', text)
+      //console.log('Changed to:', text)
     }, []
   )
 
   const onSelect = useCallback(
     (selectedResult) => {
-      console.log('Selected Result:', selectedResult)
+      //console.log('Selected Result:', selectedResult)
     }, []
   )
 
   const onEnter = useCallback(
     (query, selectedResult) => {
-      console.log('Enter Pressed. Selected Result:', selectedResult, query)
+      //console.log('Enter Pressed. Selected Result:', selectedResult, query)
     }, []
   )
 
   const onTab = useCallback(
     (query, selectedResult) => {
-      console.log('Tab Pressed. Selected Result:', selectedResult, query)
+      //console.log('Tab Pressed. Selected Result:', selectedResult, query)
     }, []
   )
 

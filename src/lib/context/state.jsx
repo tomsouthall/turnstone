@@ -11,6 +11,7 @@ const StateContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, {
     query: text,
     items,
+    itemsLoaded: false,
     highlighted: undef,
     selected: undef,
     customStyles: styles,
