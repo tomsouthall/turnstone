@@ -63,7 +63,7 @@ const App = () => {
         <div>
           <label htmlFor="autocomplete">Search:</label>&nbsp;
           <Turnstone
-            autoFocus={true}
+            autoFocus={false}
             clearButton={true}
             debounceWait={250}
             defaultItemGroups={defaultItemGroups}

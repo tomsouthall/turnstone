@@ -1,6 +1,6 @@
 // Vitest Snapshot v1
 
-exports[`ListBox > Component renders correctly 1`] = `
+exports[`Listbox > Component renders correctly 1`] = `
 <div
   className="listbox-class"
   id="test"

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext } from 'react'
 import { StateContext } from '../context/state'
-import ListBox from './listBox'
+import Listbox from './listbox'
 import { useDebounce } from 'use-debounce'
 import useData from './hooks/useData'
 import undef from '../utils/undef'
@@ -62,7 +62,7 @@ export default function Container(props) {
     ]
   } = props
 
-  const listBoxId = `${id}-listbox`
+  const listboxId = `${id}-listbox`
 
   // Global state from context
   const { state, dispatch } = useContext(StateContext)
@@ -191,7 +191,7 @@ export default function Container(props) {
         style={defaultStyles.queryContainer}
         role='combobox'
         aria-expanded={isExpanded}
-        aria-owns={listBoxId}
+        aria-owns={listboxId}
         aria-haspopup='listbox'>
         <input
           id={id}
@@ -212,7 +212,7 @@ export default function Container(props) {
           onFocus={handleFocus}
           onBlur={handleBlur}
           aria-autocomplete='both'
-          aria-controls={listBoxId}
+          aria-controls={listboxId}
         />
 
         <input
@@ -241,8 +241,8 @@ export default function Container(props) {
         )}
 
         {isExpanded && (
-          <ListBox
-            id={listBoxId}
+          <Listbox
+            id={listboxId}
             items={state.items}
             noItemsMessage={noItemsMessage}
           />

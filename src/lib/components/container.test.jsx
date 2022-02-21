@@ -6,7 +6,7 @@ import { StateContextProvider } from '../context/state'
 import Container from './container'
 import { fruits } from '../../data'
 
-vi.mock('./listBox', () => ({ default: () => 'Items' }))
+vi.mock('./listbox', () => ({ default: () => 'Items' }))
 vi.mock('./hooks/containerEffects', () => ({
   useItemsState: vi.fn(),
   useAutoFocus: vi.fn(),

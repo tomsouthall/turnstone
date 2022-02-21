@@ -3,12 +3,12 @@ import renderer from 'react-test-renderer'
 
 import { vi, describe, expect, test } from 'vitest'
 import { StateContextProvider } from '../context/state'
-import ListBox from './listBox'
+import Listbox from './listBox'
 
 vi.mock('./item', () => ({ default: () => 'Item' }))
 vi.mock('./item', () => ({ default: () => 'ItemFirst' }))
 
-describe('ListBox', () => {
+describe('Listbox', () => {
   test('Component renders correctly', () => {
     const customStyles = {
       listbox: 'listbox-class',
@@ -23,7 +23,7 @@ describe('ListBox', () => {
 
     const component = renderer.create(
       <StateContextProvider styles={customStyles}>
-        <ListBox
+        <Listbox
           id='test'
           items={items} />
       </StateContextProvider>

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { StateContext } from '../context/state'
-import defaultStyles from './styles/listBox.styles.js'
+import defaultStyles from './styles/listbox.styles.js'
 import ItemFirst from './itemFirst'
 import Item from './item'
 
@@ -40,7 +40,7 @@ export default function Listbox(props) {
     )
   }
 
-  const listBox = () => {
+  const listbox = () => {
     if (items && items.length) {
       return itemElements()
     }
@@ -52,5 +52,5 @@ export default function Listbox(props) {
     }
   }
 
-  return listBox()
+  return listbox()
 }
