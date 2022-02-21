@@ -13,4 +13,8 @@
 .main label {
   font-size: 1.4em;
 }
+
+.selected {
+  text-align: center;
+}
   
