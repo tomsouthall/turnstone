@@ -22,7 +22,6 @@ export const useAutoFocus = (queryInput, autoFocus) => { // TODO: might be able 
 
 export const useQueryChange = (query, queryInput, typeaheadInput, onChange) => {
   useEffect(() => {
-    // console.log('query changed', { query })
     const value = (() => {
       const currentValue = typeaheadInput.current.value
       if (!query) return ''
