@@ -1,31 +1,16 @@
 import * as types from './actionTypes'
-import undef from '../utils/undef'
 
 export const setQuery = (query) => {
-  const payload = {
-    query,
-    selected: undef
-  }
-
   return {
     type: types.SET_QUERY,
-    payload
+    query
   }
 }
 
 export const setItems = (items) => {
-  const highlighted = items && items.length
-    ? { index: 0, text: items[0].text }
-    : undef
-
-  const payload = {
-    items,
-    highlighted
-  }
-
   return {
     type: types.SET_ITEMS,
-    payload
+    items
   }
 }
 
