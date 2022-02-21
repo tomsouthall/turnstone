@@ -1,0 +1,83 @@
+.queryContainer {
+
+}
+
+.query,
+.typeahead {
+  box-sizing: border-box;
+  width: 700px;
+  height: 2.5em;
+  line-height: normal;
+  font-size: 1.4em;
+  padding: 0 1.5em 0 .5em;
+  margin: 0;
+  outline: none;
+  border: 1px solid #ccc;
+}
+
+.typeahead {
+  color: #a8a8a8;
+}
+
+.clearButton {
+  top: 7px;
+  right: 10px;
+  font-size: 30px;
+  color: #a8a8a8;
+  cursor: pointer;
+}
+.clearButton:hover {
+  color: black;
+}
+
+.listbox {
+  box-sizing: border-box;
+  width: 700px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  cursor: default;
+  background: #fff;
+}
+
+.noItems {
+  margin: 8em auto;
+  height: 38px;
+  text-align: center;
+}
+
+.groupName {
+  text-transform: uppercase;
+  font-size: 0.8em;
+  color: #777;
+  padding: 10px 10px 5px;
+}
+
+.item {
+  margin: 0;
+  padding: 5px 10px;
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.highlightedItem {
+  composes: item;
+  background-color: #f0f0f0;
+}
+
+.topItem {
+  font-size: 18px;
+}
+
+.split {
+  font-size: 15px;
+}
+
+.match {
+  font-weight: bold
+}
+
