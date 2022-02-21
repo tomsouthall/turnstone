@@ -21,7 +21,7 @@ const reducer = (state, action) => {
           newState.itemsLoaded = false
 
         // Allow listbox if there is no query and we have default items to show
-        if(action.query.length === 0 && state.props.defaultItemGroups)
+        if(action.query.length === 0 && state.props.defaultListbox)
           newState.itemsLoaded = true
 
         return newState

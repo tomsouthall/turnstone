@@ -12,8 +12,10 @@ describe('Integration tests', () => {
     const placeholder = 'test'
 
     render(<Turnstone
-      data={fruits}
-      dataSearchType={'startswith'}
+      listbox={{
+        data: fruits,
+        dataSearchType: 'startswith'
+      }}
       placeholder={placeholder}
     />)
 
@@ -31,8 +33,10 @@ describe('Integration tests', () => {
 
     render(<Turnstone
       autoFocus={true}
-      data={fruits}
-      dataSearchType={'startswith'}
+      listbox={{
+        data: fruits,
+        dataSearchType: 'startswith'
+      }}
       text={text}
     />)
 
@@ -46,8 +50,10 @@ describe('Integration tests', () => {
     const text = 'pe'
 
     render(<Turnstone
-      data={fruits}
-      dataSearchType={'startswith'}
+      listbox={{
+        data: fruits,
+        dataSearchType: 'startswith'
+      }}
       text={text}
     />)
 
@@ -58,9 +64,11 @@ describe('Integration tests', () => {
     const placeholder = 'test'
 
     render(<Turnstone
-      data={fruits}
-      dataSearchType={'startswith'}
       disabled={true}
+      listbox={{
+        data: fruits,
+        dataSearchType: 'startswith'
+      }}
       placeholder={placeholder}
     />)
 
@@ -74,8 +82,10 @@ describe('Integration tests', () => {
     const placeholder = 'test'
 
     render(<Turnstone
-      data={fruits}
-      dataSearchType={'startswith'}
+      listbox={{
+        data: fruits,
+        dataSearchType: 'startswith'
+      }}
       placeholder={placeholder}
     />)
 

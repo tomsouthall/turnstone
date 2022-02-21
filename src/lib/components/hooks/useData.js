@@ -75,13 +75,13 @@ const swrOptions = (isImmutable) => {
     : swrBaseOptions
 }
 
-export const fetcher = (query, itemGroups, defaultItemGroups, minQueryLength, maxItems) => {
-  if (defaultItemGroups && query.length > 0 && query.length < minQueryLength)
+export const fetcher = (query, listbox, defaultListbox, minQueryLength, maxItems) => {
+  if (defaultListbox && query.length > 0 && query.length < minQueryLength)
     return []
-  else if (!defaultItemGroups && query.length < minQueryLength) return []
+  else if (!defaultListbox && query.length < minQueryLength) return []
 
   const groupsProp =
-    defaultItemGroups && !query.length ? defaultItemGroups : itemGroups
+    defaultListbox && !query.length ? defaultListbox : listbox
 
   const promises = groupsProp.map((group) => {
     if (typeof group.data === 'function') {
@@ -110,7 +110,7 @@ export const fetcher = (query, itemGroups, defaultItemGroups, minQueryLength, ma
   })
 }
 
-const useData = (query, isImmutable, itemGroups, defaultItemGroups, minQueryLength, maxItems) => {
+const useData = (query, isImmutable, listbox, defaultListbox, minQueryLength, maxItems) => {
 
   // See: https://github.com/vercel/swr/discussions/1810
   const dummyArgToEnsureCachingOfZeroLengthStrings = 'X'
@@ -120,7 +120,7 @@ const useData = (query, isImmutable, itemGroups, defaultItemGroups, minQueryLeng
       query.toLowerCase(),
       dummyArgToEnsureCachingOfZeroLengthStrings
     ],
-    (query) => fetcher(query, itemGroups, defaultItemGroups, minQueryLength, maxItems),
+    (query) => fetcher(query, listbox, defaultListbox, minQueryLength, maxItems),
     swrOptions(isImmutable)
   )
 

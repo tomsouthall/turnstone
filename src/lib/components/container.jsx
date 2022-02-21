@@ -29,14 +29,11 @@ export default function Container(props) {
     clearButtonAriaLabel,
     clearButtonText,
     debounceWait,
-    defaultItemGroups,
-    defaultItemGroupsAreImmutable,
+    defaultListbox,
+    defaultListboxIsImmutable,
     disabled,
-    displayField,
-    data,
-    dataSearchType,
     id,
-    itemGroupsAreImmutable,
+    listboxIsImmutable,
     maxItems,
     minQueryLength,
     name,
@@ -49,18 +46,10 @@ export default function Container(props) {
     tabIndex
   } = props
 
-  // Destructure itemGroups prop
-  const {
-    itemGroups = [
-      {
-        name: '',
-        data,
-        dataSearchType,
-        displayField,
-        ratio: maxItems
-      }
-    ]
-  } = props
+  // Destructure listbox prop
+  const listbox = Array.isArray(props.listbox)
+    ? props.listbox
+    : [{ ...props.listbox, ...{ name: '', ratio: maxItems } }]
 
   const listboxId = `${id}-listbox`
 
@@ -78,10 +67,10 @@ export default function Container(props) {
 
   // Checks whether or not SWR data is to be treated as immutable
   const isImmutable = (() => {
-    return itemGroupsAreImmutable &&
+    return listboxIsImmutable &&
       !(
-        defaultItemGroups &&
-        !defaultItemGroupsAreImmutable &&
+        defaultListbox &&
+        !defaultListboxIsImmutable &&
         debouncedQuery.length === 0
       )
   })()
@@ -90,8 +79,8 @@ export default function Container(props) {
   const swrData = useData(
     debouncedQuery.toLowerCase(),
     isImmutable,
-    itemGroups,
-    defaultItemGroups,
+    listbox,
+    defaultListbox,
     minQueryLength,
     maxItems,
     dispatch

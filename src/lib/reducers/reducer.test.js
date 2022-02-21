@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest'
 import reducer from './reducer'
 import * as actions from '../actions/actions'
 import undef from '../utils/undef'
-import defaultItemGroups from '../../../examples/_shared/defaultItemGroups'
+import defaultListbox from '../../../examples/_shared/defaultListbox'
 
 describe('SET_QUERY action', () => {
   test('produces expected new state', () => {
@@ -69,7 +69,7 @@ describe('SET_QUERY action', () => {
     const state = {
       props: {
         minQueryLength: 1,
-        defaultItemGroups
+        defaultListbox
       }
     }
 
@@ -81,7 +81,7 @@ describe('SET_QUERY action', () => {
       itemsLoaded: true,
       props: {
         minQueryLength: 1,
-        defaultItemGroups
+        defaultListbox
       }
     })
   })

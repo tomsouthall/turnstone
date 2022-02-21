@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer'
 
 import { vi, describe, expect, test } from 'vitest'
 import { StateContextProvider } from '../context/state'
-import Listbox from './listBox'
+import Listbox from './listbox'
 
 vi.mock('./item', () => ({ default: () => 'Item' }))
 vi.mock('./item', () => ({ default: () => 'ItemFirst' }))

@@ -27,7 +27,7 @@ const server = setupServer(
   })
 )
 
-const apiItemGroups = [
+const apiListbox = [
   {
     name: 'Books',
     ratio: 4,
@@ -55,7 +55,7 @@ describe('Fetching API data', () => {
   })
 
   test('Returns expected results', () => {
-    return fetcher('L', apiItemGroups, undef, 1, 6).then(items => {
+    return fetcher('L', apiListbox, undef, 1, 6).then(items => {
       expect(items).toEqual([
         {
           value: { title: 'Last Argument of Kings', author: 'Joe Abercrombie' },
@@ -97,13 +97,13 @@ describe('Fetching API data', () => {
 // // Test Static data                      //
 // ///////////////////////////////////////////
 
-const singleItemGroup = [{
+const singleGroupListbox = [{
   name: '',
   data: fruits,
   dataSearchType: 'startswith'
 }]
 
-const multiItemGroup = [
+const multiGroupListbox = [
   {
     name: 'Fruits',
     data: fruits,
@@ -118,14 +118,14 @@ const multiItemGroup = [
 
 describe('Fetching static data', () => {
   afterEach(() => {
-    delete multiItemGroup[0].ratio
-    delete multiItemGroup[1].ratio
-    multiItemGroup[0].dataSearchType = 'startswith'
-    multiItemGroup[1].dataSearchType = 'startswith'
+    delete multiGroupListbox[0].ratio
+    delete multiGroupListbox[1].ratio
+    multiGroupListbox[0].dataSearchType = 'startswith'
+    multiGroupListbox[1].dataSearchType = 'startswith'
   })
 
   test('Returns expected results for a single group', () => {
-    return fetcher('Pe', singleItemGroup, undef, 1, 10).then(items => {
+    return fetcher('Pe', singleGroupListbox, undef, 1, 10).then(items => {
       expect(items).toEqual([
         { value: 'Peach', text: 'Peach', groupIndex: 0, groupName: '' },
         { value: 'Pear', text: 'Pear', groupIndex: 0, groupName: '' }
@@ -134,7 +134,7 @@ describe('Fetching static data', () => {
   })
 
   test('Returns expected results for multiple groups with equal ratios', () => {
-    return fetcher('P', multiItemGroup, undef, undef, 10).then(items => {
+    return fetcher('P', multiGroupListbox, undef, undef, 10).then(items => {
       expect(items).toEqual([
         { value: 'Peach', text: 'Peach', groupIndex: 0, groupName: 'Fruits' },
         { value: 'Pear', text: 'Pear', groupIndex: 0, groupName: 'Fruits' },
@@ -151,7 +151,7 @@ describe('Fetching static data', () => {
   })
 
   test('Returns expected results for multiple groups limited to 6 results', () => {
-    return fetcher('P', multiItemGroup, undef, 1, 6).then(items => {
+    return fetcher('P', multiGroupListbox, undef, 1, 6).then(items => {
       expect(items).toEqual([
         { value: 'Peach', text: 'Peach', groupIndex: 0, groupName: 'Fruits' },
         { value: 'Pear', text: 'Pear', groupIndex: 0, groupName: 'Fruits' },
@@ -164,10 +164,10 @@ describe('Fetching static data', () => {
   })
 
   test('Returns expected ratios for multiple groups', () => {
-    multiItemGroup[0].ratio = 4
-    multiItemGroup[0].ratio = 2
+    multiGroupListbox[0].ratio = 4
+    multiGroupListbox[0].ratio = 2
 
-    return fetcher('P', multiItemGroup, undef, 1, 6).then(items => {
+    return fetcher('P', multiGroupListbox, undef, 1, 6).then(items => {
       expect(items).toEqual([
         { value: 'Peach', text: 'Peach', groupIndex: 0, groupName: 'Fruits' },
         { value: 'Pear', text: 'Pear', groupIndex: 0, groupName: 'Fruits' },
@@ -180,10 +180,10 @@ describe('Fetching static data', () => {
   })
 
   test('Returns results containing query', () => {
-    multiItemGroup[0].dataSearchType = 'contains'
-    multiItemGroup[1].dataSearchType = 'contains'
+    multiGroupListbox[0].dataSearchType = 'contains'
+    multiGroupListbox[1].dataSearchType = 'contains'
 
-    return fetcher('Pe', multiItemGroup, undef, 1, 6).then(items => {
+    return fetcher('Pe', multiGroupListbox, undef, 1, 6).then(items => {
       expect(items).toEqual([
         { value: 'Bartlett pear', text: 'Bartlett pear', groupIndex: 0, groupName: 'Fruits' },
         { value: 'Cantaloupe', text: 'Cantaloupe', groupIndex: 0, groupName: 'Fruits' },

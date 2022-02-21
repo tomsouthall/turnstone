@@ -2,14 +2,14 @@ import React, { useCallback, useState } from 'react'
 import Turnstone from '../../src/lib'
 import styles from './styles/App.module.css'
 import autocompleteStyles from './styles/autocomplete.module.css'
-import defaultItemGroups from '../_shared/defaultItemGroups'
+import defaultListbox from '../_shared/defaultListbox'
 
 const maxItems = 10
 const placeholder = 'Enter a city or airport'
 const splitChar = ','
 const noItemsMessage = 'We found no places that match your search'
 
-const itemGroups = [
+const listbox = [
   {
     name: 'Cities',
     ratio: 8,
@@ -66,11 +66,11 @@ const App = () => {
             autoFocus={false}
             clearButton={true}
             debounceWait={250}
-            defaultItemGroups={defaultItemGroups}
-            defaultItemGroupsAreImmutable={false}
+            defaultListbox={defaultListbox}
+            defaultListboxIsImmutable={false}
             id='autocomplete'
-            itemGroups={itemGroups}
-            itemGroupsAreImmutable={true}
+            listbox={listbox}
+            listboxIsImmutable={true}
             maxItems={maxItems}
             minQueryLength={1}
             noItemsMessage={noItemsMessage}

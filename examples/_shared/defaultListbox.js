@@ -1,4 +1,4 @@
-const defaultItemGroups = [
+const defaultListbox = [
   { name: 'Recent Searches', displayField: 'name', data: [
       { name: 'New Orleans, Louisiana, United States', coords: '29.95465,-90.07507' },
       { name: 'Chicago, Illinois, United States', coords: '41.85003,-87.65005' },
@@ -17,4 +17,4 @@ const defaultItemGroups = [
   }
 ]
 
-export default defaultItemGroups
+export default defaultListbox
