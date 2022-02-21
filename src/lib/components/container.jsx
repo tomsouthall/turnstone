@@ -128,9 +128,9 @@ export default function Container(props) {
     return clearButton && !!state.query
   }
 
-  const isExpanded = () => {
+  const isExpanded = (() => {
     return hasFocus && state.itemsLoaded
-  }
+  })()
 
   // Handle different keypresses and call the appropriate action creators
   const checkKey = (evt) => {
@@ -240,7 +240,7 @@ export default function Container(props) {
             aria-label={clearButtonAriaLabel}>{clearButtonText}</div>
         )}
 
-        {isExpanded() && (
+        {isExpanded && (
           <ListBox
             id={listBoxId}
             items={state.items}
