@@ -16,7 +16,8 @@ const listbox = [
     displayField: 'name',
     data: (query) =>
       fetch(`http://localhost:3001/api/search/cities?q=${encodeURIComponent(query)}&limit=${maxItems}`)
-        .then(response => response.json())
+        .then(response => response.json()),
+    dataSearchType: 'startswith'
   },
   {
     name: 'Airports',
@@ -24,7 +25,8 @@ const listbox = [
     displayField: 'name',
     data: (query) =>
       fetch(`http://localhost:3001/api/search/airports?q=${encodeURIComponent(query)}&limit=${maxItems}`)
-        .then(response => response.json())
+        .then(response => response.json()),
+    dataSearchType: 'contains'
   }
 ]
 

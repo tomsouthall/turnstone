@@ -73,7 +73,7 @@
   font-size: 18px;
 }
 
-.split {
+.split:not(:first-child) {
   font-size: 15px;
 }
 

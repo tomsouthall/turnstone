@@ -1,16 +1,28 @@
 // Vitest Snapshot v1
 
-exports[`MatchingText > snapshot renders 1`] = `
-[
+exports[`MatchingText > Component renders 1`] = `
+<span
+  className="split-class"
+>
   <span
     className="match-class"
   >
     New
-  </span>,
+  </span>
+   York City
+</span>
+`;
+
+exports[`MatchingText > Text is highlighted for a "contains" item 1`] = `
+<span
+  className="split-class"
+>
+  Foo 
   <span
-    className="non-match-class"
+    className="match-class"
   >
-     York City
-  </span>,
-]
+    New
+  </span>
+   Foo
+</span>
 `;

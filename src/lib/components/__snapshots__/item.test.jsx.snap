@@ -14,10 +14,12 @@ exports[`Item > Component renders correctly 1`] = `
     }
   }
 >
-  <span>
-    Chi
-  </span>
-  <span>
+  <span
+    className="split-class"
+  >
+    <span>
+      Chi
+    </span>
     cago, Illinois, United States
   </span>
 </div>
@@ -38,10 +40,12 @@ exports[`Item > Link changes the class when hovered 1`] = `
     }
   }
 >
-  <span>
-    Chi
-  </span>
-  <span>
+  <span
+    className="split-class"
+  >
+    <span>
+      Chi
+    </span>
     cago, Illinois, United States
   </span>
 </div>

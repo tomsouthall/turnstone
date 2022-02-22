@@ -127,8 +127,8 @@ describe('Fetching static data', () => {
   test('Returns expected results for a single group', () => {
     return fetcher('Pe', singleGroupListbox, undef, 1, 10).then(items => {
       expect(items).toEqual([
-        { value: 'Peach', text: 'Peach', groupIndex: 0, groupName: '' },
-        { value: 'Pear', text: 'Pear', groupIndex: 0, groupName: '' }
+        { value: 'Peach', text: 'Peach', groupIndex: 0, groupName: '', dataSearchType: 'startswith'},
+        { value: 'Pear', text: 'Pear', groupIndex: 0, groupName: '', dataSearchType: 'startswith' }
       ])
     })
   })
@@ -136,16 +136,16 @@ describe('Fetching static data', () => {
   test('Returns expected results for multiple groups with equal ratios', () => {
     return fetcher('P', multiGroupListbox, undef, undef, 10).then(items => {
       expect(items).toEqual([
-        { value: 'Peach', text: 'Peach', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Pear', text: 'Pear', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Physalis', text: 'Physalis', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Pineapple', text: 'Pineapple', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Pitaya', text: 'Pitaya', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Parsnip', text: 'Parsnip', groupIndex: 1, groupName: 'Vegetables' },
-        { value: 'Peanuts', text: 'Peanuts', groupIndex: 1, groupName: 'Vegetables' },
-        { value: 'Peas', text: 'Peas', groupIndex: 1, groupName: 'Vegetables' },
-        { value: 'Peppers', text: 'Peppers', groupIndex: 1, groupName: 'Vegetables' },
-        { value: 'Pinto Beans', text: 'Pinto Beans', groupIndex: 1, groupName: 'Vegetables' }
+        { value: 'Peach', text: 'Peach', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'startswith' },
+        { value: 'Pear', text: 'Pear', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'startswith' },
+        { value: 'Physalis', text: 'Physalis', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'startswith' },
+        { value: 'Pineapple', text: 'Pineapple', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'startswith' },
+        { value: 'Pitaya', text: 'Pitaya', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'startswith' },
+        { value: 'Parsnip', text: 'Parsnip', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'startswith' },
+        { value: 'Peanuts', text: 'Peanuts', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'startswith' },
+        { value: 'Peas', text: 'Peas', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'startswith' },
+        { value: 'Peppers', text: 'Peppers', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'startswith' },
+        { value: 'Pinto Beans', text: 'Pinto Beans', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'startswith' }
       ])
     })
   })
@@ -153,12 +153,12 @@ describe('Fetching static data', () => {
   test('Returns expected results for multiple groups limited to 6 results', () => {
     return fetcher('P', multiGroupListbox, undef, 1, 6).then(items => {
       expect(items).toEqual([
-        { value: 'Peach', text: 'Peach', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Pear', text: 'Pear', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Physalis', text: 'Physalis', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Parsnip', text: 'Parsnip', groupIndex: 1, groupName: 'Vegetables' },
-        { value: 'Peanuts', text: 'Peanuts', groupIndex: 1, groupName: 'Vegetables' },
-        { value: 'Peas', text: 'Peas', groupIndex: 1, groupName: 'Vegetables' }
+        { value: 'Peach', text: 'Peach', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'startswith' },
+        { value: 'Pear', text: 'Pear', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'startswith' },
+        { value: 'Physalis', text: 'Physalis', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'startswith' },
+        { value: 'Parsnip', text: 'Parsnip', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'startswith' },
+        { value: 'Peanuts', text: 'Peanuts', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'startswith' },
+        { value: 'Peas', text: 'Peas', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'startswith' }
       ])
     })
   })
@@ -169,12 +169,12 @@ describe('Fetching static data', () => {
 
     return fetcher('P', multiGroupListbox, undef, 1, 6).then(items => {
       expect(items).toEqual([
-        { value: 'Peach', text: 'Peach', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Pear', text: 'Pear', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Physalis', text: 'Physalis', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Pineapple', text: 'Pineapple', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Parsnip', text: 'Parsnip', groupIndex: 1, groupName: 'Vegetables' },
-        { value: 'Peanuts', text: 'Peanuts', groupIndex: 1, groupName: 'Vegetables' }
+        { value: 'Peach', text: 'Peach', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'startswith' },
+        { value: 'Pear', text: 'Pear', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'startswith' },
+        { value: 'Physalis', text: 'Physalis', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'startswith' },
+        { value: 'Pineapple', text: 'Pineapple', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'startswith' },
+        { value: 'Parsnip', text: 'Parsnip', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'startswith' },
+        { value: 'Peanuts', text: 'Peanuts', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'startswith' }
       ])
     })
   })
@@ -185,12 +185,12 @@ describe('Fetching static data', () => {
 
     return fetcher('Pe', multiGroupListbox, undef, 1, 6).then(items => {
       expect(items).toEqual([
-        { value: 'Bartlett pear', text: 'Bartlett pear', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Cantaloupe', text: 'Cantaloupe', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Grape', text: 'Grape', groupIndex: 0, groupName: 'Fruits' },
-        { value: 'Bell Pepper', text: 'Bell Pepper', groupIndex: 1, groupName: 'Vegetables' },
-        { value: 'Black-Eyed Peas', text: 'Black-Eyed Peas', groupIndex: 1, groupName: 'Vegetables' },
-        { value: 'Chickpeas', text: 'Chickpeas', groupIndex: 1, groupName: 'Vegetables' }
+        { value: 'Bartlett pear', text: 'Bartlett pear', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'contains' },
+        { value: 'Cantaloupe', text: 'Cantaloupe', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'contains' },
+        { value: 'Grape', text: 'Grape', groupIndex: 0, groupName: 'Fruits', dataSearchType: 'contains' },
+        { value: 'Bell Pepper', text: 'Bell Pepper', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'contains' },
+        { value: 'Black-Eyed Peas', text: 'Black-Eyed Peas', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'contains' },
+        { value: 'Chickpeas', text: 'Chickpeas', groupIndex: 1, groupName: 'Vegetables', dataSearchType: 'contains' }
       ])
     })
   })

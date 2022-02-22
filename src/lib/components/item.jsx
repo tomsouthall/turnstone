@@ -1,8 +1,7 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useContext } from 'react'
 import defaultStyles from './styles/item.styles.js'
 import MatchingText from './matchingText'
 import { StateContext } from '../context/state'
-import isUndefined from '../utils/isUndefined'
 import escapeStringRegExp from 'escape-string-regexp'
 import { setHighlighted, setSelected } from '../actions/actions'
 
@@ -14,19 +13,24 @@ export default function Item(props) {
     dispatch
   } = useContext(StateContext)
 
-  const { customStyles, highlighted, splitChar } = state
+  const { customStyles, highlighted, splitChar, query } = state
 
-  const splitText = useMemo(() => {
-    if (isUndefined(splitChar)) return [item.text]
-    const regex = new RegExp(escapeStringRegExp(splitChar) + '(.+)')
-    return item.text.split(regex)
-  }, [splitChar, item])
+  const startsWith = item.dataSearchType !== 'contains'
 
-  const isHighlighted = () => highlighted && index === highlighted.index
+  const split = (str, separator) => {
+    if(!separator) return [str]
+    const regex =  new RegExp(`(${escapeStringRegExp(separator)})`, 'g')
+    return str.split(regex).filter(part => part.length)
+  }
+
+  const splitText = split(item.text, splitChar)
+  const splitQuery = split(query, splitChar)
+
+  const isHighlighted = highlighted && index === highlighted.index
 
   const divClassName = () => {
     let itemStyle = customStyles[
-      (isHighlighted())
+      isHighlighted
         ? 'highlightedItem'
         : 'item'
     ]
@@ -44,24 +48,10 @@ export default function Item(props) {
     dispatch(setSelected(index))
   }
 
-  const itemElement = () => {
-    return isUndefined(splitChar) ||
-      !item.text.includes(splitChar) ? (
-      <MatchingText text={splitText[0]} />
-    ) : (
-      splitItemElement()
-    )
-  }
-
-  function splitItemElement() {
-    return (
-      <React.Fragment>
-        <MatchingText text={splitText[0]} />
-        <span className={customStyles.splitChar}>{splitChar}</span>
-        <span className={customStyles.split}>{splitText[1]}</span>
-      </React.Fragment>
-    )
-  }
+  const contents = splitText.map((part, index) => {
+    const match = startsWith ? (splitQuery[index] || '') : query
+    return <MatchingText key={`split${index}`} text={part} match={match} startsWith={startsWith} />
+  })
 
   return (
     <div
@@ -70,9 +60,9 @@ export default function Item(props) {
       onMouseEnter={handleMouseEnter}
       onMouseDown={handleClick}
       role='option'
-      aria-selected={isHighlighted()}
+      aria-selected={isHighlighted}
       aria-label={item.text}>
-      {itemElement()}
+      {contents}
     </div>
   )
 }

@@ -27,8 +27,8 @@ const filterSuppliedData = (group, query) => {
   }
 }
 
-const limitResults = (groups, groupsProp, maxItems) => {
-  const ratios = groupsProp.map((group) => group.ratio || 1)
+const limitResults = (groups, listboxProp, maxItems) => {
+  const ratios = listboxProp.map((group) => group.ratio || 1)
   const ratioTotal = ratios.reduce((total, ratio) => total + ratio, 0)
   const ratioMultiplier = maxItems / ratioTotal
   const resultTotal = groups.flat().length
@@ -80,10 +80,10 @@ export const fetcher = (query, listbox, defaultListbox, minQueryLength, maxItems
     return []
   else if (!defaultListbox && query.length < minQueryLength) return []
 
-  const groupsProp =
+  const listboxProp =
     defaultListbox && !query.length ? defaultListbox : listbox
 
-  const promises = groupsProp.map((group) => {
+  const promises = listboxProp.map((group) => {
     if (typeof group.data === 'function') {
       return group.data(query)
     } else {
@@ -97,14 +97,15 @@ export const fetcher = (query, listbox, defaultListbox, minQueryLength, maxItems
         ...prevGroups,
         group.data.map((item) => ({
           value: item,
-          text: itemText(item, groupsProp[groupIndex].displayField),
+          text: itemText(item, listboxProp[groupIndex].displayField),
           groupIndex,
-          groupName: groupsProp[groupIndex].name
+          groupName: listboxProp[groupIndex].name,
+          dataSearchType: listboxProp[groupIndex].dataSearchType
         }))
       ]
     }, [])
 
-    if (groups.length) groups = limitResults(groups, groupsProp, maxItems)
+    if (groups.length) groups = limitResults(groups, listboxProp, maxItems)
 
     return groups.flat()
   })

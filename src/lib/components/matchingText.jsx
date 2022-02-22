@@ -3,16 +3,21 @@ import { StateContext } from '../context/state'
 import escapeStringRegExp from 'escape-string-regexp'
 
 export default function MatchingText(props) {
-  const { text } = props
+  const { text, match, startsWith } = props
   const { state } = useContext(StateContext)
   const { customStyles } = state
-  const regex = new RegExp('(' + escapeStringRegExp(state.query) + ')', 'i')
-  const parts = (state.query) ? text.split(regex) : [text]
+  const patternPrefix = startsWith ? '^' : ''
+  const pattern = `${patternPrefix}(${escapeStringRegExp(match)})`
+  const regex = new RegExp(pattern, 'i')
+  const partsRaw = match ? text.split(regex) : [text]
+  const parts = partsRaw.filter(part => part.length)
   const matchingText = parts.map((part, index) => {
-    const style = (part.toLowerCase() === state.query.toLowerCase()) ? 'match' : 'nonMatch'
-    if(part.length)
-      return (<span className={customStyles[style]} key={`part${index}`}>{parts[index]}</span>)
+    const isMatch = part.toLowerCase() === match.toLowerCase()
+
+    return (isMatch)
+      ? <span key={`part${index}`} className={customStyles.match}>{parts[index]}</span>
+      : <React.Fragment key={`part${index}`}>{parts[index]}</React.Fragment>
   })
 
-  return <React.Fragment>{matchingText}</React.Fragment>
+  return <span className={customStyles.split}>{matchingText}</span>
 }
