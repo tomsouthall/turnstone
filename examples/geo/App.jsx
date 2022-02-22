@@ -6,7 +6,7 @@ import defaultListbox from '../_shared/defaultListbox'
 
 const maxItems = 10
 const placeholder = 'Enter a city or airport'
-const splitChar = ','
+const separator = ','
 const noItemsMessage = 'We found no places that match your search'
 
 const listbox = [
@@ -81,7 +81,7 @@ const App = () => {
             onEnter={onEnter}
             onTab={onTab}
             placeholder={placeholder}
-            splitChar={splitChar}
+            separator={separator}
             styles={autocompleteStyles}
           />
         </div>

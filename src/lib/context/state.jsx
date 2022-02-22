@@ -6,7 +6,7 @@ import undef from '../utils/undef'
 const StateContext = createContext() //TODO: Rename GlobalStateContext
 
 const StateContextProvider = (props) => {
-  const { splitChar, styles = {}, text = '', items = [] } = props
+  const { separator, styles = {}, text = '', items = [] } = props
   const { children, ...propsMinusChildren} = props
   const [state, dispatch] = useReducer(reducer, {
     query: text,
@@ -15,7 +15,7 @@ const StateContextProvider = (props) => {
     highlighted: undef,
     selected: undef,
     customStyles: styles,
-    splitChar,
+    separator,
     props: propsMinusChildren
   })
 

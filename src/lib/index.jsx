@@ -92,7 +92,7 @@ Turnstone.propTypes = {
   onTab: PropTypes.func,
   placeholder: PropTypes.string,
   maxItems: PropTypes.number,
-  splitChar: PropTypes.string,
+  separator: PropTypes.string,
   styles: PropTypes.object,
   tabIndex: PropTypes.number,
   text: PropTypes.string

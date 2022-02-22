@@ -6,14 +6,13 @@ import Turnstone from './index'
 
 vi.mock('./components/container', () => ({ default: () => 'Container' }))
 
-const data = ['foo', 'bar', 'foobar']
-const dataSearchType = 'startswith'
+const listbox = {
+  data: ['foo', 'bar', 'foobar'],
+  dataSearchType: 'startswith'
+}
 
 const component = renderer.create(
-  <Turnstone
-    data={data}
-    dataSearchType={dataSearchType}
-  />
+  <Turnstone listbox={listbox} />
 )
 
 const tree = component.toJSON()
@@ -37,12 +36,11 @@ describe('Turnstone', () => {
       debounceWait: 250,
       defaultListboxIsImmutable: true,
       disabled: false,
+      listbox,
       listboxIsImmutable: true,
       maxItems: 10,
       minQueryLength: 1,
-      placeholder: '',
-      data,
-      dataSearchType
+      placeholder: ''
     })
   })
 })

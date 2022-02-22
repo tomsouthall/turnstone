@@ -13,7 +13,7 @@ export default function Item(props) {
     dispatch
   } = useContext(StateContext)
 
-  const { customStyles, highlighted, splitChar, query } = state
+  const { customStyles, highlighted, separator, query } = state
 
   const startsWith = item.dataSearchType !== 'contains'
 
@@ -23,8 +23,8 @@ export default function Item(props) {
     return str.split(regex).filter(part => part.length)
   }
 
-  const splitText = split(item.text, splitChar)
-  const splitQuery = split(query, splitChar)
+  const splitText = split(item.text, separator)
+  const splitQuery = split(query, separator)
 
   const isHighlighted = highlighted && index === highlighted.index
 
