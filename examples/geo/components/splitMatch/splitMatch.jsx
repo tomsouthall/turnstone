@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import escapeStringRegExp from 'escape-string-regexp'
 
 const getMatches = (str, searchString, global, caseSensitive) => {
@@ -97,3 +98,21 @@ export default function SplitMatch(props) {
 
   return parts
 }
+
+//////////////////////////////////////////////////////
+// Prop validation                                  //
+//////////////////////////////////////////////////////
+
+SplitMatch.propTypes = {
+  caseSensitiveMatch: PropTypes.bool,
+  caseSensitiveSplit: PropTypes.bool,
+  globalMatch: PropTypes.bool,
+  globalSplit: PropTypes.bool,
+  includeSeparator: PropTypes.bool,
+  searchText: PropTypes.string,
+  separator: PropTypes.string, // Recommend single-character
+  MatchComponent: PropTypes.elementType,
+  SplitComponent: PropTypes.elementType
+}
+
+//////////////////////////////////////////////////////
