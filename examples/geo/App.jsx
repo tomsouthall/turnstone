@@ -3,6 +3,7 @@ import Turnstone from '../../src/lib'
 import styles from './styles/App.module.css'
 import autocompleteStyles from './styles/autocomplete.module.css'
 import defaultListbox from '../_shared/defaultListbox'
+import Item from './components/item/item'
 
 const maxItems = 10
 const placeholder = 'Enter a city or airport'
@@ -33,29 +34,17 @@ const listbox = [
 const App = () => {
   const [selected, setSelected] = useState()
 
-  const onChange = useCallback(
-    (text) => {
-      //console.log('Changed to:', text)
-    }, []
-  )
-
   const onSelect = sel => setSelected(sel)
-
-  // const onSelect = useCallback(
-  //   (selectedResult) => {
-  //     console.log('Selected Result:', selectedResult)
-  //   }, []
-  // )
 
   const onEnter = useCallback(
     (query, selectedResult) => {
-      //console.log('Enter Pressed. Selected Result:', selectedResult, query)
+      console.log('Enter Pressed. Selected Result:', selectedResult, query)
     }, []
   )
 
   const onTab = useCallback(
     (query, selectedResult) => {
-      //console.log('Tab Pressed. Selected Result:', selectedResult, query)
+      console.log('Tab Pressed. Selected Result:', selectedResult, query)
     }, []
   )
 
@@ -71,12 +60,12 @@ const App = () => {
             defaultListbox={defaultListbox}
             defaultListboxIsImmutable={false}
             id='autocomplete'
+            itemComponent={Item}
             listbox={listbox}
             listboxIsImmutable={true}
             maxItems={maxItems}
             minQueryLength={1}
             noItemsMessage={noItemsMessage}
-            onChange={onChange}
             onSelect={onSelect}
             onEnter={onEnter}
             onTab={onTab}

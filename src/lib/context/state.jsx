@@ -3,7 +3,7 @@ import reducer from '../reducers/reducer'
 import {setQuery} from '../actions/actions'
 import undef from '../utils/undef'
 
-const StateContext = createContext() //TODO: Rename GlobalStateContext
+const StateContext = createContext()
 
 const StateContextProvider = (props) => {
   const { separator, styles = {}, text = '', items = [] } = props

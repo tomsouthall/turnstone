@@ -80,8 +80,9 @@ export const fetcher = (query, listbox, defaultListbox, minQueryLength, maxItems
     return []
   else if (!defaultListbox && query.length < minQueryLength) return []
 
-  const listboxProp =
-    defaultListbox && !query.length ? defaultListbox : listbox
+  const isDefaultListbox = (defaultListbox && !query.length)
+
+  const listboxProp = isDefaultListbox ? defaultListbox : listbox
 
   const promises = listboxProp.map((group) => {
     if (typeof group.data === 'function') {
@@ -100,7 +101,8 @@ export const fetcher = (query, listbox, defaultListbox, minQueryLength, maxItems
           text: itemText(item, listboxProp[groupIndex].displayField),
           groupIndex,
           groupName: listboxProp[groupIndex].name,
-          dataSearchType: listboxProp[groupIndex].dataSearchType
+          dataSearchType: listboxProp[groupIndex].dataSearchType,
+          defaultListbox: isDefaultListbox
         }))
       ]
     }, [])

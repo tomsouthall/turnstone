@@ -27,9 +27,11 @@ export default function Turnstone(props) {
   const newProps = {...propDefaults, ...props}
 
   return (
-    <StateContextProvider {...newProps}>
-      <Container {...newProps} />
-    </StateContextProvider>
+    <React.StrictMode>
+      <StateContextProvider {...newProps}>
+        <Container {...newProps} />
+      </StateContextProvider>
+    </React.StrictMode>
   )
 }
 
@@ -71,6 +73,7 @@ Turnstone.propTypes = {
   disabled: PropTypes.bool,
   displayField: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   id: PropTypes.string,
+  itemComponent: PropTypes.elementType,
   listbox: listboxRules.isRequired,
   listboxIsImmutable: PropTypes.bool,
   minQueryLength: (props) => {

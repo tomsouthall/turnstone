@@ -1,0 +1,27 @@
+.first > div {
+  display: inline-block;
+  height: 50px;
+  vertical-align: middle;
+}
+
+.first img {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin-right: 8px;
+}
+
+.first .split0 {
+  display: block;
+  margin-top: 4px;
+  font-size: 20px;
+}
+
+.container .split1 {
+  font-size: 15px;
+  color: #777;
+}
+
+.match {
+  font-weight: 600;
+}

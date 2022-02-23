@@ -14,6 +14,7 @@ export default function Item(props) {
   } = useContext(StateContext)
 
   const { customStyles, highlighted, separator, query } = state
+  const CustomItem = state.props.itemComponent
 
   const startsWith = item.dataSearchType !== 'contains'
 
@@ -48,10 +49,22 @@ export default function Item(props) {
     dispatch(setSelected(index))
   }
 
-  const contents = splitText.map((part, index) => {
+  const matchedText = splitText.map((part, index) => {
     const match = startsWith ? (splitQuery[index] || '') : query
     return <MatchingText key={`split${index}`} text={part} match={match} startsWith={startsWith} />
   })
+
+  const itemContents = (CustomItem)
+    ? <CustomItem
+        appearsInDefaultListbox={item.defaultListbox}
+        groupName={item.groupName}
+        index={index}
+        item={item.value}
+        query={query}
+        searchType={item.dataSearchType}
+        totalItems={state.items.length}
+      />
+    : matchedText
 
   return (
     <div
@@ -62,7 +75,7 @@ export default function Item(props) {
       role='option'
       aria-selected={isHighlighted}
       aria-label={item.text}>
-      {contents}
+      {itemContents}
     </div>
   )
 }

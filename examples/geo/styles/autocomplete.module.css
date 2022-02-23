@@ -5,7 +5,7 @@
 .query,
 .typeahead {
   box-sizing: border-box;
-  width: 700px;
+  width: 500px;
   height: 2.5em;
   line-height: normal;
   font-size: 1.4em;
@@ -32,7 +32,7 @@
 
 .listbox {
   box-sizing: border-box;
-  width: 700px;
+  width: 500px;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
@@ -69,10 +69,12 @@
   background-color: #f0f0f0;
 }
 
+/* Get rid */
 .topItem {
   font-size: 18px;
 }
 
+/* Get rid */
 .split:not(:first-child) {
   font-size: 15px;
 }
