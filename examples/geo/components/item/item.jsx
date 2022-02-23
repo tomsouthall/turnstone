@@ -39,7 +39,7 @@ export default function Item(props) {
         globalSplit={false}
         caseSensitiveMatch={false}
         caseSensitiveSplit={false}
-        separator=", "
+        separator=","
         includeSeparator={includeSeparator}
         MatchComponent={MatchComponent}
         SplitComponent={SplitComponent}>{item.name}</SplitMatch>

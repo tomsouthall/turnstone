@@ -69,17 +69,3 @@
   background-color: #f0f0f0;
 }
 
-/* Get rid */
-.topItem {
-  font-size: 18px;
-}
-
-/* Get rid */
-.split:not(:first-child) {
-  font-size: 15px;
-}
-
-.match {
-  font-weight: bold
-}
-

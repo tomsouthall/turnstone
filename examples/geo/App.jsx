@@ -7,7 +7,6 @@ import Item from './components/item/item'
 
 const maxItems = 10
 const placeholder = 'Enter a city or airport'
-const separator = ','
 const noItemsMessage = 'We found no places that match your search'
 
 const listbox = [
@@ -70,7 +69,6 @@ const App = () => {
             onEnter={onEnter}
             onTab={onTab}
             placeholder={placeholder}
-            separator={separator}
             styles={autocompleteStyles}
           />
         </div>

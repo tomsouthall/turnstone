@@ -9,8 +9,7 @@ const customStyles = {
   item: 'item-class',
   highlightedItem: 'highlighted-item-class',
   topItem: 'top-item-class',
-  split: 'split-class',
-  separator: 'separator-class'
+  split: 'split-class'
 }
 const item = {
   text: 'Chicago, Illinois, United States',
