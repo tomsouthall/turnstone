@@ -15,7 +15,6 @@ export const setItems = (items) => {
 }
 
 export const clear = () => {
-  console.log('clear() called')
   return {
     type: types.CLEAR
   }
