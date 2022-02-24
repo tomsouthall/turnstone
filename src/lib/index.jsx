@@ -73,7 +73,6 @@ Turnstone.propTypes = {
   disabled: PropTypes.bool,
   displayField: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   id: PropTypes.string,
-  itemComponent: PropTypes.elementType,
   listbox: listboxRules.isRequired,
   listboxIsImmutable: PropTypes.bool,
   matchText: PropTypes.bool,
@@ -98,7 +97,9 @@ Turnstone.propTypes = {
   maxItems: PropTypes.number,
   styles: PropTypes.object,
   tabIndex: PropTypes.number,
-  text: PropTypes.string
+  text: PropTypes.string,
+  ItemContents: PropTypes.elementType,
+  GroupName: PropTypes.elementType
 }
 
 //////////////////////////////////////////////////////

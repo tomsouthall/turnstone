@@ -6,10 +6,17 @@ export default function ItemFirst(props) {
   const { groupName, index, item } = props
   const { state } = useContext(StateContext)
   const { customStyles } = state
+  const GroupName = state.props.GroupName
+
+  const groupHeading = !!groupName && (
+    GroupName
+      ? <GroupName index={item.groupIndex}>{groupName}</GroupName>
+      : groupName
+  )
 
   return (
     <React.Fragment>
-      {!!groupName && <div className={customStyles.groupName}>{groupName}</div>}
+       {!!groupHeading && <div className={customStyles.groupHeading}>{groupHeading}</div>}
       <Item index={index} key={`item${index}`} item={item} />
     </React.Fragment>
   )

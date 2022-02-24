@@ -10,7 +10,7 @@ vi.mock('./item', () => ({ default: () => 'Item' }))
 describe('ItemFirst', () => {
   test('Component renders correctly', () => {
     const customStyles = {
-      groupName: 'group-name-class'
+      groupHeading: 'group-heading-class'
     }
 
     const component = renderer.create(

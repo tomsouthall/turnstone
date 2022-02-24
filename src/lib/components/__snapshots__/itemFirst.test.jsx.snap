@@ -3,7 +3,7 @@
 exports[`ItemFirst > Component renders correctly 1`] = `
 [
   <div
-    className="group-name-class"
+    className="group-heading-class"
   >
     Cities
   </div>,

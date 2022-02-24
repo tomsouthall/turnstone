@@ -1,7 +1,7 @@
 import React from 'react'
 import SplitMatch from '../splitMatch/splitMatch'
 import imgNewYork from'../../images/newyork.jpg'
-import styles from './item.module.css'
+import styles from './itemContents.module.css'
 
 const SplitComponent = (props) => {
   const {
@@ -20,7 +20,7 @@ const MatchComponent = (props) => {
   return <span className={styles.match}>{children}</span>
 }
 
-export default function Item(props) {
+export default function ItemContents(props) {
   const {
     appearsInDefaultListbox,
     index,

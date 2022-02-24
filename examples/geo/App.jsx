@@ -3,7 +3,8 @@ import Turnstone from '../../src/lib'
 import styles from './styles/App.module.css'
 import autocompleteStyles from './styles/autocomplete.module.css'
 import defaultListbox from '../_shared/defaultListbox'
-import Item from './components/item/item'
+import ItemContents from './components/itemContents/itemContents'
+import GroupName from './components/groupName/groupName'
 
 const maxItems = 10
 const placeholder = 'Enter a city or airport'
@@ -59,7 +60,6 @@ const App = () => {
             defaultListbox={defaultListbox}
             defaultListboxIsImmutable={false}
             id='autocomplete'
-            itemComponent={Item}
             listbox={listbox}
             listboxIsImmutable={true}
             maxItems={maxItems}
@@ -70,6 +70,8 @@ const App = () => {
             onTab={onTab}
             placeholder={placeholder}
             styles={autocompleteStyles}
+            GroupName={GroupName}
+            ItemContents={ItemContents}
           />
         </div>
       </main>

@@ -13,7 +13,7 @@ export default function Item(props) {
   } = useContext(StateContext)
 
   const { customStyles, highlighted, query } = state
-  const CustomItem = state.props.itemComponent
+  const ItemContents = state.props.ItemContents
   const globalMatch = item.dataSearchType === 'contains'
   const isHighlighted = highlighted && index === highlighted.index
 
@@ -37,8 +37,8 @@ export default function Item(props) {
     dispatch(setSelected(index))
   }
 
-  const itemContents = (CustomItem)
-    ? <CustomItem
+  const itemContents = (ItemContents)
+    ? <ItemContents
         appearsInDefaultListbox={item.defaultListbox}
         groupName={item.groupName}
         index={index}
