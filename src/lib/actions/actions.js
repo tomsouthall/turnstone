@@ -14,6 +14,13 @@ export const setItems = (items) => {
   }
 }
 
+export const clear = () => {
+  console.log('clear() called')
+  return {
+    type: types.CLEAR
+  }
+}
+
 export const setHighlighted = (index) => {
   return {
     type: types.SET_HIGHLIGHTED,

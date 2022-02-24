@@ -2,6 +2,7 @@ import * as types from '../actions/actionTypes'
 import undef from '../utils/undef'
 
 const highlightedItem = (index, items) => {
+  if(!items[index]) return undef
   return { index, text: items[index].text }
 }
 
@@ -35,6 +36,14 @@ const reducer = (state, action) => {
         if(action.items.length) newState.itemsLoaded = true
 
         return newState
+      case types.CLEAR:
+        return {
+          query: '',
+          items: [],
+          itemsLoaded: false,
+          highlighted: undef,
+          selected: undef
+        }
       case types.SET_HIGHLIGHTED:
         return { highlighted: highlightedItem(action.index, state.items) }
       case types.CLEAR_HIGHLIGHTED:

@@ -1,5 +1,6 @@
 export const SET_QUERY = 'SET_QUERY'
 export const SET_ITEMS = 'SET_ITEMS'
+export const CLEAR = 'CLEAR'
 export const SET_HIGHLIGHTED = 'SET_HIGHLIGHTED'
 export const CLEAR_HIGHLIGHTED = 'CLEAR_HIGHLIGHTED'
 export const NEXT_HIGHLIGHTED = 'NEXT_HIGHLIGHTED'

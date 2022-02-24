@@ -18,7 +18,8 @@ import {
   setHighlighted,
   highlightPrev,
   highlightNext,
-  setSelected
+  setSelected,
+  clear
 } from '../actions/actions'
 
 export default function Container(props) {
@@ -157,13 +158,16 @@ export default function Container(props) {
   }
 
   const clearState = () => {
-    dispatch(setQuery(''))
+    // Immediately clearing both inputs prevents any slight
+    // visual timing delays with async dispatch
+    queryInput.current.vaslue = ''
+    typeaheadInput.current.value = ''
+    dispatch(clear())
     queryInput.current.focus()
   }
 
   const handleFocus = () => {
     setHasFocus(true) //TODO: make hasFocus part of global state?
-
     if (state.items && state.items.length > 0) {
       dispatch(setHighlighted(0))
     }
@@ -223,7 +227,7 @@ export default function Container(props) {
           <div
             className={customStyles.clearButton}
             style={defaultStyles.clearButton}
-            onMouseDown={handleClearButton}
+            onClick={handleClearButton}
             tabIndex={-1}
             role='button'
             aria-label={clearButtonAriaLabel}>{clearButtonText}</div>

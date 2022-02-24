@@ -67,8 +67,6 @@ export default function SplitMatch(props) {
     const addTag = (isMatch, finalTagInDivider) => {
       const key = `part-${i}-${parts.length}`
       if(tag.length && tagIsMatch !== isMatch) {
-        console.log({tag : `"${tag}"`})
-
         if(!includeSeparator && finalTagInDivider && (globalSplit || !separatorRemoved)) {
           tag = tag.replace(separator, '')
           separatorRemoved = true
@@ -93,8 +91,6 @@ export default function SplitMatch(props) {
 
     return wrapSplit(parts, `part-${i}`, i)
   })
-
-  console.log({parts})
 
   return parts
 }
