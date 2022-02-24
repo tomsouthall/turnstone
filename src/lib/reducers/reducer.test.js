@@ -164,6 +164,33 @@ describe('SET_ITEMS action', () => {
   })
 })
 
+describe('CLEAR action', () => {
+  test('produces expected new state', () => {
+    let action
+    const state = {
+      query: 'foobar',
+      items: [
+        {text: 'foo'},
+        {text: 'foobar'},
+        {text: 'foofoo'}
+      ],
+      itemsLoaded: true,
+      highlighted: { index: 0, text: 'foo' },
+      selected: {text: 'foo'}
+    }
+
+    action = actions.clear()
+
+    expect(reducer(state, action)).toEqual({
+      query: '',
+      items: [],
+      itemsLoaded: false,
+      highlighted: undef,
+      selected: undef
+    })
+  })
+})
+
 describe('SET_HIGHLIGHTED action', () => {
   test('produces expected new state', () => {
     let action

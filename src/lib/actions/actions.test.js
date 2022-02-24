@@ -18,6 +18,13 @@ describe('Actions', () => {
     })
   })
 
+  test('clear returns expected action', () => {
+    const action = actions.clear()
+    expect(action).toEqual({
+      type: 'CLEAR'
+    })
+  })
+
   test('setHighlighted returns expected action', () => {
     const action = actions.setHighlighted(0)
     expect(action).toEqual({

@@ -14,14 +14,7 @@ exports[`Item > Component renders correctly 1`] = `
     }
   }
 >
-  <span
-    className="split-class"
-  >
-    <span>
-      Chi
-    </span>
-    cago, Illinois, United States
-  </span>
+  Chicago, Illinois, United States
 </div>
 `;
 
@@ -40,13 +33,6 @@ exports[`Item > Link changes the class when hovered 1`] = `
     }
   }
 >
-  <span
-    className="split-class"
-  >
-    <span>
-      Chi
-    </span>
-    cago, Illinois, United States
-  </span>
+  Chicago, Illinois, United States
 </div>
 `;
