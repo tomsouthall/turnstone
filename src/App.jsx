@@ -33,6 +33,7 @@ const App = () => {
           autoFocus={true}
           clearButton={true}
           debounceWait={0}
+          errorMessage={'Houston we have a problem'}
           listbox={listbox1}
           listboxIsImmutable={true}
           maxItems={10}
@@ -47,6 +48,7 @@ const App = () => {
           autoFocus={true}
           clearButton={true}
           debounceWait={0}
+          errorMessage={'Something is broken'}
           listbox={listbox2}
           listboxIsImmutable={true}
           matchText={true}

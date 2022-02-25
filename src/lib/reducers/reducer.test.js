@@ -7,6 +7,7 @@ import defaultListbox from '../../../examples/_shared/defaultListbox'
 describe('SET_QUERY action', () => {
   test('produces expected new state', () => {
     const state = {
+      itemsError: true,
       query: 'foo',
       selected: {index: 0, text: 'Foobar'},
       props: {
@@ -17,6 +18,7 @@ describe('SET_QUERY action', () => {
     const action = actions.setQuery('bar')
 
     expect(reducer(state, action)).toEqual({
+      itemsError: false,
       query: 'bar',
       selected: undef,
       props: {
@@ -37,6 +39,7 @@ describe('SET_QUERY action', () => {
     const action = actions.setQuery('')
 
     expect(reducer(state, action)).toEqual({
+      itemsError: false,
       query: '',
       selected: undef,
       itemsLoaded: false,
@@ -56,6 +59,7 @@ describe('SET_QUERY action', () => {
     const action = actions.setQuery('f')
 
     expect(reducer(state, action)).toEqual({
+      itemsError: false,
       query: 'f',
       selected: undef,
       itemsLoaded: false,
@@ -78,6 +82,7 @@ describe('SET_QUERY action', () => {
     expect(reducer(state, action)).toEqual({
       query: '',
       selected: undef,
+      itemsError: false,
       itemsLoaded: true,
       props: {
         minQueryLength: 1,
@@ -91,6 +96,7 @@ describe('SET_ITEMS action', () => {
   test('produces expected new state', () => {
     const state = {
       query: 'foo',
+      itemsError: true,
       itemsLoaded: false
     }
 
@@ -105,6 +111,7 @@ describe('SET_ITEMS action', () => {
     expect(reducer(state, action)).toEqual({
       query: 'foo',
       items,
+      itemsError: false,
       itemsLoaded: true,
       highlighted: { index: 0, text: 'foo' }
     })
@@ -122,6 +129,7 @@ describe('SET_ITEMS action', () => {
     expect(reducer(state, action)).toEqual({
       query: 'foo',
       items,
+      itemsError: false,
       highlighted: undef
     })
   })
@@ -138,6 +146,7 @@ describe('SET_ITEMS action', () => {
     expect(reducer(state, action)).toEqual({
       query: '',
       items,
+      itemsError: false,
       highlighted: undef
     })
   })
@@ -158,8 +167,32 @@ describe('SET_ITEMS action', () => {
     expect(reducer(state, action)).toEqual({
       query: '',
       items,
+      itemsError: false,
       itemsLoaded: true,
       highlighted: undef
+    })
+  })
+})
+
+describe('SET_ITEMS_ERROR action', () => {
+  test('produces expected new state', () => {
+    let action
+    const state = {
+      items: [
+        {text: 'foo'},
+        {text: 'foobar'},
+        {text: 'foofoo'}
+      ],
+      itemsError: false,
+      itemsLoaded: true
+    }
+
+    action = actions.setItemsError()
+
+    expect(reducer(state, action)).toEqual({
+      items: [],
+      itemsError: true,
+      itemsLoaded: false
     })
   })
 })
@@ -174,6 +207,7 @@ describe('CLEAR action', () => {
         {text: 'foobar'},
         {text: 'foofoo'}
       ],
+      itemsError: true,
       itemsLoaded: true,
       highlighted: { index: 0, text: 'foo' },
       selected: {text: 'foo'}
@@ -184,6 +218,7 @@ describe('CLEAR action', () => {
     expect(reducer(state, action)).toEqual({
       query: '',
       items: [],
+      itemsError: false,
       itemsLoaded: false,
       highlighted: undef,
       selected: undef

@@ -1,7 +1,7 @@
 import { useEffect, useContext } from 'react'
 import setify from 'setify' // Sets input value without changing cursor position
 import { StateContext } from '../../context/state'
-import { setItems } from '../../actions/actions'
+import { setItems, setItemsError } from '../../actions/actions'
 import isUndefined from '../../utils/isUndefined'
 import undef from '../../utils/undef'
 import startsWithCaseInsensitive from '../../utils/startsWithCaseInsensitive'
@@ -12,6 +12,14 @@ export const useItemsState = (swrData) => {
   useEffect(() => {
     dispatch(setItems(swrData || []))
   }, [swrData])
+}
+
+export const useItemsError = (error) => {
+  const { dispatch } = useContext(StateContext)
+
+  useEffect(() => {
+    if(error) dispatch(setItemsError())
+  }, [error])
 }
 
 export const useAutoFocus = (queryInput, autoFocus) => { // TODO: might be able to use autofocus property of input for this - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autofocus

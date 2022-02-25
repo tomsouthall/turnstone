@@ -13,6 +13,7 @@ const reducer = (state, action) => {
     switch (action.type) {
       case types.SET_QUERY:
         newState = {
+          itemsError: false,
           query: action.query,
           selected: undef
         }
@@ -29,6 +30,7 @@ const reducer = (state, action) => {
       case types.SET_ITEMS:
         newState = {
           items: action.items,
+          itemsError: false,
           highlighted: (action.items.length && state.query.length)
             ? highlightedItem(0, action.items)
             : undef
@@ -40,9 +42,16 @@ const reducer = (state, action) => {
         return {
           query: '',
           items: [],
+          itemsError: false,
           itemsLoaded: false,
           highlighted: undef,
           selected: undef
+        }
+      case types.SET_ITEMS_ERROR:
+        return {
+          items: [],
+          itemsError: true,
+          itemsLoaded: false
         }
       case types.SET_HIGHLIGHTED:
         return { highlighted: highlightedItem(action.index, state.items) }

@@ -18,6 +18,13 @@ describe('Actions', () => {
     })
   })
 
+  test('setItemsError returns expected action', () => {
+    const action = actions.setItemsError()
+    expect(action).toEqual({
+      type: 'SET_ITEMS_ERROR'
+    })
+  })
+
   test('clear returns expected action', () => {
     const action = actions.clear()
     expect(action).toEqual({

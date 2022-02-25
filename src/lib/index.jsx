@@ -72,6 +72,7 @@ Turnstone.propTypes = {
   defaultListboxIsImmutable: PropTypes.bool,
   disabled: PropTypes.bool,
   displayField: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  errorMessage: PropTypes.string,
   id: PropTypes.string,
   listbox: listboxRules.isRequired,
   listboxIsImmutable: PropTypes.bool,

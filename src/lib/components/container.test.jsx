@@ -9,6 +9,7 @@ import { fruits } from '../../data'
 vi.mock('./listbox', () => ({ default: () => 'Listbox' }))
 vi.mock('./hooks/containerEffects', () => ({
   useItemsState: vi.fn(),
+  useItemsError: vi.fn(),
   useAutoFocus: vi.fn(),
   useQueryChange: vi.fn(),
   useHighlight: vi.fn(),

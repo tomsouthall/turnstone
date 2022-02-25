@@ -1,6 +1,7 @@
 import React, { useState, useRef, useContext } from 'react'
 import { StateContext } from '../context/state'
 import Listbox from './listbox'
+import Errorbox from './errorbox'
 import { useDebounce } from 'use-debounce'
 import useData from './hooks/useData'
 import undef from '../utils/undef'
@@ -8,6 +9,7 @@ import isUndefined from '../utils/isUndefined'
 import defaultStyles from './styles/input.styles.js'
 import {
   useItemsState,
+  useItemsError,
   useAutoFocus,
   useQueryChange,
   useHighlight,
@@ -33,6 +35,7 @@ export default function Container(props) {
     defaultListbox,
     defaultListboxIsImmutable,
     disabled,
+    errorMessage,
     id,
     listboxIsImmutable,
     maxItems,
@@ -53,6 +56,7 @@ export default function Container(props) {
     : [{ ...props.listbox, ...{ name: '', ratio: maxItems } }]
 
   const listboxId = `${id}-listbox`
+  const errorboxId = `${id}-errorbox`
 
   // Global state from context
   const { state, dispatch } = useContext(StateContext)
@@ -66,6 +70,11 @@ export default function Container(props) {
   const queryInput = useRef(null)
   const typeaheadInput = useRef(null)
 
+  // Calculated states
+  const hasClearButton = clearButton && !!state.query
+  const isExpanded = hasFocus && state.itemsLoaded
+  const isErrorExpanded = !!props.errorMessage && state.itemsError
+
   // Checks whether or not SWR data is to be treated as immutable
   const isImmutable = (() => {
     return listboxIsImmutable &&
@@ -77,7 +86,7 @@ export default function Container(props) {
   })()
 
   // Hook to retrieve data using SWR
-  const swrData = useData(
+  const swrResult = useData(
     debouncedQuery.toLowerCase(),
     isImmutable,
     listbox,
@@ -85,10 +94,13 @@ export default function Container(props) {
     minQueryLength,
     maxItems,
     dispatch
-  ).data
+  )
 
   // Store retrieved data in global state as state.items
-  useItemsState(swrData)
+  useItemsState(swrResult.data)
+
+  // Store retrieved error if there is one
+  useItemsError(swrResult.error)
 
   // Autofocus on render if prop is true
   useAutoFocus(queryInput, autoFocus)
@@ -113,14 +125,6 @@ export default function Container(props) {
     dispatch(setSelected(highlightedIndex))
     if (typeof f === 'function') f(queryInput.current.value, highlightedItem)
   }
-
-  const hasClearButton = () => {
-    return clearButton && !!state.query
-  }
-
-  const isExpanded = (() => {
-    return hasFocus && state.itemsLoaded
-  })()
 
   // Handle different keypresses and call the appropriate action creators
   const checkKey = (evt) => {
@@ -223,7 +227,7 @@ export default function Container(props) {
           ref={typeaheadInput}
         />
 
-        {hasClearButton() && (
+        {hasClearButton && (
           <div
             className={customStyles.clearButton}
             style={defaultStyles.clearButton}
@@ -239,6 +243,10 @@ export default function Container(props) {
             items={state.items}
             noItemsMessage={noItemsMessage}
           />
+        )}
+
+        {isErrorExpanded && (
+          <Errorbox id={errorboxId} errorMessage={errorMessage} />
         )}
       </div>
     </React.Fragment>

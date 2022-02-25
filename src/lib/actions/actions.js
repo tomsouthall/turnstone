@@ -14,6 +14,12 @@ export const setItems = (items) => {
   }
 }
 
+export const setItemsError = () => {
+  return {
+    type: types.SET_ITEMS_ERROR
+  }
+}
+
 export const clear = () => {
   return {
     type: types.CLEAR

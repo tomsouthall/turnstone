@@ -30,7 +30,8 @@
   color: black;
 }
 
-.listbox {
+.listbox,
+.errorbox {
   box-sizing: border-box;
   width: 500px;
   border-left: 1px solid #ccc;
@@ -41,10 +42,14 @@
   background: #fff;
 }
 
-.noItems {
-  margin: 8em auto;
-  height: 38px;
+.noItems,
+.errorMessage {
+  margin: 2em auto;
   text-align: center;
+}
+
+.errorMessage {
+  color: rgb(175, 0, 0);
 }
 
 .groupHeading {

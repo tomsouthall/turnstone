@@ -59,6 +59,7 @@ const App = () => {
             debounceWait={250}
             defaultListbox={defaultListbox}
             defaultListboxIsImmutable={false}
+            errorMessage={'Sorry, something has broken!'}
             id='autocomplete'
             listbox={listbox}
             listboxIsImmutable={true}
