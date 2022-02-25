@@ -14,7 +14,7 @@ export default function Item(props) {
 
   const { customStyles, highlighted, query } = state
   const ItemContents = state.props.ItemContents
-  const globalMatch = item.dataSearchType === 'contains'
+  const globalMatch = item.searchType === 'contains'
   const isHighlighted = highlighted && index === highlighted.index
 
   const divClassName = () => {
@@ -44,7 +44,7 @@ export default function Item(props) {
         index={index}
         item={item.value}
         query={query}
-        searchType={item.dataSearchType}
+        searchType={item.searchType}
         totalItems={state.items.length}
       />
     : (state.props.matchText

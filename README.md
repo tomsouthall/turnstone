@@ -18,7 +18,7 @@ const App = () => {
     <Turnstone
       autoFocus={true}
       data={fruits}
-      dataSearchType={'startswith'}
+      searchType={'startswith'}
       debounceWait={0}
       maxItems={10}
       noItemsMessage={'No matching fruit found'}

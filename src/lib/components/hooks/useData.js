@@ -4,12 +4,12 @@ import swrLaggyMiddleware from '../../utils/swrLaggyMiddleware'
 import isUndefined from '../../utils/isUndefined'
 
 const filterSuppliedData = (group, query) => {
-  const { data, displayField, dataSearchType } = group
-  const searchType = dataSearchType
-    ? dataSearchType.toLowerCase()
-    : dataSearchType
+  const { data, displayField, searchType } = group
+  const caseInsensitiveSearchType = searchType
+    ? searchType.toLowerCase()
+    : searchType
 
-  switch (searchType) {
+  switch (caseInsensitiveSearchType) {
     case 'startswith':
       return data.filter((item) =>
         itemText(item, displayField)
@@ -101,7 +101,7 @@ export const fetcher = (query, listbox, defaultListbox, minQueryLength, maxItems
           text: itemText(item, listboxProp[groupIndex].displayField),
           groupIndex,
           groupName: listboxProp[groupIndex].name,
-          dataSearchType: listboxProp[groupIndex].dataSearchType,
+          searchType: listboxProp[groupIndex].searchType,
           defaultListbox: isDefaultListbox
         }))
       ]

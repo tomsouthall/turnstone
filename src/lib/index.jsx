@@ -39,7 +39,7 @@ export default function Turnstone(props) {
 // Prop validation                                  //
 //////////////////////////////////////////////////////
 
-const dataSearchTypes = ['startswith', 'contains']
+const searchTypes = ['startswith', 'contains']
 
 const listboxRules = PropTypes.oneOfType([
   PropTypes.arrayOf(PropTypes.exact({
@@ -47,7 +47,7 @@ const listboxRules = PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.array
     ]).isRequired,
-    dataSearchType: PropTypes.oneOf(dataSearchTypes),
+    searchType: PropTypes.oneOf(searchTypes),
     displayField: PropTypes.string,
     name: PropTypes.string.isRequired,
     ratio: PropTypes.number
@@ -57,7 +57,7 @@ const listboxRules = PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.array
     ]).isRequired,
-    dataSearchType: PropTypes.oneOf(dataSearchTypes),
+    searchType: PropTypes.oneOf(searchTypes),
     displayField: PropTypes.string
   })
 ])

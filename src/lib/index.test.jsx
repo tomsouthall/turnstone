@@ -8,7 +8,7 @@ vi.mock('./components/container', () => ({ default: () => 'Container' }))
 
 const listbox = {
   data: ['foo', 'bar', 'foobar'],
-  dataSearchType: 'startswith'
+  searchType: 'startswith'
 }
 
 const component = renderer.create(

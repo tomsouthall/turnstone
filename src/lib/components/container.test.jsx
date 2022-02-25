@@ -31,7 +31,7 @@ describe('Container', () => {
     const props = {
       autoFocus: true,
       data: fruits,
-      dataSearchType: 'startswith',
+      searchType: 'startswith',
       debounceWait: 0,
       id: 'autocomplete',
       maxItems: 10,

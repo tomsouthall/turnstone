@@ -8,18 +8,18 @@ const styles = {
 
 const listbox1 = {
   data: fruits,
-  dataSearchType: 'startswith'
+  searchType: 'startswith'
 }
 
 const listbox2 = [
   {
     data: fruits,
-    dataSearchType: 'startswith',
+    searchType: 'startswith',
     name: 'Fruits'
   },
   {
     data: vegetables,
-    dataSearchType: 'contains',
+    searchType: 'contains',
     name: 'Vegetables'
   }
 ]
