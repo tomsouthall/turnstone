@@ -1,5 +1,5 @@
 import React from 'react'
-import SplitMatch from '../splitMatch/splitMatch'
+import SplitMatch from 'split-match'
 import imgNewYork from'../../images/newyork.jpg'
 import styles from './itemContents.module.css'
 
@@ -70,5 +70,4 @@ export default function ItemContents(props) {
   }
 
   return index === 0 && !appearsInDefaultListbox ? firstItem() : standardItem()
-
 }
