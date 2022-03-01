@@ -3,6 +3,7 @@ import styles from './groupName.module.css'
 
 export default function GroupName(props) {
   const {
+    id,
     children: name
   } = props
 
@@ -11,7 +12,7 @@ export default function GroupName(props) {
     airports: '\u{2708}'
   }
 
-  const icon = icons[name.toLowerCase()] || ''
+  const icon = icons[id] || ''
 
   return (
     <>

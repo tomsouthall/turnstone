@@ -12,6 +12,7 @@ const noItemsMessage = 'We found no places that match your search'
 
 const listbox = [
   {
+    id: 'cities',
     name: 'Cities',
     ratio: 8,
     displayField: 'name',
@@ -21,6 +22,7 @@ const listbox = [
     searchType: 'startswith'
   },
   {
+    id: 'airports',
     name: 'Airports',
     ratio: 2,
     displayField: 'name',

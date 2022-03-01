@@ -49,6 +49,7 @@ const listboxRules = PropTypes.oneOfType([
     ]).isRequired,
     searchType: PropTypes.oneOf(searchTypes),
     displayField: PropTypes.string,
+    id: PropTypes.string,
     name: PropTypes.string.isRequired,
     ratio: PropTypes.number
   })),

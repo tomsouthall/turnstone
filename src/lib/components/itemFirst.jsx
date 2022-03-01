@@ -10,7 +10,7 @@ export default function ItemFirst(props) {
 
   const groupHeading = !!groupName && (
     GroupName
-      ? <GroupName index={item.groupIndex}>{groupName}</GroupName>
+      ? <GroupName id={item.groupId} index={item.groupIndex}>{groupName}</GroupName>
       : groupName
   )
 
