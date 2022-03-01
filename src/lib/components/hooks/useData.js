@@ -103,6 +103,7 @@ export const fetcher = (query, listbox, defaultListbox, minQueryLength, maxItems
           groupId: listboxProp[groupIndex].id,
           groupName: listboxProp[groupIndex].name,
           searchType: listboxProp[groupIndex].searchType,
+          displayField: listboxProp[groupIndex].displayField,
           defaultListbox: isDefaultListbox
         }))
       ]

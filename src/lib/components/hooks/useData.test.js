@@ -29,6 +29,7 @@ const server = setupServer(
 
 const apiListbox = [
   {
+    id: 'books',
     name: 'Books',
     ratio: 4,
     displayField: 'title',
@@ -61,25 +62,41 @@ describe('Fetching API data', () => {
           value: { title: 'Last Argument of Kings', author: 'Joe Abercrombie' },
           text: 'Last Argument of Kings',
           groupIndex: 0,
-          groupName: 'Books'
+          groupName: 'Books',
+          defaultListbox: undef,
+          displayField: 'title',
+          groupId: 'books',
+          searchType: undef
         },
         {
           value: { title: 'Legend', author: 'Marie Lu' },
           text: 'Legend',
           groupIndex: 0,
-          groupName: 'Books'
+          groupName: 'Books',
+          defaultListbox: undef,
+          displayField: 'title',
+          groupId: 'books',
+          searchType: undef
         },
         {
           value: { title: 'Life After Life', author: 'Kate Atkinson' },
           text: 'Life After Life',
           groupIndex: 0,
-          groupName: 'Books'
+          groupName: 'Books',
+          defaultListbox: undef,
+          displayField: 'title',
+          groupId: 'books',
+          searchType: undef
         },
         {
           value: { title: 'Like Water for Chocolate', author: 'Laura Esquivel' },
           text: 'Like Water for Chocolate',
           groupIndex: 0,
-          groupName: 'Books'
+          groupName: 'Books',
+          defaultListbox: undef,
+          displayField: 'title',
+          groupId: 'books',
+          searchType: undef
         },
         {
           value: 'Legume',

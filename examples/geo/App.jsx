@@ -5,6 +5,7 @@ import autocompleteStyles from './styles/autocomplete.module.css'
 import defaultListbox from '../_shared/defaultListbox'
 import ItemContents from './components/itemContents/itemContents'
 import GroupName from './components/groupName/groupName'
+import undef from '../../src/lib/utils/undef'
 
 const maxItems = 10
 const placeholder = 'Enter a city or airport'
@@ -34,9 +35,14 @@ const listbox = [
 ]
 
 const App = () => {
-  const [selected, setSelected] = useState()
+  const [selected, setSelected] = useState({item: undef, displayField: undef})
 
-  const onSelect = sel => setSelected(sel)
+  const onSelect = useCallback(
+    (item, displayField) => {
+      console.log({item, displayField})
+      setSelected({item, displayField})
+    }, []
+  )
 
   const onEnter = useCallback(
     (query, selectedResult) => {
@@ -78,11 +84,11 @@ const App = () => {
           />
         </div>
       </main>
-      {selected && (
+      {!!selected.item && (
         <div className={styles.selected}>
           <strong>Selected Result</strong><br />
-          {selected.name}<br />
-          Coords: {selected.coords}
+          {selected.item[selected.displayField]}<br />
+          Coords: {selected.item.coords}
         </div>
       )}
     </div>

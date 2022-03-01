@@ -132,7 +132,8 @@ describe('useSelected', () => {
     value: {
       name: queryValue,
       coords: '41.882304590139135, -87.62327214400634'
-    }
+    },
+    displayField: 'name'
   }
 
   test('Side effects of item selection occur correctly', () => {
@@ -143,7 +144,7 @@ describe('useSelected', () => {
     expect(queryRef.current.value).toBe(queryValue)
     expect(queryRef.current.blur).toHaveBeenCalledTimes(1)
     expect(typeaheadRef.current.value).toBe('')
-    expect(onSelect).toHaveBeenCalledWith(selected.value)
+    expect(onSelect).toHaveBeenCalledWith(selected.value, selected.displayField)
   })
 
   test('Side effects do not occur if selected item is undefined', () => {
@@ -153,7 +154,7 @@ describe('useSelected', () => {
     renderHook(() => useSelected(undef, queryRef, typeaheadRef, onSelect))
     expect(queryRef.current.blur).toHaveBeenCalledTimes(0)
     expect(typeaheadRef.current.value).toBe(queryValue)
-    expect(onSelect).toHaveBeenCalledWith(undef)
+    expect(onSelect).toHaveBeenCalledWith(undef, undef)
   })
 })
 

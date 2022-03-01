@@ -48,7 +48,7 @@ const listboxRules = PropTypes.oneOfType([
       PropTypes.array
     ]).isRequired,
     searchType: PropTypes.oneOf(searchTypes),
-    displayField: PropTypes.string,
+    displayField: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     id: PropTypes.string,
     name: PropTypes.string.isRequired,
     ratio: PropTypes.number
@@ -59,7 +59,7 @@ const listboxRules = PropTypes.oneOfType([
       PropTypes.array
     ]).isRequired,
     searchType: PropTypes.oneOf(searchTypes),
-    displayField: PropTypes.string
+    displayField: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   })
 ])
 
@@ -72,7 +72,6 @@ Turnstone.propTypes = {
   defaultListbox: listboxRules,
   defaultListboxIsImmutable: PropTypes.bool,
   disabled: PropTypes.bool,
-  displayField: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   errorMessage: PropTypes.string,
   id: PropTypes.string,
   listbox: listboxRules.isRequired,

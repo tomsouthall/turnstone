@@ -63,18 +63,20 @@ export const useHighlight = (highlighted, hasFocus, queryInput, typeaheadInput) 
 
 export const useSelected = (selected, queryInput, typeaheadInput, onSelect) => {
   useEffect(() => {
-    let callbackValue
+    let value, displayField
 
     if (isUndefined(selected)) {
-      callbackValue = undef
+      value = undef
+      displayField = undef
     }
     else {
       typeaheadInput.current.value = ''
       queryInput.current.blur()
-      callbackValue = selected.value
+      value = selected.value
+      displayField = selected.displayField
     }
 
-    if (typeof onSelect === 'function') onSelect(callbackValue)
+    if (typeof onSelect === 'function') onSelect(value, displayField)
   }, [selected, onSelect])
 }
 
