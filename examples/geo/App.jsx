@@ -2,9 +2,10 @@ import React, { useCallback, useState } from 'react'
 import Turnstone from '../../src/lib'
 import styles from './styles/App.module.css'
 import autocompleteStyles from './styles/autocomplete.module.css'
-import defaultListbox from '../_shared/defaultListbox'
+import { defaultListboxNoRecentSearches } from '../_shared/defaultListbox'
 import ItemContents from './components/itemContents/itemContents'
 import GroupName from './components/groupName/groupName'
+import recentSearchesPlugin from '../../plugins/turnstone-recent-searches'
 import undef from '../../src/lib/utils/undef'
 
 const maxItems = 10
@@ -39,7 +40,6 @@ const App = () => {
 
   const onSelect = useCallback(
     (item, displayField) => {
-      console.log({item, displayField})
       setSelected({item, displayField})
     }, []
   )
@@ -65,7 +65,7 @@ const App = () => {
             autoFocus={false}
             clearButton={true}
             debounceWait={250}
-            defaultListbox={defaultListbox}
+            defaultListbox={defaultListboxNoRecentSearches}
             defaultListboxIsImmutable={false}
             errorMessage={'Sorry, something has broken!'}
             id='autocomplete'
@@ -78,6 +78,7 @@ const App = () => {
             onEnter={onEnter}
             onTab={onTab}
             placeholder={placeholder}
+            plugins={[[recentSearchesPlugin, {ratio: 2, name: 'Recent'}]]}
             styles={autocompleteStyles}
             GroupName={GroupName}
             ItemContents={ItemContents}

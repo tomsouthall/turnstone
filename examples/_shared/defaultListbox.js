@@ -1,4 +1,4 @@
-const defaultListbox = [
+export const defaultListbox = [
   { name: 'Recent Searches', displayField: 'name', data: [
       { name: 'New Orleans, Louisiana, United States', coords: '29.95465,-90.07507' },
       { name: 'Chicago, Illinois, United States', coords: '41.85003,-87.65005' },
@@ -17,4 +17,13 @@ const defaultListbox = [
   }
 ]
 
-export default defaultListbox
+export const defaultListboxNoRecentSearches = [
+  { name: 'Popular Cities', displayField: 'name', data: [
+      { name: 'Paris, France', coords: '48.86425, 2.29416' },
+      { name: 'Rome, Italy', coords: '41.89205, 12.49209' },
+      { name: 'Orlando, Florida, United States', coords: '28.53781, -81.38592' },
+      { name: 'London, England', coords: '51.50420, -0.12426' },
+      { name: 'Barcelona, Spain', coords: '41.40629, 2.17555' }
+    ]
+  }
+]

@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest'
 import reducer from './reducer'
 import * as actions from '../actions/actions'
 import undef from '../utils/undef'
-import defaultListbox from '../../../examples/_shared/defaultListbox'
+import { defaultListbox } from '../../../examples/_shared/defaultListbox'
 
 describe('SET_QUERY action', () => {
   test('produces expected new state', () => {
