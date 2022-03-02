@@ -24,12 +24,21 @@ const propDefaults = {
 }
 
 export default function Turnstone(props) {
-  const newProps = {...propDefaults, ...props}
+  const { plugins } = props
+  const defaultComponentAndProps = [Container, {...propDefaults, ...props}]
+  const componentAndProps = plugins
+    ? plugins.reduce((prev, curr) => {
+          const plugin = Array.isArray(curr) ? curr : [curr]
+          return plugin[0](prev[0], prev[1], plugin[1])
+        }, defaultComponentAndProps)
+    : defaultComponentAndProps
+  const Component = componentAndProps[0]
+  const componentProps = componentAndProps[1]
 
   return (
     <React.StrictMode>
-      <StateContextProvider {...newProps}>
-        <Container {...newProps} />
+      <StateContextProvider {...componentProps}>
+        <Component {...componentProps} />
       </StateContextProvider>
     </React.StrictMode>
   )
@@ -95,6 +104,7 @@ Turnstone.propTypes = {
   onEnter: PropTypes.func,
   onTab: PropTypes.func,
   placeholder: PropTypes.string,
+  plugins: PropTypes.array,
   maxItems: PropTypes.number,
   styles: PropTypes.object,
   tabIndex: PropTypes.number,
