@@ -15,14 +15,14 @@ import { fruits, vegetables, books } from '../../../data'
 const server = setupServer(
   rest.get('http://mock-api-site.com/api/books', (req, res, ctx) => {
     return res(
-      ctx.json({data: books})
+      ctx.json(books)
     )
   }),
   rest.get('http://mock-api-site.com/api/fruits', (req, res, ctx) => {
     const q = req.url.searchParams.get('q')
 
     return res(
-      ctx.json({data: fruits.filter(fruit => fruit.toLowerCase().startsWith(q.toLowerCase()))})
+      ctx.json(fruits.filter(fruit => fruit.toLowerCase().startsWith(q.toLowerCase())))
     )
   })
 )

@@ -87,8 +87,9 @@ export const fetcher = (query, listbox, defaultListbox, minQueryLength, maxItems
   const promises = listboxProp.map((group) => {
     if (typeof group.data === 'function') {
       return group.data(query)
-    } else {
-      return Promise.resolve({ data: filterSuppliedData(group, query) })
+    }
+    else {
+      return Promise.resolve(filterSuppliedData(group, query))
     }
   })
 
@@ -96,7 +97,7 @@ export const fetcher = (query, listbox, defaultListbox, minQueryLength, maxItems
     groups = groups.reduce((prevGroups, group, groupIndex) => {
       return [
         ...prevGroups,
-        group.data.map((item) => ({
+        group.map((item) => ({
           value: item,
           text: itemText(item, listboxProp[groupIndex].displayField),
           groupIndex,

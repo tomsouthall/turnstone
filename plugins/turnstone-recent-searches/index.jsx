@@ -1,6 +1,8 @@
 import { useCallback } from 'react'
 import { useLocalStorage } from 'react-use'
 
+// TODO: Do we need to pass in Container? Plugins could just act upon props.
+
 const recentSearchesPlugin = (Container, containerProps = {}, pluginProps = {}) => {
   const {
     ratio = 1,
