@@ -26,10 +26,14 @@ export default function ItemContents(props) {
     index,
     item,
     query,
-    searchType = 'startswith'
+    searchType = 'startswith',
+    setSelected,
+    totalItems
   } = props
 
   const globalMatch = searchType === 'contains'
+
+  const isNYC = item.name === 'New York City, New York, United States'
 
   const matchedText = (includeSeparator) => {
     return (
@@ -47,16 +51,73 @@ export default function ItemContents(props) {
   }
 
   const img = () => {
-    return item.name === 'New York City, New York, United States'
-      ? <div><img src={imgNewYork} alt={item.name} /></div>
+    return isNYC
+      ? <div className={styles.imgContainer}><img src={imgNewYork} alt={item.name} /></div>
       : void 0
+  }
+
+  const SubLocations = () => {
+    if(totalItems <= 5 && (item.neighbourhoods || item.attractions)) {
+      const neighbourhoods = (totalItems > 1) ? item.neighbourhoods.slice(0,5) : item.neighbourhoods
+      const attractions = (totalItems > 1) ? item.attractions.slice(0,5) : item.attractions
+
+      return (
+        <div className={styles.sublocations}>
+          <SubLocationList title="Neighbourhoods" data={neighbourhoods} />
+          <SubLocationList title="Attractions" data={attractions} />
+        </div>
+      )
+    }
+    return null
+  }
+
+  const SubLocationList = (props) => {
+    const { title, data } = props
+
+    if(!data || !data.length) return null
+
+    return (
+      <div className={styles.sublocationList}>
+        <div className={styles.subLocationTitle}>{title}</div>
+        <>
+          {
+            data.map(
+              (value, index) =>
+                <SubLocation
+                  key={`neighbourhood${index}`}
+                  value={value}>
+                    {value.name.split(',')[0]}
+                </SubLocation>
+              )
+          }
+        </>
+      </div>
+    )
+  }
+
+  const SubLocation = (props) => {
+    const { children, value } = props
+
+    const handleClick = (evt, value) => {
+      evt.stopPropagation()
+      setSelected(value, 'name')
+    }
+
+    return (
+      <div>
+        <div className={styles.sublocation} onMouseDown={(evt) => handleClick(evt, value)}>
+          {children}
+        </div>
+      </div>
+    )
   }
 
   const firstItem = () => {
     return (
       <div className={`${styles.container} ${styles.first}`}>
         {img()}
-        <div>{matchedText(false)}</div>
+        <div className={styles.nameContainer}>{matchedText(false)}</div>
+        {SubLocations()}
       </div>
     )
   }

@@ -37,6 +37,14 @@ export default function Item(props) {
     dispatch(setSelected(index))
   }
 
+  const setCustomSelected = (value, displayField) => {
+    dispatch(setSelected({
+      value,
+      displayField,
+      text: value[displayField]
+    }))
+  }
+
   const itemContents = (ItemContents)
     ? <ItemContents
         appearsInDefaultListbox={item.defaultListbox}
@@ -45,6 +53,7 @@ export default function Item(props) {
         item={item.value}
         query={query}
         searchType={item.searchType}
+        setSelected={setCustomSelected}
         totalItems={state.items.length}
       />
     : (state.props.matchText

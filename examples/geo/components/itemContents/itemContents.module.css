@@ -1,4 +1,5 @@
-.first > div {
+.first > .imgContainer,
+.first > .nameContainer {
   display: inline-block;
   height: 50px;
   vertical-align: middle;
@@ -25,4 +26,36 @@
 .match {
   font-weight: 600;
   color: #000;
+}
+
+.sublocations {
+  display: block;
+  padding-top: 10px;
+  padding-left: 48px;
+}
+
+.sublocationList {
+  display: inline-block;
+  margin-right: 40px;
+  font-size: 15px;
+}
+
+.subLocationTitle {
+  text-transform: uppercase;
+  font-size: 0.8em;
+  color: #777;
+  margin-bottom: 3px;
+  margin-left: 10px;
+}
+
+.sublocation {
+  display:inline-block;
+  padding: 2px 10px 3px;
+  color: rgb(118, 58, 214);
+}
+
+.sublocation:hover {
+  color: #fff;
+  background: rgb(118, 58, 214);
+  border-radius: 15px;
 }

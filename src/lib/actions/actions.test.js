@@ -61,11 +61,20 @@ describe('Actions', () => {
     })
   })
 
-  test('setSelected returns expected action', () => {
-    const action = actions.setSelected(0)
+  test('setSelected returns expected actions', () => {
+    const item = {value: {name: 'foobar'}, text: 'foobar'}
+    let action = actions.setSelected(0)
+
     expect(action).toEqual({
       type: 'SET_SELECTED',
       index: 0
+    })
+
+    action = actions.setSelected(item)
+
+    expect(action).toEqual({
+      type: 'SET_SELECTED',
+      item
     })
   })
 

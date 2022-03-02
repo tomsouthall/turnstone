@@ -51,11 +51,11 @@ export const highlightNext = () => {
   }
 }
 
-export const setSelected = (index) => {
-  return {
-    type: types.SET_SELECTED,
-    index
-  }
+export const setSelected = (i) => {
+  const type = types.SET_SELECTED
+  return (typeof i === 'object')
+    ? { type, item: i }
+    : { type, index: i }
 }
 
 export const clearSelected = () => {

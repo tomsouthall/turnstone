@@ -1,5 +1,6 @@
 import * as types from '../actions/actionTypes'
 import undef from '../utils/undef'
+import isUndefined from '../utils/isUndefined'
 
 const highlightedItem = (index, items) => {
   if(!items[index]) return undef
@@ -8,7 +9,7 @@ const highlightedItem = (index, items) => {
 
 const reducer = (state, action) => {
   const newState = (() => {
-    let newState
+    let newState, item
 
     switch (action.type) {
       case types.SET_QUERY:
@@ -66,10 +67,8 @@ const reducer = (state, action) => {
           ? { highlighted: highlightedItem(state.highlighted.index + 1, state.items) }
           : {}
       case types.SET_SELECTED:
-        return {
-          selected: state.items[action.index],
-          query: state.items[action.index].text,
-        }
+        item = isUndefined(action.index) ? action.item : state.items[action.index]
+        return { selected: item, query: item.text }
       default:
         throw new Error('Invalid action type passed to reducer')
     }
