@@ -28,9 +28,10 @@ export default function Container(props) {
   // Destructure props
   const {
     autoFocus,
+    cancelButton,
+    cancelButtonAriaLabel,
     clearButton,
     clearButtonAriaLabel,
-    clearButtonText,
     debounceWait,
     defaultListbox,
     defaultListboxIsImmutable,
@@ -47,7 +48,9 @@ export default function Container(props) {
     onEnter,
     onTab,
     placeholder,
-    tabIndex
+    tabIndex,
+    Cancel,
+    Clear
   } = props
 
   // Destructure listbox prop
@@ -65,6 +68,7 @@ export default function Container(props) {
   // Component state
   const [debouncedQuery] = useDebounce(state.query, debounceWait)
   const [hasFocus, setHasFocus] = useState(false)
+  const [blockBlurHandler, setBlockBlurHandler] = useState(false)
 
   // DOM references
   const queryInput = useRef(null)
@@ -72,8 +76,13 @@ export default function Container(props) {
 
   // Calculated states
   const hasClearButton = clearButton && !!state.query
+  const hasCancelButton = cancelButton && hasFocus
   const isExpanded = hasFocus && state.itemsLoaded
   const isErrorExpanded = !!props.errorMessage && state.itemsError
+  const containerClassname = hasFocus ? 'containerFocus' : 'container'
+  const defaultContainerStyles = customStyles[containerClassname]
+    ? undef
+    : defaultStyles[containerClassname]
 
   // Checks whether or not SWR data is to be treated as immutable
   const isImmutable = (() => {
@@ -156,36 +165,48 @@ export default function Container(props) {
     dispatch(setQuery(queryInput.current.value))
   }
 
-  const handleClearButton = (evt) => {
-    evt.preventDefault()
+  const handleClearButton = () => {
+    setBlockBlurHandler(true)
+    clearState()
+  }
+
+  const handleCancelButton = () => {
     clearState()
   }
 
   const clearState = () => {
     // Immediately clearing both inputs prevents any slight
     // visual timing delays with async dispatch
-    queryInput.current.vaslue = ''
+    queryInput.current.value = ''
     typeaheadInput.current.value = ''
     dispatch(clear())
     queryInput.current.focus()
   }
 
   const handleFocus = () => {
-    setHasFocus(true) //TODO: make hasFocus part of global state?
-    if (state.items && state.items.length > 0) {
-      dispatch(setHighlighted(0))
+    if(!hasFocus) {
+      setHasFocus(true)
+      if (state.items && state.items.length > 0) {
+        dispatch(setHighlighted(0))
+      }
     }
   }
 
   const handleBlur = () => {
-    setHasFocus(false)
+    if(blockBlurHandler) {
+      queryInput.current.focus()
+    }
+    else {
+      setHasFocus(false)
+    }
+    setBlockBlurHandler(false)
   }
 
   return (
     <React.Fragment>
       <div
-        className={customStyles.queryContainer}
-        style={defaultStyles.queryContainer}
+        className={customStyles[containerClassname]}
+        style={defaultContainerStyles}
         role='combobox'
         aria-expanded={isExpanded}
         aria-owns={listboxId}
@@ -228,13 +249,25 @@ export default function Container(props) {
         />
 
         {hasClearButton && (
-          <div
+          <button
             className={customStyles.clearButton}
             style={defaultStyles.clearButton}
-            onClick={handleClearButton}
+            onMouseDown={handleClearButton}
             tabIndex={-1}
-            role='button'
-            aria-label={clearButtonAriaLabel}>{clearButtonText}</div>
+            aria-label={clearButtonAriaLabel}>
+            <Clear />
+          </button>
+        )}
+
+        {hasCancelButton && (
+          <button
+            className={customStyles.cancelButton}
+            style={defaultStyles.cancelButton}
+            onMouseDown={handleCancelButton}
+            tabIndex={-1}
+            aria-label={cancelButtonAriaLabel}>
+            <Cancel />
+          </button>
         )}
 
         {isExpanded && (

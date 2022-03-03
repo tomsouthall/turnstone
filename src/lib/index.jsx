@@ -10,9 +10,10 @@ const randomId = () => `turnstone-${(0|Math.random()*6.04e7).toString(36)}`
 // Set prop defaults before passing them on to components
 const propDefaults = {
   autoFocus: false,
+  cancelButton: false,
+  cancelButtonAriaLabel: 'Cancel',
   clearButton: false,
   clearButtonAriaLabel: 'Clear contents',
-  clearButtonText: '\u00d7',
   debounceWait: 250,
   defaultListboxIsImmutable: true,
   disabled: false,
@@ -20,7 +21,9 @@ const propDefaults = {
   listboxIsImmutable: true,
   maxItems: 10,
   minQueryLength: 1,
-  placeholder: ''
+  placeholder: '',
+  Cancel: () => 'Cancel',
+  Clear: () => '\u00d7'
 }
 
 export default function Turnstone(props) {
@@ -109,6 +112,8 @@ Turnstone.propTypes = {
   styles: PropTypes.object,
   tabIndex: PropTypes.number,
   text: PropTypes.string,
+  Cancel: PropTypes.elementType,
+  Clear: PropTypes.elementType,
   ItemContents: PropTypes.elementType,
   GroupName: PropTypes.elementType
 }

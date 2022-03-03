@@ -27,7 +27,7 @@ const listbox2 = [
 const App = () => {
   return (
     <>
-      <div>
+     <div style={{display:'inline-block'}}>
         <label htmlFor="autocomplete">Search Fruits:</label>&nbsp;
         <Turnstone
           autoFocus={true}
@@ -42,7 +42,9 @@ const App = () => {
           placeholder={'Type something fruity'}
           styles={styles}
         />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <div style={{display:'inline-block'}}>
         <label htmlFor="autocomplete">Search Fruits &amp; Veg:</label>&nbsp;
         <Turnstone
           autoFocus={true}

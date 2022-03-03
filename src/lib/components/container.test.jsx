@@ -23,7 +23,7 @@ vi.mock('use-debounce', vi.fn().mockImplementation(() => ({
 describe('Container', () => {
   test('Component renders correctly', () => {
     const customStyles = {
-      queryContainer: 'query-container-class',
+      container: 'query-container-class',
       query: 'query-class',
       typeahead: 'typeahead-class',
       x: 'x-class'

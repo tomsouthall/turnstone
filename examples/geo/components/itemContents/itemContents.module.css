@@ -18,6 +18,12 @@
   font-size: 20px;
 }
 
+.container {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
 .container .split1 {
   font-size: 15px;
   color: #777;

@@ -28,11 +28,16 @@ describe('Turnstone', () => {
     // The id prop is randomly generated so must be excluded
     delete props.id
 
+    //Do not test default functions
+    delete props.Cancel
+    delete props.Clear
+
     expect(props).toEqual({
       autoFocus: false,
+      cancelButton: false,
+      cancelButtonAriaLabel: 'Cancel',
       clearButton: false,
       clearButtonAriaLabel: 'Clear contents',
-      clearButtonText: '×',
       debounceWait: 250,
       defaultListboxIsImmutable: true,
       disabled: false,

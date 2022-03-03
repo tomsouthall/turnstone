@@ -1,11 +1,40 @@
-.queryContainer {
+.container {
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+}
 
+.containerFocus {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background: #fff;
+  z-index: 989;
+  overflow: auto;
+  font-size: 14px;
+}
+
+@media (min-width: 640px) {
+  .containerFocus {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    top: auto;
+    left: auto;
+    z-index: 0;
+    overflow: visible;
+    font-size: 16px;
+  }
 }
 
 .query,
 .typeahead {
   box-sizing: border-box;
-  width: 500px;
+  width: 100%;
   height: 2.5em;
   line-height: normal;
   font-size: 1.4em;
@@ -15,31 +44,101 @@
   border: 1px solid #ccc;
 }
 
+.containerFocus .query,
+.containerFocus .typeahead {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #ccc;
+  padding: 0 1.5em 0 2em;
+}
+
+@media (min-width: 640px) {
+  .query,
+  .typeahead {
+    width: 500px;
+    font-size: 1.4em;
+  }
+
+  .containerFocus .query,
+  .containerFocus .typeahead {
+    border: 1px solid #ccc;
+    padding: 0 1.5em 0 .5em;
+  }
+}
+
 .typeahead {
   color: #a8a8a8;
 }
 
 .clearButton {
-  top: 7px;
-  right: 10px;
-  font-size: 30px;
+  position: absolute;
+  display: block;
+  width: 1.5em;
+  height: 2.5em;
+  top: 0;
+  right: 0;
+  font-size: 1.4em;
   color: #a8a8a8;
   cursor: pointer;
+  border: none;
+  background: transparent;
+  padding:0;
 }
 .clearButton:hover {
   color: black;
 }
 
+@media (min-width: 640px) {
+  .clearButton {
+    width: 1.5em;
+    height: 2.5em;
+  }
+}
+
+.cancelButton {
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 2.5em;
+  top: 0;
+  left: 0;
+  font-size: 1.4em;
+  color: #a8a8a8;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding:0;
+}
+.cancelButton:hover {
+  color: black;
+}
+
+@media (min-width: 640px) {
+  .cancelButton {
+    display: none;
+  }
+}
+
 .listbox,
 .errorbox {
   box-sizing: border-box;
-  width: 500px;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  width: 100%;
+  border: none;
   padding-bottom: 5px;
   cursor: default;
   background: #fff;
+}
+
+@media (min-width: 640px) {
+  .listbox,
+  .errorbox {
+    width: 500px;
+    border: none;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
 }
 
 .noItems,
@@ -61,12 +160,15 @@
 
 .item {
   margin: 0;
-  padding: 5px 10px;
-  font-size: 18px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
+  padding: 12px 10px;
+  font-size: 16px;
+}
+
+@media (min-width: 640px) {
+  .item {
+    padding: 5px 10px;
+    font-size: 18px;
+  }
 }
 
 .highlightedItem {

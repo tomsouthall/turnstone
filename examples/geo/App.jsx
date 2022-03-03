@@ -5,6 +5,8 @@ import autocompleteStyles from './styles/autocomplete.module.css'
 import { defaultListboxNoRecentSearches } from '../_shared/defaultListbox'
 import ItemContents from './components/itemContents/itemContents'
 import GroupName from './components/groupName/groupName'
+import CancelButton from './components/cancelButton/cancelButton'
+import ClearButton from './components/clearButton/clearButton'
 import recentSearchesPlugin from '../../plugins/turnstone-recent-searches'
 import undef from '../../src/lib/utils/undef'
 
@@ -63,6 +65,7 @@ const App = () => {
           <label htmlFor="autocomplete">Search:</label>&nbsp;
           <Turnstone
             autoFocus={false}
+            cancelButton={true}
             clearButton={true}
             debounceWait={250}
             defaultListbox={defaultListboxNoRecentSearches}
@@ -80,6 +83,8 @@ const App = () => {
             placeholder={placeholder}
             plugins={[[recentSearchesPlugin, {ratio: 2, name: 'Recent'}]]}
             styles={autocompleteStyles}
+            Cancel={CancelButton}
+            Clear={ClearButton}
             GroupName={GroupName}
             ItemContents={ItemContents}
           />

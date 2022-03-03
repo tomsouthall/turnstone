@@ -1,5 +1,8 @@
 const styles = {
-  queryContainer: {
+  container: {
+    position: 'relative'
+  },
+  containerFocus: {
     position: 'relative'
   },
   query: {
@@ -14,9 +17,10 @@ const styles = {
     left: 0
   },
   clearButton: {
-    position: 'absolute',
-    display: 'inline-block',
     zIndex: 2
+  },
+  cancelButton: {
+    zIndex: 3
   }
 }
 

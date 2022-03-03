@@ -7,12 +7,6 @@ exports[`Container > Component renders correctly 1`] = `
   aria-owns="autocomplete-listbox"
   className="query-container-class"
   role="combobox"
-  style={
-    {
-      "display": "inline-block",
-      "position": "relative",
-    }
-  }
 >
   <input
     aria-autocomplete="both"
