@@ -1,6 +1,5 @@
 const styles = {
   queryContainer: {
-    display: 'inline-block',
     position: 'relative'
   },
   query: {
