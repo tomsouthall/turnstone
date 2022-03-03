@@ -24,6 +24,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "escape-string-regexp": "^5.0.0",
     "first-of-type": "^1.0.0",
     "prop-types": "^15.8.1",
     "react-use": "^17.3.2",
