@@ -114,7 +114,7 @@ export const fetcher = (query, listbox, defaultListbox, minQueryLength, maxItems
 
     return groups.flat()
   })
-  .catch(() => {throw('Something went wrong')})
+  // .catch(() => {throw('Something went wrong')})
   //TODO Put a .catch here https://javascript.info/promise-error-handling
 }
 
