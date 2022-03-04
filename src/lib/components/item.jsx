@@ -13,7 +13,7 @@ export default function Item(props) {
   } = useContext(StateContext)
 
   const { customStyles, highlighted, query } = state
-  const ItemContents = state.props.ItemContents
+  const ItemContents = state.props.Item
   const globalMatch = item.searchType === 'contains'
   const isHighlighted = highlighted && index === highlighted.index
 

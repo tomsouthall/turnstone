@@ -114,7 +114,7 @@ Turnstone.propTypes = {
   text: PropTypes.string,
   Cancel: PropTypes.elementType,
   Clear: PropTypes.elementType,
-  ItemContents: PropTypes.elementType,
+  Item: PropTypes.elementType,
   GroupName: PropTypes.elementType
 }
 

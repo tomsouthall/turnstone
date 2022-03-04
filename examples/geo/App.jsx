@@ -86,7 +86,7 @@ const App = () => {
             Cancel={CancelButton}
             Clear={ClearButton}
             GroupName={GroupName}
-            ItemContents={ItemContents}
+            Item={ItemContents}
           />
         </div>
       </main>
