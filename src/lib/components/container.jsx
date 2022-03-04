@@ -43,9 +43,11 @@ export default function Container(props) {
     minQueryLength,
     name,
     noItemsMessage,
+    onBlur,
     onChange,
-    onSelect,
     onEnter,
+    onFocus,
+    onSelect,
     onTab,
     placeholder,
     tabIndex,
@@ -189,6 +191,7 @@ export default function Container(props) {
       if (state.items && state.items.length > 0) {
         dispatch(setHighlighted(0))
       }
+      if(typeof onFocus === 'function') onFocus()
     }
   }
 
@@ -198,6 +201,7 @@ export default function Container(props) {
     }
     else {
       setHasFocus(false)
+      if(typeof onBlur === 'function') onBlur()
     }
     setBlockBlurHandler(false)
   }
