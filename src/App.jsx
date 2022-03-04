@@ -3,7 +3,9 @@ import Turnstone from './lib'
 import { fruits, vegetables } from './data'
 
 const styles = {
-  highlightedItem: 'highlightedItem'
+  highlightedItem: 'highlightedItem',
+  input: 'input',
+  inputFocus: 'inputFocus'
 }
 
 const listbox1 = {

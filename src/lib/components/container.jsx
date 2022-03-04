@@ -83,9 +83,12 @@ export default function Container(props) {
   const isExpanded = hasFocus && state.itemsLoaded
   const isErrorExpanded = !!props.errorMessage && state.itemsError
   const containerClassname = hasFocus ? 'containerFocus' : 'container'
+  const containerStyles = customStyles[containerClassname] || customStyles.container
   const defaultContainerStyles = customStyles[containerClassname]
     ? undef
     : defaultStyles[containerClassname]
+  const inputClassName = hasFocus ? 'inputFocus' : 'input'
+  const inputStyles = customStyles[inputClassName] || customStyles.input
 
   // Checks whether or not SWR data is to be treated as immutable
   const isImmutable = (() => {
@@ -210,7 +213,7 @@ export default function Container(props) {
   return (
     <React.Fragment>
       <div
-        className={customStyles[containerClassname]}
+        className={containerStyles}
         style={defaultContainerStyles}
         role='combobox'
         aria-expanded={isExpanded}
@@ -219,7 +222,7 @@ export default function Container(props) {
         <input
           id={id}
           name={name}
-          className={`${customStyles.input || ''} ${customStyles.query || ''}`.trim()}
+          className={`${inputStyles || ''} ${customStyles.query || ''}`.trim()}
           style={defaultStyles.query}
           disabled={disabled}
           placeholder={placeholder}
@@ -240,7 +243,7 @@ export default function Container(props) {
 
         {typeahead && (
           <input
-            className={`${customStyles.input || ''} ${customStyles.typeahead || ''}`.trim()}
+            className={`${inputStyles || ''} ${customStyles.typeahead || ''}`.trim()}
             style={defaultStyles.typeahead}
             disabled={disabled}
             type='text'
