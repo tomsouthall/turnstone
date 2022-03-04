@@ -219,7 +219,7 @@ export default function Container(props) {
         <input
           id={id}
           name={name}
-          className={customStyles.query}
+          className={`${customStyles.input || ''} ${customStyles.query || ''}`.trim()}
           style={defaultStyles.query}
           disabled={disabled}
           placeholder={placeholder}
@@ -240,7 +240,7 @@ export default function Container(props) {
 
         {typeahead && (
           <input
-            className={customStyles.typeahead}
+            className={`${customStyles.input || ''} ${customStyles.typeahead || ''}`.trim()}
             style={defaultStyles.typeahead}
             disabled={disabled}
             type='text'
