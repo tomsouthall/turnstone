@@ -51,6 +51,7 @@ export default function Container(props) {
     onTab,
     placeholder,
     tabIndex,
+    typeahead,
     Cancel,
     Clear
   } = props
@@ -180,7 +181,7 @@ export default function Container(props) {
     // Immediately clearing both inputs prevents any slight
     // visual timing delays with async dispatch
     queryInput.current.value = ''
-    typeaheadInput.current.value = ''
+    if(typeahead) typeaheadInput.current.value = ''
     dispatch(clear())
     queryInput.current.focus()
   }
@@ -237,20 +238,22 @@ export default function Container(props) {
           aria-controls={listboxId}
         />
 
-        <input
-          className={customStyles.typeahead}
-          style={defaultStyles.typeahead}
-          disabled={disabled}
-          type='text'
-          autoComplete='off'
-          autoCorrect='off'
-          autoCapitalize='off'
-          spellCheck='false'
-          tabIndex='-1'
-          readOnly='readonly'
-          aria-hidden='true'
-          ref={typeaheadInput}
-        />
+        {typeahead && (
+          <input
+            className={customStyles.typeahead}
+            style={defaultStyles.typeahead}
+            disabled={disabled}
+            type='text'
+            autoComplete='off'
+            autoCorrect='off'
+            autoCapitalize='off'
+            spellCheck='false'
+            tabIndex='-1'
+            readOnly='readonly'
+            aria-hidden='true'
+            ref={typeaheadInput}
+          />
+        )}
 
         {hasClearButton && (
           <button

@@ -83,6 +83,7 @@ const App = () => {
             placeholder={placeholder}
             plugins={[[recentSearchesPlugin, {ratio: 2, name: 'Recent'}]]}
             styles={autocompleteStyles}
+            typeahead={false}
             Cancel={CancelButton}
             Clear={ClearButton}
             GroupName={GroupName}

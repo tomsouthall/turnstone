@@ -22,6 +22,7 @@ const propDefaults = {
   maxItems: 10,
   minQueryLength: 1,
   placeholder: '',
+  typeahead: true,
   Cancel: () => 'Cancel',
   Clear: () => '\u00d7'
 }
@@ -114,6 +115,7 @@ Turnstone.propTypes = {
   styles: PropTypes.object,
   tabIndex: PropTypes.number,
   text: PropTypes.string,
+  typeahead: PropTypes.bool,
   Cancel: PropTypes.elementType,
   Clear: PropTypes.elementType,
   Item: PropTypes.elementType,

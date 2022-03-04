@@ -30,14 +30,15 @@ export const useAutoFocus = (queryInput, autoFocus) => { // TODO: might be able 
 
 export const useQueryChange = (query, queryInput, typeaheadInput, onChange) => {
   useEffect(() => {
+    const hasTypeahead = !!typeaheadInput.current
     const value = (() => {
-      const currentValue = typeaheadInput.current.value
+      const currentValue = hasTypeahead ? typeaheadInput.current.value : ''
       if (!query) return ''
       if (!currentValue.startsWith(query)) return ''
       return currentValue
     })()
 
-    typeaheadInput.current.value = value
+    if(hasTypeahead) typeaheadInput.current.value = value
 
     setify(queryInput.current, query)
     if (typeof onChange === 'function') onChange(query)
@@ -55,7 +56,7 @@ export const useHighlight = (highlighted, hasFocus, queryInput, typeaheadInput) 
         : ''
     const queryValue = formatQuery(queryInput.current.value, typeAheadValue)
 
-    typeaheadInput.current.value = typeAheadValue
+    if(typeaheadInput.current) typeaheadInput.current.value = typeAheadValue
 
     setify(queryInput.current, queryValue)
   }, [highlighted, hasFocus])
@@ -70,7 +71,7 @@ export const useSelected = (selected, queryInput, typeaheadInput, onSelect) => {
       displayField = undef
     }
     else {
-      typeaheadInput.current.value = ''
+      if(typeaheadInput.current) typeaheadInput.current.value = ''
       queryInput.current.blur()
       value = selected.value
       displayField = selected.displayField

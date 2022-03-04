@@ -37,7 +37,8 @@ describe('Container', () => {
       maxItems: 10,
       noItemsMessage: 'No matching fruit found',
       placeholder: 'Type something fruity',
-      styles: customStyles
+      styles: customStyles,
+      typeahead: true
     }
 
     const component = renderer.create(
