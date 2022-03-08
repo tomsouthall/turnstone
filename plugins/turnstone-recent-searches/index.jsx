@@ -45,7 +45,7 @@ const recentSearchesPlugin = (Component, componentProps = {}, pluginProps = {}) 
 
   const newComponentProps = {
     ...componentProps,
-    ...{defaultListbox: buildDefaultListBox(recentSearches), onSelect}
+    ...{defaultListbox: buildDefaultListBox(recentSearches()), onSelect}
   }
 
   return [Component, newComponentProps]
