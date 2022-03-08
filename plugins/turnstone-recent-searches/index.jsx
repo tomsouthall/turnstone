@@ -1,47 +1,54 @@
-import { useCallback } from 'react'
-import { useLocalStorage } from 'react-use'
-
-// TODO: Do we need to pass in Container? Plugins could just act upon props.
-
-const recentSearchesPlugin = (Container, containerProps = {}, pluginProps = {}) => {
+const recentSearchesPlugin = (Component, componentProps = {}, pluginProps = {}) => {
   const {
     ratio = 1,
     id,
-    name = 'Recent Searches'
+    name = 'Recent Searches',
+    storageKey = 'recentSearches',
+    limit = 10
   } = pluginProps
-  const [recentSearches, setRecentSearches] = useLocalStorage('recentSearches', [])
+
+  const {
+    defaultListbox = []
+  } = componentProps
+
+  const recentSearches = () => {
+    return JSON.parse(localStorage.getItem(storageKey)) || []
+  }
+
+  const addToRecentSearches = itemToAdd => {
+    const searches = [
+      itemToAdd,
+      ...recentSearches().filter(
+        item => item._displayField !== itemToAdd._displayField
+      )
+    ]
+    localStorage.setItem(storageKey, JSON.stringify(searches.slice(0, limit)))
+  }
 
   const buildDefaultListBox = (recentSearches) => {
     return [
       {id, name, displayField: '_displayField', data: recentSearches, ratio},
-      ...containerProps.defaultListbox
+      ...defaultListbox
     ]
   }
 
-  const onSelect = useCallback(
-    (selectedResult, displayField) => {
-      if(selectedResult) {
-        selectedResult._displayField = selectedResult[displayField]
-        const searches = [
-          selectedResult,
-          ...recentSearches.filter(
-            item => item._displayField !== selectedResult._displayField
-          )
-        ]
-        setRecentSearches(searches)
-      }
+  const onSelect = (selectedResult, displayField) => {
+    if(selectedResult) {
+      selectedResult._displayField = selectedResult[displayField]
+      console.log({selectedResult})
+      addToRecentSearches(selectedResult)
+    }
 
-      if (typeof containerProps.onSelect === 'function')
-        containerProps.onSelect(selectedResult, displayField)
-    }, []
-  )
+    if(typeof componentProps.onSelect === 'function')
+      componentProps.onSelect(selectedResult, displayField)
+  }
 
-  const newContainerProps = {
-    ...containerProps,
+  const newComponentProps = {
+    ...componentProps,
     ...{defaultListbox: buildDefaultListBox(recentSearches), onSelect}
   }
 
-  return [Container, newContainerProps]
+  return [Component, newComponentProps]
 }
 
 export default recentSearchesPlugin

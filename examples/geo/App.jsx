@@ -38,12 +38,12 @@ const listbox = [
 ]
 
 const App = () => {
-  const [selected, setSelected] = useState({item: undef, displayField: undef})
+  const [selectedItem, setSelectedItem] = useState(undef)
 
   const onSelect = useCallback(
     (item, displayField) => {
-      setSelected({item, displayField})
-    }, []
+      setSelectedItem((item && displayField) ? item[displayField] : undef)
+    }, [setSelectedItem]
   )
 
   const onEnter = useCallback(
@@ -81,7 +81,7 @@ const App = () => {
             onEnter={onEnter}
             onTab={onTab}
             placeholder={placeholder}
-            plugins={[[recentSearchesPlugin, {ratio: 2, name: 'Recent'}]]}
+            plugins={[[recentSearchesPlugin, {ratio: 2, name: 'Recent', limit: maxItems}]]}
             styles={autocompleteStyles}
             typeahead={false}
             Cancel={CancelButton}
@@ -91,11 +91,10 @@ const App = () => {
           />
         </div>
       </main>
-      {!!selected.item && (
+      {!!selectedItem && (
         <div className={styles.selected}>
           <strong>Selected Result</strong><br />
-          {selected.item[selected.displayField]}<br />
-          Coords: {selected.item.coords}
+          {selectedItem}
         </div>
       )}
     </div>
