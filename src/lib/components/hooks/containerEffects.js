@@ -11,7 +11,7 @@ export const useItemsState = (swrData) => {
 
   useEffect(() => {
     dispatch(setItems(swrData || []))
-  }, [swrData])
+  }, [swrData, dispatch])
 }
 
 export const useItemsError = (error) => {
@@ -19,13 +19,13 @@ export const useItemsError = (error) => {
 
   useEffect(() => {
     if(error) dispatch(setItemsError())
-  }, [error])
+  }, [error, dispatch])
 }
 
 export const useAutoFocus = (queryInput, autoFocus) => { // TODO: might be able to use autofocus property of input for this - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autofocus
   useEffect(() => {
     if (autoFocus) queryInput.current.focus()
-  }, [autoFocus])
+  }, [autoFocus, queryInput])
 }
 
 export const useQueryChange = (query, queryInput, typeaheadInput, onChange) => {
@@ -42,7 +42,7 @@ export const useQueryChange = (query, queryInput, typeaheadInput, onChange) => {
 
     setify(queryInput.current, query)
     if (typeof onChange === 'function') onChange(query)
-  }, [query, onChange])
+  }, [query, onChange, queryInput, typeaheadInput])
 }
 
 export const useHighlight = (highlighted, hasFocus, queryInput, typeaheadInput) => {
@@ -59,7 +59,7 @@ export const useHighlight = (highlighted, hasFocus, queryInput, typeaheadInput) 
     if(typeaheadInput.current) typeaheadInput.current.value = typeAheadValue
 
     setify(queryInput.current, queryValue)
-  }, [highlighted, hasFocus])
+  }, [highlighted, hasFocus, queryInput, typeaheadInput])
 }
 
 export const useSelected = (selected, queryInput, typeaheadInput, onSelect) => {
@@ -78,7 +78,7 @@ export const useSelected = (selected, queryInput, typeaheadInput, onSelect) => {
     }
 
     if (typeof onSelect === 'function') onSelect(value, displayField)
-  }, [selected, onSelect])
+  }, [selected, onSelect, queryInput, typeaheadInput])
 }
 
 //////////////////////////////
