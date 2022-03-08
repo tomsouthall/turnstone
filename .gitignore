@@ -14,8 +14,9 @@
 # compiled component
 /dist
 
-# examples
+# examples and plugins
 /examples
+/plugins
 
 # misc
 .DS_Store
