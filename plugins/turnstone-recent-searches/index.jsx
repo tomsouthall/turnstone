@@ -35,7 +35,6 @@ const recentSearchesPlugin = (Component, componentProps = {}, pluginProps = {}) 
   const onSelect = (selectedResult, displayField) => {
     if(selectedResult) {
       selectedResult._displayField = selectedResult[displayField]
-      console.log({selectedResult})
       addToRecentSearches(selectedResult)
     }
 
