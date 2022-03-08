@@ -14,6 +14,9 @@
 # compiled component
 /dist
 
+# examples
+/examples
+
 # misc
 .DS_Store
 .env.local
