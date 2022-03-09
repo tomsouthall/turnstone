@@ -3,7 +3,7 @@
   "version": "0.7.0",
   "description": "In development. React multi-search autocomplete component.",
   "author": "Tom Southall",
-  "keywords": [],
+  "keywords": ["react", "component", "autocomplete", "autosuggest", "typeahead", "dropdown", "searchbox", "multisearch"],
   "files": [
     "dist",
     "README.md"
