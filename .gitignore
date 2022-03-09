@@ -15,8 +15,8 @@
 /dist
 
 # examples and plugins
-/examples
-/plugins
+# /examples
+# /plugins
 
 # misc
 .DS_Store
