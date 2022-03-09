@@ -43,6 +43,7 @@ describe('Turnstone', () => {
       disabled: false,
       listbox,
       listboxIsImmutable: true,
+      matchText: false,
       maxItems: 10,
       minQueryLength: 1,
       placeholder: '',

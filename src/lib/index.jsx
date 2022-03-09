@@ -19,6 +19,7 @@ const propDefaults = {
   disabled: false,
   id: randomId(),
   listboxIsImmutable: true,
+  matchText: false,
   maxItems: 10,
   minQueryLength: 1,
   placeholder: '',
