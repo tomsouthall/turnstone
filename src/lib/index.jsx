@@ -78,6 +78,9 @@ const listboxRules = PropTypes.oneOfType([
 
 Turnstone.propTypes = {
   autoFocus: PropTypes.bool,
+  cancelButton: PropTypes.bool,
+  cancelButtonAriaLabel: PropTypes.string,
+  cancelButtonText: PropTypes.string,
   clearButton: PropTypes.bool,
   clearButtonAriaLabel: PropTypes.string,
   clearButtonText: PropTypes.string,
