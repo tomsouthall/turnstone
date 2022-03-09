@@ -2,7 +2,9 @@
 
 exports[`MatchingText > Component renders 1`] = `
 [
-  <strong>
+  <strong
+    className="match-class"
+  >
     New
   </strong>,
   " York City",
