@@ -1,7 +1,7 @@
 const styles = {
   listbox: {
     position: 'absolute',
-    zIndex: 100
+    zIndex: 4
   }
 }
 
