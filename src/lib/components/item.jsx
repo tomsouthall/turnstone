@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import defaultStyles from './styles/item.styles.js'
 import MatchingText from './matchingText'
 import { StateContext } from '../context/state'
 import { setHighlighted, setSelected } from '../actions/actions'
@@ -63,7 +62,6 @@ export default function Item(props) {
   return (
     <div
       className={divClassName()}
-      style={defaultStyles.item}
       onMouseEnter={handleMouseEnter}
       onMouseDown={handleClick}
       role='option'
