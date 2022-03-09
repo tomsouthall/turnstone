@@ -94,6 +94,7 @@ Turnstone.propTypes = {
   listbox: listboxRules.isRequired,
   listboxIsImmutable: PropTypes.bool,
   matchText: PropTypes.bool,
+  maxItems: PropTypes.number,
   minQueryLength: (props) => {
     PropTypes.checkPropTypes(
       {minQueryLength: PropTypes.number},
@@ -115,7 +116,6 @@ Turnstone.propTypes = {
   onTab: PropTypes.func,
   placeholder: PropTypes.string,
   plugins: PropTypes.array,
-  maxItems: PropTypes.number,
   styles: PropTypes.object,
   tabIndex: PropTypes.number,
   text: PropTypes.string,
