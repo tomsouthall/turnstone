@@ -3,16 +3,10 @@
 exports[`Item > Component renders correctly 1`] = `
 <div
   aria-label="Chicago, Illinois, United States"
-  className="item-class top-item-class"
+  className="item-class"
   onMouseDown={[Function]}
   onMouseEnter={[Function]}
   role="option"
-  style={
-    {
-      "overflow": "hidden",
-      "whiteSpace": "nowrap",
-    }
-  }
 >
   Chicago, Illinois, United States
 </div>
@@ -22,16 +16,10 @@ exports[`Item > Link changes the class when hovered 1`] = `
 <div
   aria-label="Chicago, Illinois, United States"
   aria-selected={true}
-  className="highlighted-item-class top-item-class"
+  className="highlighted-item-class"
   onMouseDown={[Function]}
   onMouseEnter={[Function]}
   role="option"
-  style={
-    {
-      "overflow": "hidden",
-      "whiteSpace": "nowrap",
-    }
-  }
 >
   Chicago, Illinois, United States
 </div>
