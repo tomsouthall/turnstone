@@ -16,17 +16,7 @@ export default function Item(props) {
   const globalMatch = item.searchType === 'contains'
   const isHighlighted = highlighted && index === highlighted.index
 
-  const divClassName = () => {
-    let itemStyle = customStyles[
-      isHighlighted
-        ? 'highlightedItem'
-        : 'item'
-    ]
-
-    return (index === 0 && customStyles.topItem)
-      ? `${itemStyle} ${customStyles.topItem}`
-      : itemStyle
-  }
+  const divClassName = customStyles[isHighlighted ? 'highlightedItem' : 'item']
 
   const handleMouseEnter = () => {
     dispatch(setHighlighted(index))
@@ -47,6 +37,8 @@ export default function Item(props) {
   const itemContents = (ItemContents)
     ? <ItemContents
         appearsInDefaultListbox={item.defaultListbox}
+        groupId={item.groupId}
+        groupIndex={item.groupIndex}
         groupName={item.groupName}
         index={index}
         item={item.value}
@@ -61,7 +53,7 @@ export default function Item(props) {
 
   return (
     <div
-      className={divClassName()}
+      className={divClassName}
       onMouseEnter={handleMouseEnter}
       onMouseDown={handleClick}
       role='option'
