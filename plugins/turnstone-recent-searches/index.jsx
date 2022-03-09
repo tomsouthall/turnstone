@@ -25,9 +25,15 @@ const recentSearchesPlugin = (Component, componentProps = {}, pluginProps = {}) 
     localStorage.setItem(storageKey, JSON.stringify(searches.slice(0, limit)))
   }
 
-  const buildDefaultListBox = (recentSearches) => {
-    return [
-      {id, name, displayField: '_displayField', data: recentSearches, ratio},
+  const buildDefaultListBox = () => {
+    return  [
+      {
+        id,
+        name,
+        displayField: '_displayField',
+        data: () => Promise.resolve(recentSearches()),
+        ratio
+      },
       ...defaultListbox
     ]
   }
@@ -49,7 +55,11 @@ const recentSearchesPlugin = (Component, componentProps = {}, pluginProps = {}) 
 
   const newComponentProps = {
     ...componentProps,
-    ...{defaultListbox: buildDefaultListBox(recentSearches()), onSelect}
+    ...{
+      defaultListbox: buildDefaultListBox(),
+      defaultListboxIsImmutable: false,
+      onSelect
+    }
   }
 
   return [Component, newComponentProps]
