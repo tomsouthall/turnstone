@@ -1,6 +1,6 @@
 {
   "name": "turnstone",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "In development. React multi-search autocomplete component.",
   "author": "Tom Southall",
   "keywords": ["react", "component", "autocomplete", "autosuggest", "typeahead", "dropdown", "searchbox", "multisearch"],
@@ -16,6 +16,11 @@
       "require": "./dist/turnstone.umd.js"
     }
   },
+  "homepage": "https://github.com/tomsouthall/turnstone#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomsouthall/turnstone"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -29,7 +34,7 @@
     "prop-types": "^15.8.1",
     "react-use": "^17.3.2",
     "setify": "^1.0.4",
-    "split-match": "^0.2.0",
+    "split-match": "^0.2.2",
     "swr": "^1.1.2",
     "use-debounce": "^7.0.1"
   },
