@@ -1,9 +1,9 @@
 {
   "name": "turnstone",
-  "version": "1.0.0",
-  "description": "In development. React multi-search autocomplete component.",
+  "version": "1.0.1",
+  "description": "React customisable autocomplete component with typeahead and grouped results from multiple APIs.",
   "author": "Tom Southall",
-  "keywords": ["react", "component", "autocomplete", "autosuggest", "typeahead", "dropdown", "searchbox", "multisearch"],
+  "keywords": ["react", "component", "autocomplete", "autosuggest", "typeahead", "dropdown", "searchbox", "multisearch", "select", "omnibox", "turnstone"],
   "files": [
     "dist",
     "README.md"
