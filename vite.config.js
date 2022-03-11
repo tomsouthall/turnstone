@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/lib/index.jsx'),
-      name: 'Turnstone',
+      name: 'turnstone',
       fileName: (format) => `turnstone.${format}.js`
     },
     rollupOptions: {
