@@ -43,7 +43,7 @@ const App = () => {
   const onSelect = useCallback(
     (item, displayField) => {
       setSelectedItem((item && displayField) ? item[displayField] : undef)
-    }, [setSelectedItem]
+    }, []
   )
 
   const onEnter = useCallback(

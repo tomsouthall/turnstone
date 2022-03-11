@@ -77,6 +77,7 @@ export const useSelected = (selected, queryInput, typeaheadInput, onSelect) => {
       displayField = selected.displayField
     }
 
+    //TODO: Check if it's necessary to call this when value is undef
     if (typeof onSelect === 'function') onSelect(value, displayField)
   }, [selected, onSelect, queryInput, typeaheadInput])
 }
