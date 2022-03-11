@@ -78,7 +78,6 @@ export default function Container(props) {
   const typeaheadInput = useRef(null)
 
   // Calculated states
-  console.log('hasTypeahead', typeahead, state.items.length > 1)
   const hasTypeahead = typeahead && state.items.length > 1
   const hasClearButton = clearButton && !!state.query
   const hasCancelButton = cancelButton && hasFocus
@@ -186,7 +185,8 @@ export default function Container(props) {
     // Immediately clearing both inputs prevents any slight
     // visual timing delays with async dispatch
     queryInput.current.value = ''
-    if(typeahead) typeaheadInput.current.value = ''
+    if(typeahead && typeaheadInput.current)
+      typeaheadInput.current.value = ''
     dispatch(clear())
     queryInput.current.focus()
   }
