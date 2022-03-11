@@ -78,6 +78,8 @@ export default function Container(props) {
   const typeaheadInput = useRef(null)
 
   // Calculated states
+  console.log('hasTypeahead', typeahead, state.items.length > 1)
+  const hasTypeahead = typeahead && state.items.length > 1
   const hasClearButton = clearButton && !!state.query
   const hasCancelButton = cancelButton && hasFocus
   const isExpanded = hasFocus && state.itemsLoaded
@@ -241,7 +243,7 @@ export default function Container(props) {
           aria-controls={listboxId}
         />
 
-        {typeahead && (
+        {hasTypeahead && (
           <input
             className={`${inputStyles || ''} ${customStyles.typeahead || ''}`.trim()}
             style={defaultStyles.typeahead}

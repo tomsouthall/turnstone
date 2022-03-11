@@ -91,14 +91,13 @@ describe('Integration tests', () => {
 
     const container = screen.getByRole('combobox')
     const input = screen.getByPlaceholderText(placeholder)
-    const typeahead = container.children[1]
 
     expect(input).toBeDefined()
-    expect(typeahead).toBeDefined()
     expect(screen.queryByRole('listbox')).toBeNull()
     userEvent.type(screen.getByRole('textbox'), 'p')
     expect(await screen.findByRole('listbox')).toBeDefined()
-    expect(typeahead.value).toBe('Peach')
+    expect(container.children[1]).toBeDefined()
+    expect(container.children[1].value).toBe('Peach')
     expect(input.value).toBe('P')
     expect(screen.getByRole('option', { name: /peach/i }).getAttribute('aria-selected')).toBe('true')
     userEvent.type(screen.getByRole('textbox'), 'i', { skipClick: true })
@@ -123,6 +122,6 @@ describe('Integration tests', () => {
     userEvent.type(screen.getByRole('textbox'), '{backspace}', { skipClick: true })
     expect(screen.queryByRole('listbox')).toBeNull()
     expect(input.value).toBe('')
-    expect(typeahead.value).toBe('')
+    expect(container.children[1].value).toBe('')
   })
 })

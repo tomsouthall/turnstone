@@ -31,24 +31,5 @@ exports[`Container > Component renders correctly 1`] = `
     }
     type="text"
   />
-  <input
-    aria-hidden="true"
-    autoCapitalize="off"
-    autoComplete="off"
-    autoCorrect="off"
-    className="typeahead-class"
-    readOnly="readonly"
-    spellCheck="false"
-    style={
-      {
-        "left": 0,
-        "position": "absolute",
-        "top": 0,
-        "zIndex": 0,
-      }
-    }
-    tabIndex="-1"
-    type="text"
-  />
 </div>
 `;
