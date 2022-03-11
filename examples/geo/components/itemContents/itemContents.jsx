@@ -1,6 +1,6 @@
 import React from 'react'
 import SplitMatch from 'split-match'
-import imgNewYork from'../../images/newyork.jpg'
+import imgNewYork from '../../images/newyork.jpg'
 import styles from './itemContents.module.css'
 
 const SplitComponent = (props) => {
