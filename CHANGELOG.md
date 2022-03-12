@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.1 (12 Mar 2022)
+
+- Remove plugins argument from plugin render function
+
 ### 1.1.0 (12 Mar 2022)
 
 - Revamp plugins so that each acts as a wrapper component around Container

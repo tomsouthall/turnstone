@@ -14,7 +14,6 @@ const RecentSearchesPlugin = (props) => {
   } = props
 
   const {
-    plugins,
     defaultListbox = [],
     onSelect
   } = componentProps
@@ -67,7 +66,7 @@ const RecentSearchesPlugin = (props) => {
     onSelect: handleSelect
   }
 
-  return render(Component, newComponentProps, plugins, pluginIndex)
+  return render(Component, newComponentProps, pluginIndex + 1)
 }
 
 export default RecentSearchesPlugin

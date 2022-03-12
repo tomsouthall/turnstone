@@ -28,15 +28,16 @@ const propDefaults = {
   Clear: () => '\u00d7'
 }
 
-const render = (Component, componentProps, plugins = [], pluginIndex) => {
-  const p = plugins[pluginIndex]
+const render = (Component, componentProps, pluginIndex) => {
+  const p = Array.isArray(componentProps.plugins) && componentProps.plugins[pluginIndex]
   if(p) {
     const [Plugin, pluginProps] = Array.isArray(p) ? p : [p]
 
     return <Plugin {...{
       ...pluginProps,
-      Component, componentProps,
-      pluginIndex: pluginIndex + 1,
+      Component,
+      componentProps,
+      pluginIndex,
       render
     }} />
   }
@@ -45,12 +46,11 @@ const render = (Component, componentProps, plugins = [], pluginIndex) => {
 
 export default function Turnstone(props) {
   const componentProps = {...propDefaults, ...props}
-  const { plugins } = componentProps
 
   return (
     <React.StrictMode>
       <StateContextProvider {...componentProps}>
-        { render(Container, componentProps, plugins, 0) }
+        { render(Container, componentProps, 0) }
       </StateContextProvider>
     </React.StrictMode>
   )
