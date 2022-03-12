@@ -1,6 +1,6 @@
 # Changelog
 
-### 1.1.0 (Unreleased)
+### 1.1.0 (12 Mar 2022)
 
 - Revamp plugins so that each acts as a wrapper component around Container
 - Do not show typeahead unless there is more than one item in the dropdown
