@@ -1,9 +1,21 @@
 {
   "name": "turnstone",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "React customisable autocomplete component with typeahead and grouped results from multiple APIs.",
   "author": "Tom Southall",
-  "keywords": ["react", "component", "autocomplete", "autosuggest", "typeahead", "dropdown", "searchbox", "multisearch", "select", "omnibox", "turnstone"],
+  "keywords": [
+    "react",
+    "component",
+    "autocomplete",
+    "autosuggest",
+    "typeahead",
+    "dropdown",
+    "searchbox",
+    "multisearch",
+    "select",
+    "omnibox",
+    "turnstone"
+  ],
   "files": [
     "dist",
     "README.md"

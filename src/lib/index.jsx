@@ -28,22 +28,29 @@ const propDefaults = {
   Clear: () => '\u00d7'
 }
 
+const render = (Component, componentProps, plugins = [], pluginIndex) => {
+  const p = plugins[pluginIndex]
+  if(p) {
+    const [Plugin, pluginProps] = Array.isArray(p) ? p : [p]
+
+    return <Plugin {...{
+      ...pluginProps,
+      Component, componentProps,
+      pluginIndex: pluginIndex + 1,
+      render
+    }} />
+  }
+  return <Component {...componentProps} />
+}
+
 export default function Turnstone(props) {
-  const { plugins } = props
-  const defaultComponentAndProps = [Container, {...propDefaults, ...props}]
-  const componentAndProps = plugins
-    ? plugins.reduce((prev, curr) => {
-          const plugin = Array.isArray(curr) ? curr : [curr]
-          return plugin[0](prev[0], prev[1], plugin[1])
-        }, defaultComponentAndProps)
-    : defaultComponentAndProps
-  const Component = componentAndProps[0]
-  const componentProps = componentAndProps[1]
+  const componentProps = {...propDefaults, ...props}
+  const { plugins } = componentProps
 
   return (
     <React.StrictMode>
       <StateContextProvider {...componentProps}>
-        <Component {...componentProps} />
+        { render(Container, componentProps, plugins, 0) }
       </StateContextProvider>
     </React.StrictMode>
   )

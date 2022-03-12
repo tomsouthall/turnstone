@@ -42,6 +42,7 @@ const App = () => {
 
   const onSelect = useCallback(
     (item, displayField) => {
+      console.log('onselect', item)
       setSelectedItem((item && displayField) ? item[displayField] : undef)
     }, []
   )

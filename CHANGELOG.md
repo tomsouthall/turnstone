@@ -1,7 +1,8 @@
 # Changelog
 
-### 1.0.2 (Unreleased)
+### 1.1.0 (Unreleased)
 
+- Re
 - Do not show typeahead unless there is more than one item in the dropdown
 
 ### 1.0.1 (10 Mar 2022)
