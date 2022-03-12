@@ -2,7 +2,7 @@
 
 ### 1.1.0 (Unreleased)
 
-- Re
+- Revamp plugins so that each acts as a wrapper component around Container
 - Do not show typeahead unless there is more than one item in the dropdown
 
 ### 1.0.1 (10 Mar 2022)
