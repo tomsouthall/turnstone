@@ -1,6 +1,6 @@
-# Turnstone
+<div style="text-align:center"><img src="https://github.com/tomsouthall/turnstone/raw/main/images/turnstone.svg" alt="Turnstone - A React Search Component" style="max-width:450px;margin-bottom:30px;"></div>
 
-Turnstone is a highly customisable, easy-to-use autocomplete search box for React.
+Turnstone is a highly customisable, easy-to-use autocomplete search component for React.
 
 - [Features](#features)
 - [Installation &amp; Usage](#installation-amp-usage)
