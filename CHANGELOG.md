@@ -3,6 +3,7 @@
 ### 1.1.2 (13 Mar 2022)
 
 - Add Turnstone logo to README
+- Add Turnstone screengrab gif to README
 
 ### 1.1.1 (12 Mar 2022)
 

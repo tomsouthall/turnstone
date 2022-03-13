@@ -5,6 +5,7 @@
 
 Turnstone is a highly customisable, easy-to-use autocomplete search component for React.
 
+- [Turnstone In Action](#turnstone-in-action)
 - [Features](#features)
 - [Installation &amp; Usage](#installation-amp-usage)
 - [API](#api)
@@ -13,6 +14,10 @@ Turnstone is a highly customisable, easy-to-use autocomplete search component fo
 - [Contributing](#contributing)
 - [Release Checklist](#release-checklist)
 - [License](#license)
+
+## Turnstone In Action
+
+![Turnstone in action](https://github.com/tomsouthall/turnstone/raw/main/images/example.gif)
 
 ## Features
 
