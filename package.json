@@ -1,6 +1,6 @@
 {
   "name": "turnstone",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "React customisable autocomplete component with typeahead and grouped results from multiple APIs.",
   "author": "Tom Southall",
   "keywords": [

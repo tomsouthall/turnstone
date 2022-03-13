@@ -1,4 +1,7 @@
-<div style="text-align:center"><img src="https://github.com/tomsouthall/turnstone/raw/main/images/turnstone.svg" alt="Turnstone - A React Search Component" style="max-width:450px;margin-bottom:30px;"></div>
+<p align="center" width="100%">
+<img src="https://github.com/tomsouthall/turnstone/raw/main/images/turnstone.svg" alt="Turnstone - A React Search Component" width="80%" align="center">
+<br/><br/>
+</p>
 
 Turnstone is a highly customisable, easy-to-use autocomplete search component for React.
 
