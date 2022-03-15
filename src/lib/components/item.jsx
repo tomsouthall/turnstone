@@ -48,7 +48,7 @@ export default function Item(props) {
         setSelected={setCustomSelected}
         totalItems={state.items.length}
       />
-    : (state.props.matchText
+    : (state.props.matchText && !item.defaultListbox
       ? <MatchingText text={item.text} match={query} global={globalMatch} />
       : <>{item.text}</>)
 

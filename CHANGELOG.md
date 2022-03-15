@@ -1,7 +1,10 @@
 # Changelog
 
-### 1.1.2 (Unreleased)
+### 1.1.2 (15 Mar 2022)
 
+- Do not do any text matching in default listbox
+- Pass the highlighted state to custom Item component
+- Only show a transparent background on input box if there is no typeahead
 - Add screengrab GIF to README
 - Add Turnstone logo to README
 
