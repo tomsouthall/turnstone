@@ -424,6 +424,7 @@ in order to exit the focused state of the search box.
 - The following arguments are passed to the `onSelect` function:
   1. `selectedItem` The item selected by the user. This is in the same format as received from `listbox.data`.
   1. `displayField` (string / number / undefined) The field in `selectedItem` that contains the text displayed in the listbox. If `selectedItem` is not an array or an object, `displayField` is `undefined`.
+- This function is also called with `undefined` arguments to indicate when an item is no longer selected
 
 #### `onTab`
 - Type: `function`

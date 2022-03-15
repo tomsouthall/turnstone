@@ -2,6 +2,7 @@
 
 ### 1.1.2 (15 Mar 2022)
 
+- Add note to README regarding onSelect being called when an item is no longer selected
 - Use autofocus HTML attribute instead of a useEffect hook
 - Add MIT License
 - Add precommit hooks for test and lint
