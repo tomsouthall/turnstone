@@ -16,8 +16,10 @@
     "omnibox",
     "turnstone"
   ],
+  "license": "MIT",
   "files": [
     "dist",
+    "LICENSE.md",
     "README.md"
   ],
   "main": "./dist/turnstone.umd.js",
