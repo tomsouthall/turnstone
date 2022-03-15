@@ -41,6 +41,7 @@ export default function Item(props) {
         groupIndex={item.groupIndex}
         groupName={item.groupName}
         index={index}
+        isHighlighted={isHighlighted}
         item={item.value}
         query={query}
         searchType={item.searchType}

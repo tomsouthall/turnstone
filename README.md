@@ -477,7 +477,9 @@ in order to exit the focused state of the search box.
   - `containerFocus`** Note that `container` and `containerFocus` are mutually exclusive. Only one or the other applies depending on whether the search box `<input>` has focus. If the styling of the outer container is to change when the search box receives focus, specify styles for `containerFocus`. If nothing is specified for `containerFocus` the styles for `container` are applied whether or not the search box has focus.
   - **`input`** Applies to the search box `<input>` element as well as the typeahead `<input>`. As the typeahead is positioned directly beneath the search box, these must be styled almost identically.
   - **`inputFocus`** Applies to the search box `<input>` element as well as the typeahead `<input>`, only when the search box has focus. Note that `input` and `inputFocus` are mutually exclusive. Only one or the other applies depending on whether the search box `<input>` has focus. If nothing is specified for `inputFocus` the styles for `input` are applied whether or not the search box has focus.
-  - **`query`** For styles applying *only* to the search box `<input>` element and *not* the typeahead element beneath. A valid example is example text colour. Note that this element already has the following styles applied which cannot be overridden: `position: relative; z-index: 1; background-color: transparent;`.
+  - **`query`** For styles applying *only* to the search box `<input>` element and *not* the typeahead element beneath. A valid example is example text colour. Note that this element already has the following styles applied which cannot be overridden:
+    - When typeahead is visible `position: relative; z-index: 1; background-color: transparent;`
+    - When typeahead is not visible `position: relative;`
   - **`typeahead`** For styles applying *only* to the typeahead `<input>` element and *not* the search box element above. A valid example is example text colour. Note that this element already has the following styles applied which cannot be overridden: `position: absolute; z-index: 0; top: 0; left: 0;`.
   - **`cancelButton`** A `<button>` element. This is only rendered when the search box has focus. Note that this element already has the following styles applied which cannot be overridden: `z-index: 3`. You may wish only to display this at mobile screen widths.
   - **`clearButton`** A `<button>` element. This is only rendered when the search box contains text. Note that this element already has the following styles applied which cannot be overridden: `z-index: 2`.
@@ -530,6 +532,7 @@ The following custom components can also be supplied as props:
   - **`groupIndex`** (number) The index of the group. Matches the order supplied in the `listbox` or `defaultListbox` prop. Zero-indexed.
   - **`groupName`** (string) The `name` of the group supplied in the `listbox` or `defaultListbox` prop.
   - **`index`** (number) The index of the item within the listbox. Zero-indexed. This allows you to style, say, the first item differently to all the rest in the listbox.
+  - **`isHighlighted`** (boolean) If `true` indicates that the item is currently in a highlighted state
   - **`item`** The item in the same format as supplied by the `listbox` or `defaultListbox` prop.
   - **`query`** The text currently entered in the search box. This can be used to show matched text in the item.
   - **`searchType`** (string) Either `"startswith"` or `"contains"`. Indicates how the item was matched to the query.
