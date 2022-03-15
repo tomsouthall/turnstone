@@ -96,6 +96,8 @@
       "sourceType": "module"
     },
     "rules": {
+      "no-console": 2,
+      "no-debugger": 2,
       "semi": [
         "error",
         "never"

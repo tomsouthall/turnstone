@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 import React, { useCallback, useState } from 'react'
 import Turnstone from '../../src/lib'
 import styles from './styles/App.module.css'
