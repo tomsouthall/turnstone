@@ -7,7 +7,6 @@ import { defaultListbox } from '../../../examples/_shared/defaultListbox'
 describe('SET_QUERY action', () => {
   test('produces expected new state', () => {
     const state = {
-      canShowListbox: false,
       itemsError: true,
       query: 'foo',
       selected: {index: 0, text: 'Foobar'},
@@ -19,7 +18,6 @@ describe('SET_QUERY action', () => {
     const action = actions.setQuery('bar')
 
     expect(reducer(state, action)).toEqual({
-      canShowListbox: true,
       itemsError: false,
       query: 'bar',
       selected: undef,
@@ -132,6 +130,7 @@ describe('SET_ITEMS action', () => {
       query: 'foo',
       items,
       itemsError: false,
+      canShowListbox: true,
       highlighted: undef
     })
   })

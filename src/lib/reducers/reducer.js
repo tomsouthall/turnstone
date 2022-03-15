@@ -14,7 +14,6 @@ const reducer = (state, action) => {
     switch (action.type) {
       case types.SET_QUERY:
         newState = {
-          canShowListbox: !!action.query.length,
           itemsError: false,
           query: action.query,
           selected: undef
@@ -37,7 +36,8 @@ const reducer = (state, action) => {
             ? highlightedItem(0, action.items)
             : undef
         }
-        if(action.items.length) newState.canShowListbox = true
+
+        if(state.query.length || action.items.length) newState.canShowListbox = true
 
         return newState
       case types.CLEAR:
