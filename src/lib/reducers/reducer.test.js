@@ -7,6 +7,7 @@ import { defaultListbox } from '../../../examples/_shared/defaultListbox'
 describe('SET_QUERY action', () => {
   test('produces expected new state', () => {
     const state = {
+      canShowListbox: false,
       itemsError: true,
       query: 'foo',
       selected: {index: 0, text: 'Foobar'},
@@ -18,6 +19,7 @@ describe('SET_QUERY action', () => {
     const action = actions.setQuery('bar')
 
     expect(reducer(state, action)).toEqual({
+      canShowListbox: true,
       itemsError: false,
       query: 'bar',
       selected: undef,
@@ -42,7 +44,7 @@ describe('SET_QUERY action', () => {
       itemsError: false,
       query: '',
       selected: undef,
-      itemsLoaded: false,
+      canShowListbox: false,
       props: {
         minQueryLength: 1
       }
@@ -62,7 +64,7 @@ describe('SET_QUERY action', () => {
       itemsError: false,
       query: 'f',
       selected: undef,
-      itemsLoaded: false,
+      canShowListbox: false,
       props: {
         minQueryLength: 3
       }
@@ -83,7 +85,7 @@ describe('SET_QUERY action', () => {
       query: '',
       selected: undef,
       itemsError: false,
-      itemsLoaded: true,
+      canShowListbox: true,
       props: {
         minQueryLength: 1,
         defaultListbox
@@ -97,7 +99,7 @@ describe('SET_ITEMS action', () => {
     const state = {
       query: 'foo',
       itemsError: true,
-      itemsLoaded: false
+      canShowListbox: false
     }
 
     const items = [
@@ -112,7 +114,7 @@ describe('SET_ITEMS action', () => {
       query: 'foo',
       items,
       itemsError: false,
-      itemsLoaded: true,
+      canShowListbox: true,
       highlighted: { index: 0, text: 'foo' }
     })
   })
@@ -168,7 +170,7 @@ describe('SET_ITEMS action', () => {
       query: '',
       items,
       itemsError: false,
-      itemsLoaded: true,
+      canShowListbox: true,
       highlighted: undef
     })
   })
@@ -184,7 +186,7 @@ describe('SET_ITEMS_ERROR action', () => {
         {text: 'foofoo'}
       ],
       itemsError: false,
-      itemsLoaded: true
+      canShowListbox: true
     }
 
     action = actions.setItemsError()
@@ -192,7 +194,7 @@ describe('SET_ITEMS_ERROR action', () => {
     expect(reducer(state, action)).toEqual({
       items: [],
       itemsError: true,
-      itemsLoaded: false
+      canShowListbox: false
     })
   })
 })
@@ -208,7 +210,7 @@ describe('CLEAR action', () => {
         {text: 'foofoo'}
       ],
       itemsError: true,
-      itemsLoaded: true,
+      canShowListbox: true,
       highlighted: { index: 0, text: 'foo' },
       selected: {text: 'foo'}
     }
@@ -219,7 +221,7 @@ describe('CLEAR action', () => {
       query: '',
       items: [],
       itemsError: false,
-      itemsLoaded: false,
+      canShowListbox: false,
       highlighted: undef,
       selected: undef
     })

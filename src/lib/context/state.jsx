@@ -12,7 +12,7 @@ const StateContextProvider = (props) => {
     query: text,
     items,
     itemsError: false,
-    itemsLoaded: false,
+    canShowListbox: false,
     highlighted: undef,
     selected: undef,
     customStyles: styles,

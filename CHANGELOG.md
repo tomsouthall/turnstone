@@ -2,6 +2,7 @@
 
 ### 1.1.2 (15 Mar 2022)
 
+- Ensure a no-items message is displayed if a query is entered but no items have ever been loaded
 - Do not do any text matching in default listbox
 - Pass the highlighted state to custom Item component
 - Only show a transparent background on input box if there is no typeahead

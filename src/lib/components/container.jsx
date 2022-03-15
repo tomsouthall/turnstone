@@ -81,7 +81,7 @@ export default function Container(props) {
   const hasTypeahead = typeahead && state.items.length > 1
   const hasClearButton = clearButton && !!state.query
   const hasCancelButton = cancelButton && hasFocus
-  const isExpanded = hasFocus && state.itemsLoaded
+  const isExpanded = hasFocus && state.canShowListbox
   const isErrorExpanded = !!props.errorMessage && state.itemsError
   const containerClassname = hasFocus ? 'containerFocus' : 'container'
   const containerStyles = customStyles[containerClassname] || customStyles.container

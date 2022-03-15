@@ -14,6 +14,7 @@ const reducer = (state, action) => {
     switch (action.type) {
       case types.SET_QUERY:
         newState = {
+          canShowListbox: !!action.query.length,
           itemsError: false,
           query: action.query,
           selected: undef
@@ -21,11 +22,11 @@ const reducer = (state, action) => {
 
         // Disallow listbox until user has entered a long enough query
         if(action.query.length < state.props.minQueryLength)
-          newState.itemsLoaded = false
+          newState.canShowListbox = false
 
         // Allow listbox if there is no query and we have default items to show
         if(action.query.length === 0 && state.props.defaultListbox)
-          newState.itemsLoaded = true
+          newState.canShowListbox = true
 
         return newState
       case types.SET_ITEMS:
@@ -36,7 +37,7 @@ const reducer = (state, action) => {
             ? highlightedItem(0, action.items)
             : undef
         }
-        if(action.items.length) newState.itemsLoaded = true
+        if(action.items.length) newState.canShowListbox = true
 
         return newState
       case types.CLEAR:
@@ -44,7 +45,7 @@ const reducer = (state, action) => {
           query: '',
           items: [],
           itemsError: false,
-          itemsLoaded: false,
+          canShowListbox: false,
           highlighted: undef,
           selected: undef
         }
@@ -52,7 +53,7 @@ const reducer = (state, action) => {
         return {
           items: [],
           itemsError: true,
-          itemsLoaded: false
+          canShowListbox: false
         }
       case types.SET_HIGHLIGHTED:
         return { highlighted: highlightedItem(action.index, state.items) }
