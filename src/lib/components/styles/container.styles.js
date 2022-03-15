@@ -10,6 +10,9 @@ const styles = {
     zIndex: 1,
     backgroundColor: 'transparent'
   },
+  queryNoTypeahead: {
+    position: 'relative'
+  },
   typeahead: {
     position: 'absolute',
     zIndex: 0,

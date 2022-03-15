@@ -6,7 +6,7 @@ import { useDebounce } from 'use-debounce'
 import useData from './hooks/useData'
 import undef from '../utils/undef'
 import isUndefined from '../utils/isUndefined'
-import defaultStyles from './styles/input.styles.js'
+import defaultStyles from './styles/container.styles.js'
 import {
   useItemsState,
   useItemsError,
@@ -90,6 +90,7 @@ export default function Container(props) {
     : defaultStyles[containerClassname]
   const inputClassName = hasFocus ? 'inputFocus' : 'input'
   const inputStyles = customStyles[inputClassName] || customStyles.input
+  const queryDefaultStyle = hasTypeahead ? defaultStyles.query : defaultStyles.queryNoTypeahead
 
   // Checks whether or not SWR data is to be treated as immutable
   const isImmutable = (() => {
@@ -225,7 +226,7 @@ export default function Container(props) {
           id={id}
           name={name}
           className={`${inputStyles || ''} ${customStyles.query || ''}`.trim()}
-          style={defaultStyles.query}
+          style={queryDefaultStyle}
           disabled={disabled}
           placeholder={placeholder}
           type='text'

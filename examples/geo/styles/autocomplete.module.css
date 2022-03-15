@@ -31,8 +31,7 @@
   }
 }
 
-.query,
-.typeahead {
+.input {
   box-sizing: border-box;
   width: 100%;
   height: 2.5em;
@@ -42,10 +41,10 @@
   margin: 0;
   outline: none;
   border: 1px solid #ccc;
+  background: #fff;
 }
 
-.containerFocus .query,
-.containerFocus .typeahead {
+.containerFocus .input {
   border-top: none;
   border-left: none;
   border-right: none;
@@ -54,14 +53,12 @@
 }
 
 @media (min-width: 640px) {
-  .query,
-  .typeahead {
+  .input {
     width: 500px;
     font-size: 1.4em;
   }
 
-  .containerFocus .query,
-  .containerFocus .typeahead {
+  .containerFocus .input {
     border: 1px solid #ccc;
     padding: 0 1.5em 0 .5em;
   }

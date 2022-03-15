@@ -24,9 +24,7 @@ exports[`Container > Component renders correctly 1`] = `
     spellCheck="false"
     style={
       {
-        "backgroundColor": "transparent",
         "position": "relative",
-        "zIndex": 1,
       }
     }
     type="text"
