@@ -1,6 +1,6 @@
 # Changelog
 
-### 1.1.2 (15 Mar 2022)
+### 1.1.3 (15 Mar 2022)
 - Prevent no items message from displaying whilst items are being fetched
 
 ### 1.1.2 (15 Mar 2022)
