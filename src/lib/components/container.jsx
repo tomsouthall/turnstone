@@ -10,7 +10,6 @@ import defaultStyles from './styles/container.styles.js'
 import {
   useItemsState,
   useItemsError,
-  useAutoFocus,
   useQueryChange,
   useHighlight,
   useSelected
@@ -118,9 +117,6 @@ export default function Container(props) {
 
   // Store retrieved error if there is one
   useItemsError(swrResult.error)
-
-  // Autofocus on render if prop is true
-  useAutoFocus(queryInput, autoFocus)
 
   // As soon as the query state changes (ignoring debounce) update the
   // typeahead value and the query value and fire onChange
@@ -230,6 +226,7 @@ export default function Container(props) {
           disabled={disabled}
           placeholder={placeholder}
           type='text'
+          autoFocus={autoFocus}
           autoComplete='off'
           autoCorrect='off'
           autoCapitalize='off'

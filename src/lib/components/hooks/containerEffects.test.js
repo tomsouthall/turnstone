@@ -2,7 +2,6 @@ import { vi, describe, test, expect } from 'vitest'
 import { renderHook } from '@testing-library/react-hooks'
 import undef from '../../utils/undef'
 import {
-  useAutoFocus,
   useQueryChange,
   useHighlight,
   useSelected,
@@ -18,22 +17,6 @@ let inputRef = (value = '') => ( //TODO: Put in a beforeEach when blogging
     }
   }
 )
-
-describe('useAutoFocus', () => {
-  test('Focus is set when autofocus is true', () => {
-    const ref = inputRef()
-    const autoFocus = true
-    renderHook(() => useAutoFocus(ref, autoFocus))
-    expect(ref.current.focus).toHaveBeenCalledTimes(1)
-  })
-
-  test('Focus is not set when autofocus is false', () => {
-    const ref = inputRef()
-    const autoFocus = false
-    renderHook(() => useAutoFocus(ref, autoFocus))
-    expect(ref.current.focus).toHaveBeenCalledTimes(0)
-  })
-})
 
 describe('useQueryChange', () => {
   const typeaheadValue = 'Chicago, Illinois, United States'

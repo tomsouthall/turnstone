@@ -2,6 +2,8 @@
 
 ### 1.1.2 (15 Mar 2022)
 
+- Use autofocus HTML attribute instead of a useEffect hook
+- Add MIT License
 - Add precommit hooks for test and lint
 - Ensure a no-items message is displayed if a query is entered but no items have ever been loaded
 - Do not do any text matching in default listbox

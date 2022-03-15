@@ -22,12 +22,6 @@ export const useItemsError = (error) => {
   }, [error, dispatch])
 }
 
-export const useAutoFocus = (queryInput, autoFocus) => { // TODO: might be able to use autofocus property of input for this - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autofocus
-  useEffect(() => {
-    if (autoFocus) queryInput.current.focus()
-  }, [autoFocus, queryInput])
-}
-
 export const useQueryChange = (query, queryInput, typeaheadInput, onChange) => {
   useEffect(() => {
     const hasTypeahead = !!typeaheadInput.current
