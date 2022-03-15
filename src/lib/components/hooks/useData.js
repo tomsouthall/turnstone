@@ -35,13 +35,14 @@ const limitResults = (groups, listboxProp, maxItems) => {
   const groupCounts = []
   let unassignedSlots = resultTotal < maxItems ? resultTotal : maxItems
 
-  while (unassignedSlots > 0) { // TODO: Use something better than a while loop
+  while (unassignedSlots > 0) {
     groups = groups.map((group, i) => {
       if (!groupCounts[i]) {
         groupCounts[i] = Math.round(ratios[i] * ratioMultiplier)
         if (groupCounts[i] > group.length) groupCounts[i] = group.length
         unassignedSlots = unassignedSlots - groupCounts[i]
-      } else if (groupCounts[i] < group.length) {
+      }
+      else if (groupCounts[i] < group.length) {
         unassignedSlots -= ++groupCounts[i]
       }
       return group
@@ -114,8 +115,6 @@ export const fetcher = (query, listbox, defaultListbox, minQueryLength, maxItems
 
     return groups.flat()
   })
-  // .catch(() => {throw('Something went wrong')})
-  //TODO Put a .catch here https://javascript.info/promise-error-handling
 }
 
 const useData = (query, isImmutable, listbox, defaultListbox, minQueryLength, maxItems) => {

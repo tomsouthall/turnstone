@@ -19,7 +19,7 @@ const StateContextProvider = (props) => {
     props: propsMinusChildren
   })
 
-  useEffect(() => dispatch(setQuery(text)), [text]) // TODO: Is this needed?
+  useEffect(() => dispatch(setQuery(text)), [text])
 
   return (
     <StateContext.Provider

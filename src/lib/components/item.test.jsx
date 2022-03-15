@@ -4,7 +4,6 @@ import { describe, expect, test } from 'vitest'
 import { StateContextProvider } from '../context/state.jsx'
 import Item from './item.jsx'
 
-// TODO: Create test helper files?
 const customStyles = {
   item: 'item-class',
   highlightedItem: 'highlighted-item-class',

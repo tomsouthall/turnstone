@@ -6,7 +6,7 @@ import { fetcher } from './useData'
 import undef from '../../utils/undef'
 import { fruits, vegetables, books } from '../../../data'
 
-// TODO: This might be better tested in an integration test
+// TODO: This would be better tested in an integration test
 
 ///////////////////////////////////////////
 // Test Fetched data                     //

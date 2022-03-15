@@ -8,7 +8,8 @@ import {
   formatQuery
 } from './containerEffects'
 
-let inputRef = (value = '') => ( //TODO: Put in a beforeEach when blogging
+//TODO: Put in a beforeEach
+let inputRef = (value = '') => (
   {
     current: {
       focus: vi.fn(),

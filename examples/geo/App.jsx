@@ -86,6 +86,7 @@ const App = () => {
             placeholder={placeholder}
             plugins={[[recentSearchesPlugin, {ratio: 2, name: 'Recent', limit: maxItems}]]}
             styles={autocompleteStyles}
+            text="bar"
             typeahead={true}
             Cancel={CancelButton}
             Clear={ClearButton}
