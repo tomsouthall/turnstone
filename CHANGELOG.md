@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.1.4 (16 Mar 2022)
+- Add live demo links to README
+
 ### 1.1.3 (15 Mar 2022)
 - Prevent no items message from displaying whilst items are being fetched
 

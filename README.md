@@ -17,6 +17,8 @@ Turnstone is a highly customisable, easy-to-use autocomplete search component fo
 
 ## Turnstone In Action
 
+**[View Demos](https://turnstone.tomsouthall.com/)** | [Demo #1](https://turnstone.tomsouthall.com/fancy) | [Demo #2](https://turnstone.tomsouthall.com/superfancy) | [Demo #3 (Basic)](https://turnstone.tomsouthall.com/basic)
+
 ![Turnstone in action](https://github.com/tomsouthall/turnstone/raw/main/images/example.gif)
 
 ## Features
