@@ -96,6 +96,7 @@ Turnstone.propTypes = {
   defaultListbox: listboxRules,
   defaultListboxIsImmutable: PropTypes.bool,
   disabled: PropTypes.bool,
+  enterKeyHint: PropTypes.oneOf(['enter', 'done', 'go', 'next', 'previous', 'search', 'send']),
   errorMessage: PropTypes.string,
   id: PropTypes.string,
   listbox: listboxRules.isRequired,

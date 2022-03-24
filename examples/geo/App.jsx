@@ -73,6 +73,7 @@ const App = () => {
             debounceWait={250}
             defaultListbox={defaultListboxNoRecentSearches}
             defaultListboxIsImmutable={false}
+            enterKeyHint="search"
             errorMessage={'Sorry, something has broken!'}
             id='autocomplete'
             listbox={listbox}

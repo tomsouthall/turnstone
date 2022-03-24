@@ -265,6 +265,12 @@ in order to exit the focused state of the search box.
 - Default: `false`
 - If `true` the search box has an HTML `disabled` attribute set and cannot be interacted with by the user.
 
+#### `enterKeyHint`
+- Type: `string`
+- Default: `undefined`
+- If provided, sets the `enterkeyhint` HTML attribute of the search box `<input>` element.
+- Accepted values: `"enter"`, `"done"`, `"go"`, `"next"`, `"previous"`, `"search"`, `"send"`
+
 #### `errorMessage`
 - Type: `string`
 - Default: `undefined`

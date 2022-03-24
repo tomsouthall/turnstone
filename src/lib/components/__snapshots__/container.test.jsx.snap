@@ -16,6 +16,7 @@ exports[`Container > Component renders correctly 1`] = `
     autoCorrect="off"
     autoFocus={true}
     className="query-class"
+    enterKeyHint="search"
     id="autocomplete"
     onBlur={[Function]}
     onFocus={[Function]}

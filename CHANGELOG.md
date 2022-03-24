@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.2.0 (24 Mar 2022)
+- Add enterKeyHint prop
+
 ### 1.1.4 (16 Mar 2022)
 - Add live demo links to README
 

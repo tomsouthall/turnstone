@@ -35,6 +35,7 @@ export default function Container(props) {
     defaultListbox,
     defaultListboxIsImmutable,
     disabled,
+    enterKeyHint,
     errorMessage,
     id,
     listboxIsImmutable,
@@ -232,6 +233,7 @@ export default function Container(props) {
           autoCapitalize='off'
           spellCheck='false'
           tabIndex={tabIndex}
+          enterKeyHint={enterKeyHint}
           ref={queryInput}
           onKeyDown={checkKey}
           onInput={handleInput}
