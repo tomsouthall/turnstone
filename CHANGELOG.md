@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.2.1 (24 Mar 2022)
+- Fix minimist dependency vulnerability
+
 ### 1.2.0 (24 Mar 2022)
 - Add enterKeyHint prop
 
