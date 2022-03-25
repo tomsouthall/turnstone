@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.2.3 (25 Mar 2022)
+- Left align container div contents when focussed
+
 ### 1.2.2 (25 Mar 2022)
 - Fix issue affecting various keypresses with empty search box
 - Left align container div contents by default

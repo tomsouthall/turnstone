@@ -4,7 +4,8 @@ const styles = {
     textAlign: 'left'
   },
   containerFocus: {
-    position: 'relative'
+    position: 'relative',
+    textAlign: 'left'
   },
   query: {
     position: 'relative',
