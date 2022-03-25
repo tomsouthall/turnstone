@@ -55,7 +55,9 @@ import React from 'react'
 import Turnstone from 'turnstone'
 
 const App = () => {
-  const listbox = ['Peach', 'Pear', 'Pineapple', 'Plum', 'Pomegranate', 'Prune']
+  const listbox = {
+    data: ['Peach', 'Pear', 'Pineapple', 'Plum', 'Pomegranate', 'Prune']
+  }
 
   return (
     <Turnstone listbox={listbox} />
