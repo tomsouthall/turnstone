@@ -104,7 +104,7 @@ export default function Container(props) {
 
   // Hook to retrieve data using SWR
   const swrResult = useData(
-    debouncedQuery.toLowerCase(),
+    debouncedQuery ? debouncedQuery.toLowerCase() : '',
     isImmutable,
     listbox,
     defaultListbox,
@@ -136,7 +136,8 @@ export default function Container(props) {
       ? state.items[highlightedIndex]
       : undef
     const f = keyPressed.toLowerCase() === 'enter' ? onEnter : onTab
-    dispatch(setSelected(highlightedIndex))
+
+    if(highlightedItem) dispatch(setSelected(highlightedIndex))
     if (typeof f === 'function') f(queryInput.current.value, highlightedItem)
   }
 
@@ -144,23 +145,18 @@ export default function Container(props) {
   const checkKey = (evt) => {
     switch (evt.keyCode) {
       case 40: // Down arrow
-        evt.preventDefault()
         dispatch(highlightNext())
         break
       case 38: // Up arrow
-        evt.preventDefault()
         dispatch(highlightPrev())
         break
       case 13: // Enter
-        evt.preventDefault()
         onTabOrEnter('enter')
         break
       case 9: // Tab
-        evt.preventDefault()
         onTabOrEnter('tab')
         break
       case 27: // Esc
-        evt.preventDefault()
         clearState()
         break
     }

@@ -60,16 +60,16 @@ const reducer = (state, action) => {
       case types.CLEAR_HIGHLIGHTED:
         return { highlighted: undef }
       case types.PREV_HIGHLIGHTED:
-        return (state.highlighted.index > 0)
+        return (state.highlighted && state.highlighted.index > 0)
           ? { highlighted: highlightedItem(state.highlighted.index - 1, state.items) }
           : {}
       case types.NEXT_HIGHLIGHTED:
-        return (state.highlighted.index < state.items.length - 1)
+        return (state.highlighted && state.highlighted.index < state.items.length - 1)
           ? { highlighted: highlightedItem(state.highlighted.index + 1, state.items) }
           : {}
       case types.SET_SELECTED:
         item = isUndefined(action.index) ? action.item : state.items[action.index]
-        return { selected: item, query: item.text }
+        return { selected: item, query: (item ? item.text : undef) }
       default:
         throw new Error('Invalid action type passed to reducer')
     }
