@@ -1,6 +1,7 @@
 const styles = {
   container: {
-    position: 'relative'
+    position: 'relative',
+    textAlign: 'left'
   },
   containerFocus: {
     position: 'relative'

@@ -484,7 +484,7 @@ in order to exit the focused state of the search box.
   }
   ```
 - The available elements are as follows:
-  - **`container`** The outer container `<div>` that wraps all other elements. If not present, the style of the container is set to `position: "relative"`. If you specify your own styles, ensure that the value of `position` allows for absolute positioning within this element.
+  - **`container`** The outer container `<div>` that wraps all other elements. If not present, the style of the container is set to `position: relative; text-align: left;`. If you specify your own styles, ensure that the value of `position` allows for absolute positioning within this element.
   - `containerFocus`** Note that `container` and `containerFocus` are mutually exclusive. Only one or the other applies depending on whether the search box `<input>` has focus. If the styling of the outer container is to change when the search box receives focus, specify styles for `containerFocus`. If nothing is specified for `containerFocus` the styles for `container` are applied whether or not the search box has focus.
   - **`input`** Applies to the search box `<input>` element as well as the typeahead `<input>`. As the typeahead is positioned directly beneath the search box, these must be styled almost identically.
   - **`inputFocus`** Applies to the search box `<input>` element as well as the typeahead `<input>`, only when the search box has focus. Note that `input` and `inputFocus` are mutually exclusive. Only one or the other applies depending on whether the search box `<input>` has focus. If nothing is specified for `inputFocus` the styles for `input` are applied whether or not the search box has focus.

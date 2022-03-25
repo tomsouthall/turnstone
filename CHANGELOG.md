@@ -2,6 +2,7 @@
 
 ### 1.2.2 (25 Mar 2022)
 - Fix issue affecting various keypresses with empty search box
+- Left align container div contents by default
 
 ### 1.2.1 (24 Mar 2022)
 - Fix minimist dependency vulnerability
