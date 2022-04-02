@@ -13,7 +13,6 @@ import recentSearchesPlugin from 'turnstone-recent-searches'
 import undef from '../../src/lib/utils/undef'
 
 const apiHost = import.meta.env.VITE_API_HOST
-console.log({apiHost})
 const maxItems = 10
 const placeholder = 'Enter a city or airport'
 const noItemsMessage = 'We found no places that match your search'
