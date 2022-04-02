@@ -9,9 +9,11 @@ import ItemContents from './components/itemContents/itemContents'
 import GroupName from './components/groupName/groupName'
 import CancelButton from './components/cancelButton/cancelButton'
 import ClearButton from './components/clearButton/clearButton'
-import recentSearchesPlugin from '../../plugins/turnstone-recent-searches'
+import recentSearchesPlugin from 'turnstone-recent-searches'
 import undef from '../../src/lib/utils/undef'
 
+const apiHost = import.meta.env.VITE_API_HOST
+console.log({apiHost})
 const maxItems = 10
 const placeholder = 'Enter a city or airport'
 const noItemsMessage = 'We found no places that match your search'
@@ -23,7 +25,7 @@ const listbox = [
     ratio: 8,
     displayField: 'name',
     data: (query) =>
-      fetch(`http://localhost:3001/api/search/cities?q=${encodeURIComponent(query)}&limit=${maxItems}`)
+      fetch(`${apiHost}/api/search/cities?q=${encodeURIComponent(query)}&limit=${maxItems}`)
         .then(response => response.json()),
     searchType: 'startswith'
   },
@@ -33,7 +35,7 @@ const listbox = [
     ratio: 2,
     displayField: 'name',
     data: (query) =>
-      fetch(`http://localhost:3001/api/search/airports?q=${encodeURIComponent(query)}&limit=${maxItems}`)
+      fetch(`${apiHost}/api/search/airports?q=${encodeURIComponent(query)}&limit=${maxItems}`)
         .then(response => response.json()),
     searchType: 'contains'
   }
