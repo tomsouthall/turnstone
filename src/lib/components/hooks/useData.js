@@ -3,6 +3,16 @@ import firstOfType from 'first-of-type'
 import swrLaggyMiddleware from '../../utils/swrLaggyMiddleware'
 import isUndefined from '../../utils/isUndefined'
 
+const convertListboxToFunction = (listbox, maxItems) => {
+  if(typeof listbox === 'function') return listbox
+
+  return () => Promise.resolve(
+    Array.isArray(listbox)
+      ? listbox
+      : [{ ...listbox, ...{ name: '', ratio: maxItems } }]
+  )
+}
+
 const filterSuppliedData = (group, query) => {
   const { data, displayField, searchType } = group
   const caseInsensitiveSearchType = searchType
@@ -83,37 +93,41 @@ export const fetcher = (query, listbox, defaultListbox, minQueryLength, maxItems
 
   const isDefaultListbox = (defaultListbox && !query.length)
 
-  const listboxProp = isDefaultListbox ? defaultListbox : listbox
+  const listboxPromise = (convertListboxToFunction(
+    isDefaultListbox ? defaultListbox : listbox,
+    maxItems
+  ))(query)
 
-  const promises = listboxProp.map((group) => {
-    if (typeof group.data === 'function') {
-      return group.data(query)
-    }
-    else {
-      return Promise.resolve(filterSuppliedData(group, query))
-    }
-  })
+  return listboxPromise.then(listboxProp => {
+    const promises = listboxProp.map(
+      group => (typeof group.data === 'function')
+        ? group.data(query)
+        : Promise.resolve(filterSuppliedData(group, query))
+    )
 
-  return Promise.all(promises).then((groups) => {
-    groups = groups.reduce((prevGroups, group, groupIndex) => {
-      return [
-        ...prevGroups,
-        group.map((item) => ({
-          value: item,
-          text: itemText(item, listboxProp[groupIndex].displayField),
-          groupIndex,
-          groupId: listboxProp[groupIndex].id,
-          groupName: listboxProp[groupIndex].name,
-          searchType: listboxProp[groupIndex].searchType,
-          displayField: listboxProp[groupIndex].displayField,
-          defaultListbox: isDefaultListbox
-        }))
-      ]
-    }, [])
+    return Promise.all(promises).then(groups => {
+      groups = groups.reduce((prevGroups, group, groupIndex) => {
+        const {id: groupId, name: groupName, displayField, searchType} = listboxProp[groupIndex]
 
-    if (groups.length) groups = limitResults(groups, listboxProp, maxItems)
+        return [
+          ...prevGroups,
+          group.map((item) => ({
+            value: item,
+            text: itemText(item, displayField),
+            groupIndex,
+            groupId,
+            groupName,
+            searchType,
+            displayField,
+            defaultListbox: isDefaultListbox
+          }))
+        ]
+      }, [])
 
-    return groups.flat()
+      if (groups.length) groups = limitResults(groups, listboxProp, maxItems)
+
+      return groups.flat()
+    })
   })
 }
 

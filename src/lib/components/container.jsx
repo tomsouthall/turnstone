@@ -38,6 +38,7 @@ export default function Container(props) {
     enterKeyHint,
     errorMessage,
     id,
+    listbox,
     listboxIsImmutable,
     maxItems,
     minQueryLength,
@@ -55,11 +56,6 @@ export default function Container(props) {
     Cancel,
     Clear
   } = props
-
-  // Destructure listbox prop
-  const listbox = Array.isArray(props.listbox)
-    ? props.listbox
-    : [{ ...props.listbox, ...{ name: '', ratio: maxItems } }]
 
   const listboxId = `${id}-listbox`
   const errorboxId = `${id}-errorbox`

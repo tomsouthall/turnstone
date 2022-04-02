@@ -24,10 +24,42 @@ const server = setupServer(
     return res(
       ctx.json(fruits.filter(fruit => fruit.toLowerCase().startsWith(q.toLowerCase())))
     )
+  }),
+  rest.get('http://mock-api-site.com/api/fruits-veg', (req, res, ctx) => {
+    const q = req.url.searchParams.get('q')
+
+    return res(
+      ctx.json({
+        fruits: fruits.filter(fruit => fruit.toLowerCase().startsWith(q.toLowerCase())),
+        veg: vegetables.filter(vegetable => vegetable.toLowerCase().startsWith(q.toLowerCase()))
+      })
+    )
   })
 )
 
-const apiListbox = [
+const item = (props) => {
+  return {
+    ...{
+      value: undef,
+      text: undef,
+      groupIndex: undef,
+      groupName: undef,
+      defaultListbox: undef,
+      displayField: undef,
+      groupId: undef,
+      searchType: undef
+    },
+    ...props
+  }
+}
+
+const apiListboxObject = {
+  data: (query) =>
+    fetch(`http://mock-api-site.com/api/fruits?q=${encodeURIComponent(query)}`)
+      .then(response => response.json())
+}
+
+const apiListboxArray = [
   {
     id: 'books',
     name: 'Books',
@@ -46,7 +78,28 @@ const apiListbox = [
   }
 ]
 
-describe('Fetching API data', () => {
+const apiListboxFunction = query => {
+  return fetch(`http://mock-api-site.com/api/fruits-veg?q=${encodeURIComponent(query)}`)
+    .then(response => response.json())
+    .then(fruitsAndVeg => {
+      const {fruits, veg} = fruitsAndVeg
+
+      return [
+        {
+          name: 'Fruits',
+          ratio: 8,
+          data: fruits
+        },
+        {
+          name: 'Vegetables',
+          ratio: 2,
+          data: veg
+        }
+      ]
+    })
+}
+
+describe('Fetching API data using a listbox array', () => {
   beforeAll(() => {
     server.listen()
   })
@@ -56,55 +109,146 @@ describe('Fetching API data', () => {
   })
 
   test('Returns expected results', () => {
-    return fetcher('L', apiListbox, undef, 1, 6).then(items => {
+    return fetcher('L', apiListboxObject, undef, 1, 6).then(items => {
       expect(items).toEqual([
-        {
+        item({
+          value: 'Legume',
+          text: 'Legume',
+          groupIndex: 0,
+          groupName: '',
+        }),
+        item({
+          value: 'Lemon',
+          text: 'Lemon',
+          groupIndex: 0,
+          groupName: ''
+        }),
+        item({
+          value: 'Lime',
+          text: 'Lime',
+          groupIndex: 0,
+          groupName: ''
+        }),
+        item({
+          value: 'Lychee',
+          text: 'Lychee',
+          groupIndex: 0,
+          groupName: ''
+        }),
+      ])
+    })
+  })
+})
+
+describe('Fetching API data using a listbox array', () => {
+  beforeAll(() => {
+    server.listen()
+  })
+
+  afterAll(() => {
+    server.close()
+  })
+
+  test('Returns expected results', () => {
+    return fetcher('L', apiListboxArray, undef, 1, 6).then(items => {
+      expect(items).toEqual([
+        item({
           value: { title: 'Last Argument of Kings', author: 'Joe Abercrombie' },
           text: 'Last Argument of Kings',
           groupIndex: 0,
           groupName: 'Books',
-          defaultListbox: undef,
           displayField: 'title',
           groupId: 'books',
-          searchType: undef
-        },
-        {
+        }),
+        item({
           value: { title: 'Legend', author: 'Marie Lu' },
           text: 'Legend',
           groupIndex: 0,
           groupName: 'Books',
-          defaultListbox: undef,
           displayField: 'title',
           groupId: 'books',
-          searchType: undef
-        },
-        {
+        }),
+        item({
           value: { title: 'Life After Life', author: 'Kate Atkinson' },
           text: 'Life After Life',
           groupIndex: 0,
           groupName: 'Books',
-          defaultListbox: undef,
           displayField: 'title',
           groupId: 'books',
-          searchType: undef
-        },
-        {
+        }),
+        item({
           value: { title: 'Like Water for Chocolate', author: 'Laura Esquivel' },
           text: 'Like Water for Chocolate',
           groupIndex: 0,
           groupName: 'Books',
-          defaultListbox: undef,
           displayField: 'title',
           groupId: 'books',
-          searchType: undef
-        },
-        {
+        }),
+        item({
           value: 'Legume',
           text: 'Legume',
           groupIndex: 1,
+          groupName: 'Fruits',
+        }),
+        item({
+          value: 'Lemon',
+          text: 'Lemon',
+          groupIndex: 1,
           groupName: 'Fruits'
-        },
-        { value: 'Lemon', text: 'Lemon', groupIndex: 1, groupName: 'Fruits' }
+        })
+      ])
+    })
+  })
+})
+
+describe('Fetching API data using a listbox function', () => {
+  beforeAll(() => {
+    server.listen()
+  })
+
+  afterAll(() => {
+    server.close()
+  })
+
+  test('Returns expected results', () => {
+    return fetcher('L', apiListboxFunction, undef, 1, 6).then(items => {
+      expect(items).toEqual([
+        item({
+          value: 'Legume',
+          text: 'Legume',
+          groupIndex: 0,
+          groupName: 'Fruits',
+        }),
+        item({
+          value: 'Lemon',
+          text: 'Lemon',
+          groupIndex: 0,
+          groupName: 'Fruits'
+        }),
+        item({
+          value: 'Lime',
+          text: 'Lime',
+          groupIndex: 0,
+          groupName: 'Fruits'
+        }),
+        item({
+          value: 'Lychee',
+          text: 'Lychee',
+          groupIndex: 0,
+          groupName: 'Fruits'
+        }),
+        item({
+          value: 'Leek',
+          text: 'Leek',
+          groupIndex: 1,
+          groupName: 'Vegetables'
+        }),
+        item({
+          value: 'Legumes',
+          text: 'Legumes',
+          groupIndex: 1,
+          groupName: 'Vegetables'
+        })
       ])
     })
   })

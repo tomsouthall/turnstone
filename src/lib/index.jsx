@@ -81,7 +81,8 @@ const listboxRules = PropTypes.oneOfType([
     ]).isRequired,
     searchType: PropTypes.oneOf(searchTypes),
     displayField: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  })
+  }),
+  PropTypes.func
 ])
 
 Turnstone.propTypes = {

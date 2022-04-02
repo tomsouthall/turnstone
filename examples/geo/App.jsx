@@ -40,6 +40,36 @@ const listbox = [
   }
 ]
 
+// // UNCOMMENT FOR TESTING LISTBOX PROP SUPPLIED AS A FUNCTION
+// const listbox = query => {
+//   return fetch(
+//     `${apiHost}/api/search/locations?q=${encodeURIComponent(query)}&limit=${maxItems}`
+//   )
+//   .then(response => response.json())
+//   .then(locations => {
+//     const {cities, airports} = locations
+
+//     return [
+//       {
+//         id: 'cities',
+//         name: 'Cities',
+//         ratio: 8,
+//         displayField: 'name',
+//         data: cities,
+//         searchType: 'startswith'
+//       },
+//       {
+//         id: 'airports',
+//         name: 'Airports',
+//         ratio: 2,
+//         displayField: 'name',
+//         data: airports,
+//         searchType: 'contains'
+//       }
+//     ]
+//   })
+// }
+
 const App = () => {
   const [selectedItem, setSelectedItem] = useState(undef)
 

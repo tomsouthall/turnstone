@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.3.0 (2 Apr 2022)
+- Extend listbox and defaultListbox prop types to allow functions returning a promise resolving to an array of group settings
+
 ### 1.2.3 (25 Mar 2022)
 - Left align container div contents when focussed
 

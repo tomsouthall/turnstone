@@ -217,7 +217,7 @@ in order to exit the focused state of the search box.
 - Set to `0` if you want no wait at all (e.g. if your listbox data is not fetched asynchronously)
 
 #### `defaultListbox`
-- Type: `array` or `object`
+- Type: `array` or `object` or `function`
 - Default: `undefined`
 - The default listbox is displayed when the search box has focus and is empty.
 - Supply an array if you wish multiple groups of items to appear in the default listbox. Groups can
@@ -256,6 +256,31 @@ in order to exit the focused state of the search box.
     data: () => fetch(`/api/cities/popular`).then(res => res.json()),
   }
   ```
+- Supply a function if you wish to dynamically build your listbox contents. One example might be
+  where you have a data source that already groups results such as a GraphQL query. The function must return a promise which resolves to an array structured exactly as detailed above (see "supply an array..."). For example:
+  ```jsx
+  (query) => fetch(`/api/default-locations`)
+    .then(res => res.json())
+    .then(locations => {
+      const {recentSearches, popularCities} = locations
+      return [
+        {
+          name: 'Recent Searches',
+          displayField: 'name',
+          data: recentSearches,
+          id: 'recent',
+          ratio: 1
+        },
+        {
+          name: 'Popular Cities',
+          displayField: 'name',
+          data: popularCities,
+          id: 'popular',
+          ratio: 1
+        }
+      ]
+    })
+  ```
 - See the [listbox](#listbox) prop for details on the data structure of groups as these are the same for both `defaultListbox` and `listbox`
 
 #### `defaultListboxIsImmutable`
@@ -292,7 +317,7 @@ in order to exit the focused state of the search box.
 
 #### `listbox`
 - **Required**
-- Type: `array` or `object`
+- Type: `array` or `object` or `function`
 - Specifies how listbox results are populated in response to a user's query entered into the search box.
 - **Supplying an array**
   Supply an array if you wish multiple groups of items to appear in the default listbox. Groups can
@@ -329,12 +354,15 @@ in order to exit the focused state of the search box.
     - The function receives a `query` argument which is a string containing the text entered into the search box. The function would then typically perform a fetch to an API endpoint for matching items and finally formats the data received as required.
     - If possible, the function should return enough items to satisfy the `maxItems` prop, in case all of the other groups return zero matches.
     - See the example above for `data` props supplied as functions.
+    - The array returned will not be filtered according to the `searchType`. The presumption is that
+    the function will return an array that is already correctly filtered.
 
     **If an array**
     - Instead of a function, an array of items, matching and non-matching can be supplied and Turnstone filters this down to items that match the query.
     - Items can be objects, arrays or strings.
+    - The contents of the array will be filtered down to items matching the user's query based on the `searchType` (see below).
   - **`displayField`** (string or number or undefined)
-    - This indicates the field within each item in the data array that contains the text to be displayed in the listbox.
+    - This indicates the field within each item in the data array that contains the text to be displayed in the listbox and the text that will be matched to the user's query.
     - If the item is an object or array, `displayField` must be a string or number.
     - If the item is a string, `displayField` can be omitted.
   - **`searchType`** (string)
@@ -366,6 +394,38 @@ in order to exit the focused state of the search box.
     - **`displayField`**
     - **`searchType`**
   See above for explanations of each field.
+- **Supplying a function**
+  Supplying a function is useful if you wish to dynamically build your listbox contents based
+  on the user's query. One example might be where you have a data source that already groups results such as a GraphQL query.
+  The function receives a single string argument representing the user's query entered into the search box
+  The function must return a promise which resolves to an array structured exactly as detailed above in "Supplying an array". For example:
+  ```jsx
+  (query) => fetch(`/api/locations?q=${encodeURIComponent(query)}`)
+    .then(res => res.json())
+    .then(locations => {
+      const {cities, airports} = locations
+
+      return [
+        {
+          id: 'cities',
+          name: 'Cities',
+          ratio: 8,
+          displayField: 'name',
+          data: cities,
+          searchType: 'startswith'
+        },
+        {
+          id: 'airports',
+          name: 'Airports',
+          ratio: 2,
+          displayField: 'name',
+          data: airports,
+          searchType: 'contains'
+        }
+      ]
+    })
+  ```
+
 
 #### `listboxIsImmutable`
 - Type: `boolean`
