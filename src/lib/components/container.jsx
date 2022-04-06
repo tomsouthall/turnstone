@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef, useContext, useImperativeHandle } from 'react'
 import { StateContext } from '../context/state'
 import Listbox from './listbox'
 import Errorbox from './errorbox'
@@ -23,7 +23,7 @@ import {
   clear
 } from '../actions/actions'
 
-export default function Container(props) {
+const Container = React.forwardRef((props, ref) => {
   // Destructure props
   const {
     autoFocus,
@@ -202,6 +202,29 @@ export default function Container(props) {
     setBlockBlurHandler(false)
   }
 
+  // Expose methods to parent components
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      queryInput.current.focus()
+    },
+    blur: () => {
+      queryInput.current.blur()
+    },
+    select: () => {
+      queryInput.current.select()
+    },
+    clear: () => {
+      clearState()
+    },
+    query: (query) => {
+      if(typeof query === 'string') {
+        queryInput.current.value = query
+        queryInput.current.focus()
+        handleInput()
+      }
+    }
+  }))
+
   return (
     <React.Fragment>
       <div
@@ -288,4 +311,8 @@ export default function Container(props) {
       </div>
     </React.Fragment>
   )
-}
+})
+
+Container.displayName = 'Container'
+
+export default Container

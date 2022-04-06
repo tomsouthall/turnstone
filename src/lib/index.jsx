@@ -28,12 +28,12 @@ const propDefaults = {
   Clear: () => '\u00d7'
 }
 
-const render = (Component, componentProps, pluginIndex) => {
+const render = (Component, componentProps, pluginIndex, ref) => {
   const p = Array.isArray(componentProps.plugins) && componentProps.plugins[pluginIndex]
   if(p) {
     const [Plugin, pluginProps] = Array.isArray(p) ? p : [p]
 
-    return <Plugin {...{
+    return <Plugin ref={ref} {...{
       ...pluginProps,
       Component,
       componentProps,
@@ -41,20 +41,24 @@ const render = (Component, componentProps, pluginIndex) => {
       render
     }} />
   }
-  return <Component {...componentProps} />
+  return <Component ref={ref} {...componentProps} />
 }
 
-export default function Turnstone(props) {
+const Turnstone = React.forwardRef((props, ref) => {
   const componentProps = {...propDefaults, ...props}
 
   return (
     <React.StrictMode>
       <StateContextProvider {...componentProps}>
-        { render(Container, componentProps, 0) }
+        { render(Container, componentProps, 0, ref) }
       </StateContextProvider>
     </React.StrictMode>
   )
-}
+})
+
+Turnstone.displayName = 'Turnstone'
+
+export default Turnstone
 
 //////////////////////////////////////////////////////
 // Prop validation                                  //

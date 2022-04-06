@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */
 
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useRef } from 'react'
 import Turnstone from '../../src/lib'
 import styles from './styles/App.module.css'
 import autocompleteStyles from './styles/autocomplete.module.css'
@@ -71,6 +71,7 @@ const listbox = [
 // }
 
 const App = () => {
+  const ref = useRef()
   const [selectedItem, setSelectedItem] = useState(undef)
 
   const onSelect = useCallback(
@@ -98,6 +99,7 @@ const App = () => {
         <div>
           <label htmlFor="autocomplete">Search:</label>&nbsp;
           <Turnstone
+            ref={ref}
             autoFocus={false}
             cancelButton={true}
             clearButton={true}

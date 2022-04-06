@@ -11,6 +11,7 @@ Turnstone is a highly customisable, easy-to-use autocomplete search component fo
 - [API](#api)
   - [Props](#props)
   - [Component Props](#component-props)
+  - [Methods](#methods)
 - [Contributing](#contributing)
 - [Release Checklist](#release-checklist)
 - [License](#license)
@@ -623,6 +624,62 @@ The following custom components can also be supplied as props:
   - **`children`** (string) The `name` of the group supplied in the `listbox` or `defaultListbox` prop.
   - **`id`** (string) The `id` of the group supplied in the `listbox` or `defaultListbox` prop.
   - **`index`** (number) The index of the group. Matches the order supplied in the `listbox` or `defaultListbox` prop. Zero-indexed.
+
+### Methods
+
+There are a number of methods accessible via a ref supplied to the Turnstone component.
+
+For example:
+
+```jsx
+import React, { useRef } from 'react'
+import Turnstone from 'turnstone'
+import data from './data'
+
+const App = () => {
+  const listbox = { data }
+
+  const turnstoneRef = useRef()
+
+  const handleQuery = () => {
+    turnstoneRef.current?.query('new')
+  }
+
+  const handleClear = () => {
+    turnstoneRef.current?.clear()
+  }
+
+  return (
+    <>
+      <Turnstone ref={turnstoneRef} listbox={listbox} />
+      <button onClick={handleQuery}>Perform Query</button>
+      <button onClick={handleClear}>Clear Contents</button>
+    </>
+  )
+}
+```
+
+The methods are as follows:
+
+#### `blur()`
+
+Removes keyboard focus from the search box.
+
+#### `clear()`
+
+Clears the contents of the search box
+
+#### `focus()`
+
+Sets keyboard focus on the search box.
+
+#### `query(<string>)`
+
+Sets the search box contents to the string argument supplied to the function.
+
+#### `select()`
+
+Selects the contents of the search box
 
 ## Contributing
 - Fork the project

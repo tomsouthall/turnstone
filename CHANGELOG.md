@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.4.0 (6 Apr 2022)
+- Expose DOM methods via a forwarded ref
+
 ### 1.3.0 (2 Apr 2022)
 - Extend listbox and defaultListbox prop types to allow functions returning a promise resolving to an array of group settings
 
