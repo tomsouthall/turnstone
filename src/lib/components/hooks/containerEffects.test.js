@@ -138,7 +138,7 @@ describe('useSelected', () => {
     renderHook(() => useSelected(undef, queryRef, typeaheadRef, onSelect))
     expect(queryRef.current.blur).toHaveBeenCalledTimes(0)
     expect(typeaheadRef.current.value).toBe(queryValue)
-    expect(onSelect).toHaveBeenCalledWith(undef, undef)
+    expect(onSelect).not.toHaveBeenCalledWith(undef, undef)
   })
 })
 

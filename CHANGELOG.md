@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.0.0 (11 May 2022)
+- No longer automatically fire onSelect and onChange events on first render. Only in response to user events.
+
+### 1.4.1 (11 May 2022)
+- Remove redundant react-use dependency
+
 ### 1.4.0 (6 Apr 2022)
 - Expose DOM methods via a forwarded ref
 

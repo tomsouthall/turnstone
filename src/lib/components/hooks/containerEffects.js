@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useRef } from 'react'
 import setify from 'setify' // Sets input value without changing cursor position
 import { StateContext } from '../../context/state'
 import { setItems, setItemsError } from '../../actions/actions'
@@ -23,6 +23,8 @@ export const useItemsError = (error) => {
 }
 
 export const useQueryChange = (query, queryInput, typeaheadInput, onChange) => {
+  const firstUpdate = useRef(true)
+
   useEffect(() => {
     const hasTypeahead = !!typeaheadInput.current
     const value = (() => {
@@ -35,7 +37,14 @@ export const useQueryChange = (query, queryInput, typeaheadInput, onChange) => {
     if(hasTypeahead) typeaheadInput.current.value = value
 
     setify(queryInput.current, query)
-    if (typeof onChange === 'function') onChange(query)
+
+    // Do not trigger onChange if this is the first time the query is being run
+    // and the query is empty
+    if(!(firstUpdate.current && !query)) {
+      if(typeof onChange === 'function') onChange(query)
+    }
+    firstUpdate.current = false
+
   }, [query, onChange, queryInput, typeaheadInput])
 }
 
@@ -57,6 +66,8 @@ export const useHighlight = (highlighted, hasFocus, queryInput, typeaheadInput) 
 }
 
 export const useSelected = (selected, queryInput, typeaheadInput, onSelect) => {
+  const firstUpdate = useRef(true)
+
   useEffect(() => {
     let value, displayField
 
@@ -71,7 +82,13 @@ export const useSelected = (selected, queryInput, typeaheadInput, onSelect) => {
       displayField = selected.displayField
     }
 
-    if (typeof onSelect === 'function') onSelect(value, displayField)
+    // Do not trigger onSelect if this is the first time the query is being run
+    // and the value is undefined
+    if(!(firstUpdate.current && isUndefined(selected))) {
+      if (typeof onSelect === 'function') onSelect(value, displayField)
+    }
+    firstUpdate.current = false
+
   }, [selected, onSelect, queryInput, typeaheadInput])
 }
 
