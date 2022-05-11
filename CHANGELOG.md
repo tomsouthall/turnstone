@@ -1,5 +1,8 @@
 # Changelog
 
+### 1.4.1 (11 May 2022)
+- Remove redundant react-use dependency
+
 ### 1.4.0 (6 Apr 2022)
 - Expose DOM methods via a forwarded ref
 
