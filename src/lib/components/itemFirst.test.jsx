@@ -9,16 +9,17 @@ vi.mock('./item', () => ({ default: () => 'Item' }))
 
 describe('ItemFirst', () => {
   test('Component renders correctly', () => {
-    const customStyles = {
+    const styles = {
       groupHeading: 'group-heading-class'
     }
 
     const component = renderer.create(
-      <StateContextProvider styles={customStyles}>
+      <StateContextProvider>
        <ItemFirst
           groupName={'Cities'}
           index={0}
           key={'item0'}
+          styles={styles}
         />
       </StateContextProvider>
     )

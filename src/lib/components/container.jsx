@@ -51,6 +51,7 @@ const Container = React.forwardRef((props, ref) => {
     onSelect,
     onTab,
     placeholder,
+    styles,
     tabIndex,
     typeahead,
     Cancel,
@@ -62,7 +63,6 @@ const Container = React.forwardRef((props, ref) => {
 
   // Global state from context
   const { state, dispatch } = useContext(StateContext)
-  const { customStyles } = state
 
   // Component state
   const [debouncedQuery] = useDebounce(state.query, debounceWait)
@@ -80,12 +80,12 @@ const Container = React.forwardRef((props, ref) => {
   const isExpanded = hasFocus && state.canShowListbox
   const isErrorExpanded = !!props.errorMessage && state.itemsError
   const containerClassname = hasFocus ? 'containerFocus' : 'container'
-  const containerStyles = customStyles[containerClassname] || customStyles.container
-  const defaultContainerStyles = customStyles[containerClassname]
+  const containerStyles = styles[containerClassname] || styles.container
+  const defaultContainerStyles = styles[containerClassname]
     ? undef
     : defaultStyles[containerClassname]
   const inputClassName = hasFocus ? 'inputFocus' : 'input'
-  const inputStyles = customStyles[inputClassName] || customStyles.input
+  const inputStyles = styles[inputClassName] || styles.input
   const queryDefaultStyle = hasTypeahead ? defaultStyles.query : defaultStyles.queryNoTypeahead
 
   // Checks whether or not SWR data is to be treated as immutable
@@ -237,7 +237,7 @@ const Container = React.forwardRef((props, ref) => {
         <input
           id={id}
           name={name}
-          className={`${inputStyles || ''} ${customStyles.query || ''}`.trim()}
+          className={`${inputStyles || ''} ${styles.query || ''}`.trim()}
           style={queryDefaultStyle}
           disabled={disabled}
           placeholder={placeholder}
@@ -260,7 +260,7 @@ const Container = React.forwardRef((props, ref) => {
 
         {hasTypeahead && (
           <input
-            className={`${inputStyles || ''} ${customStyles.typeahead || ''}`.trim()}
+            className={`${inputStyles || ''} ${styles.typeahead || ''}`.trim()}
             style={defaultStyles.typeahead}
             disabled={disabled}
             type='text'
@@ -277,7 +277,7 @@ const Container = React.forwardRef((props, ref) => {
 
         {hasClearButton && (
           <button
-            className={customStyles.clearButton}
+            className={styles.clearButton}
             style={defaultStyles.clearButton}
             onMouseDown={handleClearButton}
             tabIndex={-1}
@@ -288,7 +288,7 @@ const Container = React.forwardRef((props, ref) => {
 
         {hasCancelButton && (
           <button
-            className={customStyles.cancelButton}
+            className={styles.cancelButton}
             style={defaultStyles.cancelButton}
             onMouseDown={handleCancelButton}
             tabIndex={-1}
@@ -302,11 +302,12 @@ const Container = React.forwardRef((props, ref) => {
             id={listboxId}
             items={state.items}
             noItemsMessage={noItemsMessage}
+            styles={styles}
           />
         )}
 
         {isErrorExpanded && (
-          <Errorbox id={errorboxId} errorMessage={errorMessage} />
+          <Errorbox id={errorboxId} errorMessage={errorMessage} styles={styles} />
         )}
       </div>
     </React.Fragment>

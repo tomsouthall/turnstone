@@ -23,6 +23,7 @@ const propDefaults = {
   maxItems: 10,
   minQueryLength: 1,
   placeholder: '',
+  styles: {},
   typeahead: true,
   Cancel: () => 'Cancel',
   Clear: () => '\u00d7'

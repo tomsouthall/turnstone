@@ -3,9 +3,8 @@ import { StateContext } from '../context/state'
 import Item from './item'
 
 export default function ItemFirst(props) {
-  const { groupName, index, item } = props
+  const { groupName, index, item, styles } = props
   const { state } = useContext(StateContext)
-  const { customStyles } = state
   const GroupName = state.props.GroupName
 
   const groupHeading = !!groupName && (
@@ -16,8 +15,8 @@ export default function ItemFirst(props) {
 
   return (
     <React.Fragment>
-       {!!groupHeading && <div className={customStyles.groupHeading}>{groupHeading}</div>}
-      <Item index={index} key={`item${index}`} item={item} />
+       {!!groupHeading && <div className={styles.groupHeading}>{groupHeading}</div>}
+      <Item index={index} key={`item${index}`} item={item} styles={styles} />
     </React.Fragment>
   )
 }

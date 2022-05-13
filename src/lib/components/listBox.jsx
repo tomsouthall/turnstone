@@ -5,15 +5,14 @@ import ItemFirst from './itemFirst'
 import Item from './item'
 
 export default function Listbox(props) {
-  const { id, items, noItemsMessage } = props
+  const { id, items, noItemsMessage, styles } = props
   const { state } = useContext(StateContext)
-  const { customStyles } = state
 
   const itemElements = () => {
     return (
       <div
         id={id}
-        className={customStyles.listbox}
+        className={styles.listbox}
         style={defaultStyles.listbox}
         role='listbox'>
         {items.map((item, index) =>
@@ -23,9 +22,10 @@ export default function Listbox(props) {
               index={index}
               key={`item${index}`}
               item={item}
+              styles={styles}
             />
           ) : (
-            <Item index={index} key={`item${index}`} item={item} />
+            <Item index={index} key={`item${index}`} item={item} styles={styles} />
           )
         )}
       </div>
@@ -34,8 +34,8 @@ export default function Listbox(props) {
 
   const noItemsMsg = () => {
     return (
-      <div id={id} className={customStyles.listbox} style={defaultStyles.listbox}>
-        <div className={customStyles.noItems}>{noItemsMessage}</div>
+      <div id={id} className={styles.listbox} style={defaultStyles.listbox}>
+        <div className={styles.noItems}>{noItemsMessage}</div>
       </div>
     )
   }

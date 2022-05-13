@@ -47,6 +47,7 @@ describe('Turnstone', () => {
       maxItems: 10,
       minQueryLength: 1,
       placeholder: '',
+      styles: {},
       typeahead: true
     })
   })

@@ -22,7 +22,7 @@ vi.mock('use-debounce', vi.fn().mockImplementation(() => ({
 
 describe('Container', () => {
   test('Component renders correctly', () => {
-    const customStyles = {
+    const styles = {
       container: 'query-container-class',
       query: 'query-class',
       typeahead: 'typeahead-class',
@@ -38,7 +38,7 @@ describe('Container', () => {
       maxItems: 10,
       noItemsMessage: 'No matching fruit found',
       placeholder: 'Type something fruity',
-      styles: customStyles,
+      styles: styles,
       typeahead: true
     }
 

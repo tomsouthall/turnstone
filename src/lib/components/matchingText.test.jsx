@@ -8,9 +8,8 @@ import MatchingText from './matchingText.jsx'
 describe('MatchingText', () => {
   test('Component renders', () => {
     const component = renderer.create(
-      <StateContextProvider
-        styles={{match: 'match-class', split: 'split-class'}}>
-        <MatchingText text='New York City' match='New' startsWith={true} />
+      <StateContextProvider>
+        <MatchingText text='New York City' match='New' startsWith={true} styles={{match: 'match-class'}} />
       </StateContextProvider>
     )
 
@@ -21,9 +20,8 @@ describe('MatchingText', () => {
 
   test('Text is highlighted for a "contains" item', () => {
     const component = renderer.create(
-      <StateContextProvider
-        styles={{match: 'match-class', split: 'split-class'}}>
-        <MatchingText text='Foo New Foo' match='New' startsWith={false} />
+      <StateContextProvider>
+        <MatchingText text='Foo New Foo' match='New' startsWith={false} styles={{match: 'match-class'}} />
       </StateContextProvider>
     )
 

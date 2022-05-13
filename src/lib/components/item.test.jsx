@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest'
 import { StateContextProvider } from '../context/state.jsx'
 import Item from './item.jsx'
 
-const customStyles = {
+const styles = {
   item: 'item-class',
   highlightedItem: 'highlighted-item-class',
   topItem: 'top-item-class',
@@ -21,11 +21,12 @@ const item = {
 const index = 0
 
 const component = renderer.create(
-  <StateContextProvider styles={customStyles} text={'Chi'} items={[item]}>
+  <StateContextProvider text={'Chi'} items={[item]}>
    <Item
       index={index}
       key={`item${index}`}
       item={item}
+      styles={styles}
     />
   </StateContextProvider>
 )

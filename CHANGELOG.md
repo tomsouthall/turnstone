@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.1.0 (13 May 2022)
+- Changing styles prop now triggers a re-render
+
 ### 2.0.0 (11 May 2022)
 - No longer automatically fire onSelect and onChange events on first render. Only in response to user events.
 

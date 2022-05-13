@@ -10,7 +10,7 @@ vi.mock('./item', () => ({ default: () => 'ItemFirst' }))
 
 describe('Listbox', () => {
   test('Component renders correctly', () => {
-    const customStyles = {
+    const styles = {
       listbox: 'listbox-class',
       noItems: 'no-items-class',
     }
@@ -22,10 +22,11 @@ describe('Listbox', () => {
       { "value": "Peanuts", "text": "Peanuts", "groupIndex": 1, "groupName": "Vegetables" }]
 
     const component = renderer.create(
-      <StateContextProvider styles={customStyles}>
+      <StateContextProvider>
         <Listbox
           id='test'
-          items={items} />
+          items={items}
+          styles={styles} />
       </StateContextProvider>
     )
 

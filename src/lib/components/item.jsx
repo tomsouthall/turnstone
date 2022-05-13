@@ -4,19 +4,19 @@ import { StateContext } from '../context/state'
 import { setHighlighted, setSelected } from '../actions/actions'
 
 export default function Item(props) {
-  const { index, item } = props
+  const { index, item, styles } = props
 
   const {
     state,
     dispatch
   } = useContext(StateContext)
 
-  const { customStyles, highlighted, query } = state
+  const { highlighted, query } = state
   const ItemContents = state.props.Item
   const globalMatch = item.searchType === 'contains'
   const isHighlighted = highlighted && index === highlighted.index
 
-  const divClassName = customStyles[isHighlighted ? 'highlightedItem' : 'item']
+  const divClassName = styles[isHighlighted ? 'highlightedItem' : 'item']
 
   const handleMouseEnter = () => {
     dispatch(setHighlighted(index))
@@ -49,7 +49,7 @@ export default function Item(props) {
         totalItems={state.items.length}
       />
     : (state.props.matchText && !item.defaultListbox
-      ? <MatchingText text={item.text} match={query} global={globalMatch} />
+      ? <MatchingText text={item.text} match={query} global={globalMatch} styles={styles} />
       : <>{item.text}</>)
 
   return (
