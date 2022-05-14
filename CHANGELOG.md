@@ -1,6 +1,6 @@
 # Changelog
 
-### 2.1.0 (13 May 2022)
+### 2.1.1 (14 May 2022)
 - Changing styles prop now triggers a re-render
 
 ### 2.0.0 (11 May 2022)
