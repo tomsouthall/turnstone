@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useImperativeHandle } from 'react'
+import React, { useState, useRef, useContext, useImperativeHandle, useEffect } from 'react'
 import { StateContext } from '../context/state'
 import Listbox from './listbox'
 import Errorbox from './errorbox'
@@ -53,6 +53,7 @@ const Container = React.forwardRef((props, ref) => {
     placeholder,
     styles,
     tabIndex,
+    text,
     typeahead,
     Cancel,
     Clear
@@ -68,6 +69,7 @@ const Container = React.forwardRef((props, ref) => {
   const [debouncedQuery] = useDebounce(state.query, debounceWait)
   const [hasFocus, setHasFocus] = useState(false)
   const [blockBlurHandler, setBlockBlurHandler] = useState(false)
+  const [autoSelect, setAutoSelect] = useState(!!text)
 
   // DOM references
   const queryInput = useRef(null)
@@ -111,6 +113,14 @@ const Container = React.forwardRef((props, ref) => {
 
   // Store retrieved data in global state as state.items
   useItemsState(swrResult.data)
+
+  // Autoselect matching value if we have initial text passed in a prop
+  useEffect(() => {
+    if(autoSelect && swrResult.data && swrResult.data[0]?.text === text) {
+      dispatch(setSelected(swrResult.data[0]))
+      setAutoSelect(false)
+    }
+  }, [autoSelect, swrResult.data, text, dispatch])
 
   // Store retrieved error if there is one
   useItemsError(swrResult.error)

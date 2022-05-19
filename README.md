@@ -575,6 +575,7 @@ in order to exit the focused state of the search box.
 - Type: `string`
 - Default: `undefined`
 - Text appearing in the search box when first rendered
+- Will cause `onSelect` to fire automatically if there is a matching result
 
 #### `typeahead`
 - Type: `string`

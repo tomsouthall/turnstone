@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.2.0 (19 May 2022)
+- If the text prop is supplied and a matching item is found, onSelect is automatically fired
+
 ### 2.1.1 (14 May 2022)
 - Changing styles prop now triggers a re-render
 

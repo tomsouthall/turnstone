@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import reducer from '../reducers/reducer'
-import {setQuery} from '../actions/actions'
+import { setQuery } from '../actions/actions'
 import undef from '../utils/undef'
 
 const StateContext = createContext()
