@@ -242,10 +242,10 @@ const Container = React.forwardRef((props, ref) => {
         style={defaultContainerStyles}
         role='combobox'
         aria-expanded={isExpanded}
-        aria-owns={listboxId}
+        aria-owns={[listboxId, errorboxId].join(' ')}
         aria-haspopup='listbox'>
         <input
-          id={id}
+          id={`${id}-listbox`}
           name={name}
           className={`${inputStyles || ''} ${styles.query || ''}`.trim()}
           style={queryDefaultStyle}
@@ -265,7 +265,7 @@ const Container = React.forwardRef((props, ref) => {
           onFocus={handleFocus}
           onBlur={handleBlur}
           aria-autocomplete='both'
-          aria-controls={listboxId}
+          aria-controls={[listboxId, errorboxId].join(' ')}
         />
 
         {hasTypeahead && (
@@ -317,7 +317,7 @@ const Container = React.forwardRef((props, ref) => {
         )}
 
         {isErrorExpanded && (
-          <Errorbox id={errorboxId} errorMessage={errorMessage} styles={styles} />
+          <Errorbox id={`${errorboxId}-errorbox`} errorMessage={errorMessage} styles={styles} />
         )}
       </div>
     </React.Fragment>

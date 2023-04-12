@@ -32,6 +32,7 @@ const App = () => {
      <div style={{display:'inline-block'}}>
         <label htmlFor="autocomplete">Search Fruits:</label>&nbsp;
         <Turnstone
+          id={'search-fruits'}
           clearButton={true}
           debounceWait={0}
           errorMessage={'Houston we have a problem'}
@@ -48,6 +49,7 @@ const App = () => {
       <div style={{display:'inline-block'}}>
         <label htmlFor="autocomplete">Search Fruits &amp; Veg:</label>&nbsp;
         <Turnstone
+          id={'search-fruits-veg'}
           clearButton={true}
           debounceWait={0}
           errorMessage={'Something is broken'}
