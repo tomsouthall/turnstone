@@ -4,20 +4,20 @@ exports[`Container > Component renders correctly 1`] = `
 <div
   aria-expanded={false}
   aria-haspopup="listbox"
-  aria-owns="autocomplete-listbox"
+  aria-owns="autocomplete-listbox autocomplete-errorbox"
   className="query-container-class"
   role="combobox"
 >
   <input
     aria-autocomplete="both"
-    aria-controls="autocomplete-listbox"
+    aria-controls="autocomplete-listbox autocomplete-errorbox"
     autoCapitalize="off"
     autoComplete="off"
     autoCorrect="off"
     autoFocus={true}
     className="query-class"
     enterKeyHint="search"
-    id="autocomplete"
+    id="autocomplete-listbox"
     onBlur={[Function]}
     onFocus={[Function]}
     onInput={[Function]}
